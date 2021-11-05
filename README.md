@@ -1,5 +1,10 @@
 # Flask React Project
 
+user --> after_hours 
+password --> password
+d --> after_hours_db 
+
+
 This is the starter for the Flask React project.
 
 ## Getting started
