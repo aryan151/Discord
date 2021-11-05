@@ -11,7 +11,7 @@ class Server(db.Model):
     createdAt = db.Column(db.DateTime, nullable=False) 
     updatedAt = db.Column(db.DateTime, nullable=False)
 
-#relationships 
+#relationships    
 
 
     def to_dict(self):
