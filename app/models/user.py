@@ -3,13 +3,14 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
 
-class User(db.Model, UserMixin):
-    __tablename__ = 'users'
+class User(db.Model, UserMixin):  
+    __tablename__ = 'users' 
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
-    hashed_password = db.Column(db.String(255), nullable=False)
+    avatar = db.Column(db.String(500), nullable=True, default='https://cdn.discordapp.com/embed/avatars/0.png')
+    hashed_password = db.Column(db.String(255), nullable=False) 
 
     @property
     def password(self):
@@ -26,5 +27,6 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
+            'avatar': self.avatar,
             'email': self.email
         }
