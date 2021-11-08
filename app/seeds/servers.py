@@ -2,17 +2,14 @@ from app.models import db, Server
 
 def seed_servers():
     server1 = Server(
-        id = 1,
         ownerId=1,
         name='Small Talk'
     )
     server2 = Server(
-        id=2,
         ownerId=2,
         name='Call of Duty'
     )
     server3 = Server(
-        id=3,
         ownerId=2,
         name='League of Legends'
     )

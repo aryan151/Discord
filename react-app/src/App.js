@@ -8,7 +8,11 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
+<<<<<<< HEAD
 import Channels from './components/Channels/Index';
+=======
+import Server  from './components/Server'
+>>>>>>> b0a5a8e1b61598b2ceb1df727636328f6449ea15
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -44,6 +48,7 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/dashboard' exact={true} >
           <h1>My Home Page</h1>
+          <Server />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
