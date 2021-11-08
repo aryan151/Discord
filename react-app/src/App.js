@@ -8,11 +8,7 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
-<<<<<<< HEAD
-import Channels from './components/Channels/Index';
-=======
-import Server  from './components/Server'
->>>>>>> b0a5a8e1b61598b2ceb1df727636328f6449ea15
+import Dashboard from './components/Dashboard/Index';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -32,7 +28,7 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar />
-      <Channels />
+      {/* <Channels /> */}
       <Switch>
         <Route path='/login' exact={true}>
           <LoginForm />
@@ -40,21 +36,21 @@ function App() {
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route>
-        <ProtectedRoute path='/users' exact={true} >
+        {/* <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
-        </ProtectedRoute>
+        </ProtectedRoute> */}
         <ProtectedRoute path='/dashboard' exact={true} >
+          <Dashboard />
+          <h1>My Home Page</h1>
+        </ProtectedRoute>
+        {/* <ProtectedRoute path='/:serverId' exact={true} >
           <h1>My Home Page</h1>
           <Server />
-        </ProtectedRoute>
-        <ProtectedRoute path='/:serverId' exact={true} >
-          <h1>My Home Page</h1>
-          <Server />
-          {/* <Channels /> */}
-        </ProtectedRoute>
+          <Channels />
+        </ProtectedRoute> */}
       </Switch>
     </BrowserRouter>
   );
