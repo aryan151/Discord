@@ -44,7 +44,6 @@ function App() {
         </ProtectedRoute> */}
         <ProtectedRoute path='/dashboard' exact={true} >
           <Dashboard />
-          <h1>My Home Page</h1>
         </ProtectedRoute>
         {/* <ProtectedRoute path='/:serverId' exact={true} >
           <h1>My Home Page</h1>

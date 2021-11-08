@@ -1,8 +1,10 @@
 .channels-container {
   background-color: black;
-  width: 20%;
+  width: 100%;
   height: 100vh;
   color: lightgray;
+  grid-column: 2/ 3;
+  grid-row: 1 / 6;
 }
 .channel {
   display: flex;
