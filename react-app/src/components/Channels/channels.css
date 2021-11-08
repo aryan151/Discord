@@ -1,0 +1,25 @@
+.channels-container {
+  background-color: black;
+  width: 20%;
+  height: 100vh;
+  color: lightgray;
+}
+.channel {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  gap: 1em;
+  justify-content: space-between;
+}
+.channel * {
+  padding: 0 7px;
+}
+
+.channel:hover {
+  background-color: rgb(66, 66, 66);
+  cursor: pointer;
+}
+
+.channel p {
+  font-size: 16px;
+}
