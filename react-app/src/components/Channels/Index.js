@@ -8,16 +8,15 @@ const Channels = ({id}) => {
 
   const params = useParams()
   let serverId = params.serverId
-  serverId = 1
-  const channels = useSelector(state => state.channels[serverId])
-
-
+  // serverId = 1
   const dispatch = useDispatch()
   useEffect(() => {
 
-    const channels = dispatch(fetchChannels(1));
+    dispatch(fetchChannels(serverId));
 
-  }, [])
+  }, [dispatch, serverId])
+
+  const channels = useSelector(state => state.channels[serverId])
 
   return (
     <div className="channels-container">

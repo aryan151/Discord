@@ -14,7 +14,6 @@ export const fetchChannels = (serverId) =>  async (dispatch) => {
     dispatch(getChannelsForServer(data))
 
 
-
 }
 
   const initialState = {}
@@ -22,7 +21,7 @@ export const fetchChannels = (serverId) =>  async (dispatch) => {
   export default function reducer(state = initialState, action) {
     switch (action.type) {
       case LOAD_CHANNELS:
-        const newState = {...initialState}
+        const newState = {...state}
         const serverId = Object.keys(action.channels)[0]
         newState[serverId] = action.channels[serverId]
 

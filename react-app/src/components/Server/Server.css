@@ -5,6 +5,8 @@
     height: 100%;
     text-align: center;
     overflow-y: scroll;
+    grid-column: 1 / 2;
+    grid-row: 1 / 6
 }
 
 .server-links-div {
