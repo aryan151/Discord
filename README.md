@@ -12,6 +12,45 @@ FLASK_ENV=development
 SECRET_KEY=lkasjdf09ajsd
 DATABASE_URL=postgresql://after_hours:password@localhost/after_hours_db 
 
+models 
+api routes 
+seeds 
+
+frontend: 
+
+skeleton
+
+server crud 
+
+--------------------
+
+tuesday: 
+
+finish server crud 
+
+--------------------
+
+wednesday: 
+
+finish channel crud 
+  
+--------------------
+
+thursday: 
+
+finish message 
+
+
+--------------------
+
+Friday: 
+
+
+
+
+
+
+
 This is the starter for the Flask React project.
 
 ## Getting started
