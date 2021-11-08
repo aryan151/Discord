@@ -6,15 +6,22 @@
   grid-column: 2/ 3;
   grid-row: 1 / 6;
 }
+.channels-container h1 {
+  text-align: center;
+}
+
 .channel {
   display: flex;
   text-align: center;
   align-items: center;
-  gap: 1em;
   justify-content: space-between;
+  background-color: rgb(46, 45, 45);
+  margin: 3px 6px;
+  border-radius: 7px;
 }
 .channel * {
   padding: 0 7px;
+
 }
 
 .channel:hover {
@@ -24,4 +31,9 @@
 
 .channel p {
   font-size: 16px;
+  display: inline-block;
+}
+
+.settings-cog:hover {
+  color: white;
 }
