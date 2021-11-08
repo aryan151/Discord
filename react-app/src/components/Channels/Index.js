@@ -17,15 +17,18 @@ const Channels = ({id}) => {
   }, [dispatch, serverId])
 
   const channels = useSelector(state => state.channels[serverId])
+  const server = useSelector(state => state.servers[serverId])
 
   return (
     <div className="channels-container">
-      <h1>Hello from channels</h1>
+      {server ? <h1>{server.name}</h1> : <h1>Hello from channels</h1>}
+
       {channels?.map(channel =>
       <div className="channel">
-        <i class="fas fa-hashtag"></i>
-        <p>{channel.name}</p>
-        <i class="fas fa-cog"></i>
+        <span><i class="fas fa-hashtag"></i>
+        <p>{channel.name}</p></span>
+
+        <span className="settings-cog"><i class="fas fa-cog" ></i></span>
       </div>
         )}
     </div>
