@@ -50,6 +50,11 @@ function App() {
           <h1>My Home Page</h1>
           <Server />
         </ProtectedRoute>
+        <ProtectedRoute path='/:serverId' exact={true} >
+          <h1>My Home Page</h1>
+          <Server />
+          {/* <Channels /> */}
+        </ProtectedRoute>
       </Switch>
     </BrowserRouter>
   );

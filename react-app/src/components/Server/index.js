@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { getServers, addServer } from '../../store/server'
 import { Link } from 'react-router-dom'
+import './Server.css'
 
 function Server () {
 
@@ -24,13 +25,27 @@ function Server () {
         setServerName('')
     }
 
+    const serverInitials = (name)=> {
+        if (!name.includes(' ')) {
+            return String(name[0]).toUpperCase()
+        } else {
+            let initials = ''
+            let array = name.split(' ')
+            for (let i = 0; i < array.length; i++){
+                let word = array[i]
+                initials += String(word[0]).toUpperCase() + '.'
+            }
+            return initials
+        }
+    }
+
 
 
     return (
         <div className='server-container'>
             {servers.map((server) => (
-                <div>
-                    <Link to={`/${server.id}`}>{server?.name}</Link>
+                <div className='server-links-div' style={{backgroundImage: `url(${server?.avatar})`}}>
+                    <Link className='server-links'to={`/${server.id}`}>{serverInitials(server?.name)}</Link>
                 </div>
             ))}
 
