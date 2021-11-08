@@ -26,15 +26,15 @@ function Server () {
     }
 
     const serverInitials = (name)=> {
-        let array = name.split(' ');
-        let initials = ''
-        if (array.length === 1) {
-            return array[0]
+        if (!name.includes(' ')) {
+            return String(name[0]).toUpperCase()
         } else {
-
-            array.forEach((word) => {
-                initials += word[0]
-            })
+            let initials = ''
+            let array = name.split(' ')
+            for (let i = 0; i < array.length; i++){
+                let word = array[i]
+                initials += String(word[0]).toUpperCase() + '.'
+            }
             return initials
         }
     }
@@ -44,7 +44,7 @@ function Server () {
     return (
         <div className='server-container'>
             {servers.map((server) => (
-                <div className='server-links-div'>
+                <div className='server-links-div' style={{backgroundImage: `url(${server?.avatar})`}}>
                     <Link className='server-links'to={`/${server.id}`}>{serverInitials(server?.name)}</Link>
                 </div>
             ))}

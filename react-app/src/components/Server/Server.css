@@ -7,16 +7,19 @@
 }
 
 .server-links-div {
-    background-color: blue;
+    /* background-color: blue; */
+    box-sizing: border-box;
     border-radius: 50%;
     margin: 5%;
     height: 75px;
     width: 75px;
     text-align: center;
-    padding-top: 5px;
+    padding-top: 13%;
+    font-size: 20px;
 
 }
 
 .server-links {
     text-decoration: none;
+    color: white
 }
