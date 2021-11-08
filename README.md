@@ -5,6 +5,13 @@ password --> password
 d --> after_hours_db 
 
 
+.env file: 
+
+FLASK_APP=app
+FLASK_ENV=development
+SECRET_KEY=lkasjdf09ajsd
+DATABASE_URL=postgresql://after_hours:password@localhost/after_hours_db 
+
 This is the starter for the Flask React project.
 
 ## Getting started
