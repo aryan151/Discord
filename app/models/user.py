@@ -1,7 +1,7 @@
 from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-
+ 
 
 class User(db.Model, UserMixin):  
     __tablename__ = 'users' 
@@ -11,6 +11,12 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     avatar = db.Column(db.String(500), nullable=True, default='https://cdn.discordapp.com/embed/avatars/0.png')
     hashed_password = db.Column(db.String(255), nullable=False) 
+
+    #relationships 
+
+    messages = db.relationship('Message', back_poplulates='user', cascade='all, delete')
+    servers = db.relationship('Server', back_poplulates='user', cascade='all, delete') 
+    serverMembers = db.relationship('ServerMember', cascade='all, delete') 
 
     @property
     def password(self):

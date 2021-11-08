@@ -9,10 +9,11 @@ class Message(db.Model):
     userId = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     channelId = db.Column(db.Integer, db.ForeignKey('channels.id'))
     imageUrl = db.Column(db.String(200), nullable=True)
-    createdAt = db.Column(db.DateTime, nullable=False) 
-    updatedAt = db.Column(db.DateTime, nullable=False)
 
-    #Relations  
+    #Relationship
+
+    channel = db.relationship('Channel', back_poplulates='messages') 
+    user = db.relationship('User', back_poplulates='messages')  
 
     def to_dict(self):
         return {
@@ -20,8 +21,6 @@ class Message(db.Model):
             'body': self.body,
             'userId': self.userId,
             'channelId': self.channelId,
-            'imageUrl': self.imageUrl,
-            'createdAt': self.createdAt.strftime("%Y/%m/%d %H:%M:%S"),
-            'updatedAt': self.updatedAt.strftime("%Y/%m/%d %H:%M:%S")
+            'imageUrl': self.imageUrl
         }  
   
