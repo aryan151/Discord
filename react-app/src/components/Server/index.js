@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { getServers, addServer } from '../../store/server'
 import { Link } from 'react-router-dom'
+import './Server.css'
 
 function Server () {
 
@@ -24,13 +25,27 @@ function Server () {
         setServerName('')
     }
 
+    const serverInitials = (name)=> {
+        let array = name.split(' ');
+        let initials = ''
+        if (array.length === 1) {
+            return array[0]
+        } else {
+
+            array.forEach((word) => {
+                initials += word[0]
+            })
+            return initials
+        }
+    }
+
 
 
     return (
         <div className='server-container'>
             {servers.map((server) => (
-                <div>
-                    <Link to={`/${server.id}`}>{server?.name}</Link>
+                <div className='server-links-div'>
+                    <Link className='server-links'to={`/${server.id}`}>{serverInitials(server?.name)}</Link>
                 </div>
             ))}
 

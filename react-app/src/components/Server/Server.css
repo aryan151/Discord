@@ -1,0 +1,22 @@
+.server-container {
+    border: 1px solid black;
+    position: absolute;
+    width: 200px;
+    height: 100%;
+    text-align: center;
+}
+
+.server-links-div {
+    background-color: blue;
+    border-radius: 50%;
+    margin: 5%;
+    height: 75px;
+    width: 75px;
+    text-align: center;
+    padding-top: 5px;
+
+}
+
+.server-links {
+    text-decoration: none;
+}
