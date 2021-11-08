@@ -1,9 +1,9 @@
 from .db import db
 
 class Message(db.Model):
-  
-    __tablename__ = 'messages'    
-  
+
+    __tablename__ = 'messages'
+
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(2000), nullable=False)
     userId = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
@@ -12,8 +12,8 @@ class Message(db.Model):
 
     #Relationship
 
-    channel = db.relationship('Channel', back_poplulates='messages') 
-    user = db.relationship('User', back_poplulates='messages')  
+    channel = db.relationship('Channel', back_populates='messages')
+    user = db.relationship('User', back_populates='messages')
 
     def to_dict(self):
         return {
@@ -22,5 +22,4 @@ class Message(db.Model):
             'userId': self.userId,
             'channelId': self.channelId,
             'imageUrl': self.imageUrl
-        }  
-  
+        }

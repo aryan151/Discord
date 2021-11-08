@@ -5,15 +5,15 @@ class ServerMember(db.Model):
 
     userId = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True, nullable=False)
     serverId = db.Column(db.Integer, db.ForeignKey('servers.id'), primary_key=True, nullable=False)
-    admin = db.Column(db.Boolean, nullable=False) 
+    admin = db.Column(db.Boolean, nullable=False)
 
     #relationships
 
-    users = db.relationship('User', back_popluates='serverMembers')
-    servers = db.relationship('Server', back_popluates='serverMembers')
+    users = db.relationship('User', back_populates='server_members')
+    servers = db.relationship('Server', back_populates='server_members')
 
 
-    def to_dict(self): 
+    def to_dict(self):
         return {
             'id': self.id,
             'userId': self.ownerId,
