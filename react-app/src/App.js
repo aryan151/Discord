@@ -33,6 +33,7 @@ function App() {
       {/* <NavBar /> */}
       <NavBar />
       {/* <Channels /> */}
+>>>>>>> main
       <Switch>
         <Route path='/' exact={true}>
           <Splash />
