@@ -4,6 +4,7 @@ import { useParams } from 'react-router'
 import { fetchChannels } from '../../store/channel'
 import './channels.css'
 import { Link } from 'react-router-dom'
+import AddChannelModal from '../AddChannelModal/AddChannelModal'
 
 const Channels = ({id}) => {
 
@@ -23,7 +24,7 @@ const Channels = ({id}) => {
   return (
     <div className="channels-container">
       {server ? <h1>{server.name}</h1> : <h1>Hello from channels</h1>}
-
+      <AddChannelModal />
       {channels?.map(channel =>
       <Link to={`/${serverId}/${channel.id}`} className="channel">
         <span><i class="fas fa-hashtag"></i>
