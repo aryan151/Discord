@@ -6,9 +6,13 @@ import AddServerModal, { addServerModal } from '../AddServerModal'
 import './Server.css'
 
 function Server () {
-
-    const userId = useSelector((state) => state.session?.user?.id);
+    const [homeServer, setHomeServer] = useState(null)
+    const user = useSelector((state) => state.session?.user);
     const servers = useSelector(state => Object.values(state.servers));
+
+    useEffect(()=>{
+        setHomeServer(Object.keys(servers).find(server => server.name == user.username))
+    }, [servers])
 
     const dispatch = useDispatch()
     useEffect(() => {
@@ -45,6 +49,11 @@ function Server () {
 
     return (
         <div className='server-container'>
+           { homeServer && <Link className='server-links'to={`/${homeServer.id}`}>
+                <div className='server-links-div' style={{backgroundImage: `url(${homeServer?.avatar})`}}>
+                    {serverInitials(homeServer?.name)}
+                </div>
+            </Link>}
             {servers.map((server) => (
             <Link className='server-links'to={`/${server.id}`}>
                 <div className='server-links-div' style={{backgroundImage: `url(${server?.avatar})`}}>
