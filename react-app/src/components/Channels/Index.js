@@ -30,7 +30,7 @@ const Channels = ({id}) => {
         <span><i class="fas fa-hashtag"></i>
         <p>{channel.name}</p></span>
 
-        <span className="settings-cog"><i class="fas fa-cog" ></i></span>
+        <span onClickclassName="settings-cog"><i class="fas fa-cog" ></i></span>
       </Link>
         )}
     </div>
