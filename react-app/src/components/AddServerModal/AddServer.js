@@ -20,11 +20,13 @@ function AddServer(){
     }
     
     return (
-        <div className='form-container'>
-            <form className='form' onSubmit={createServer}>
+        <div>
+            <form onSubmit={createServer}>
+                <fieldset>
                     <legend>Server Name</legend>
                         <div>
-                            <input type="text"
+                            <input 
+                            type="text"
                             value={serverName}
                             onChange={(e) => setServerName(e.target.value)}
                             />        
@@ -33,10 +35,12 @@ function AddServer(){
                             <button 
                             type="submit"
                             onClick={createServer}
-                            >Create Server</button>
+                            >Create Server
+                            </button>
                         </div>
+                    </fieldset>
             </form>
-        </div>
+        </div>    
     )
 }
 
