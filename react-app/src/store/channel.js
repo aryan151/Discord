@@ -8,6 +8,7 @@ const getChannelsForServer = (channels) => ({
 
 
 export const fetchChannels = (serverId) =>  async (dispatch) => {
+  if(!serverId) return
   const channels = await fetch(`/api/channels/${serverId}`)
   const data = await channels.json();
     console.log(data)

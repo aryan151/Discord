@@ -55,6 +55,7 @@ def seed_messages():
   db.session.add(msg8)
   db.session.commit()
 
+
 def undo_messages():
-    db.session.execute('TRUNCATE messages RESTART IDENTITY CASCADE;')
-    db.session.commit()
+  db.session.execute('TRUNCATE messages RESTART IDENTITY CASCADE;')
+  db.session.commit()
