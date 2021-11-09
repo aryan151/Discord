@@ -24,7 +24,7 @@ const Channels = ({id}) => {
   return (
     <div className="channels-container">
       {server ? <h1>{server.name}</h1> : <h1>Hello from channels</h1>}
-      <AddChannelModal />
+      <AddChannelModal serverId={serverId}/>
       {channels?.map(channel =>
       <Link to={`/${serverId}/${channel.id}`} className="channel">
         <span><i class="fas fa-hashtag"></i>

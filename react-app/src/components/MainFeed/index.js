@@ -5,6 +5,9 @@ import { useParams } from 'react-router'
 import '../Dashboard/dashboard.css'
 import { getMessages, createOneMessage } from '../../store/message';
 
+import './MainFeed.css'
+
+
 export const MainFeed = () => {
 
     const params = useParams()
@@ -15,13 +18,23 @@ export const MainFeed = () => {
 
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(getMessages(channelId))
+        if (channelId){
+            dispatch(getMessages(channelId))
+        }
+
     }, [dispatch, channelId, serverId])
 
+    let messages = useSelector((state) => state?.messages[channelId])
+    let channel = useSelector(state => state.channels[serverId]?.find(channel => channelId == channel.id))
 
 
     if (!messages) {
-        return null;
+        return (
+            <div className="empty-channel">
+            <h2>Welcome to {channel ? channel.name + "!": "the channel!"}</h2>
+            <p>This is just the beginning. <br /> Be the first to leave a message.</p>
+            </div>
+        );
     }
 
     const createMessage = async (e) => {
