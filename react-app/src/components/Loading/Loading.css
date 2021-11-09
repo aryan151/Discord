@@ -1,0 +1,16 @@
+.loading-screen-container {
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #272A31;
+}
+
+.loading-gif {
+    width: 150px;
+    height: 150px;
+}

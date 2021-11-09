@@ -1,94 +1,115 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom';
+import { Redirect, NavLink } from 'react-router-dom';
 import { signUp } from '../../store/session';
-
+import AHours from '../video/AHours.mp4'  
+import './SignUpForm.css' 
+    
 const SignUpForm = () => {
+     
+  const dispatch = useDispatch();    
+  const user = useSelector(state => state.session.user);
+
   const [errors, setErrors] = useState([]);
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState(''); 
   const [email, setEmail] = useState('');
+  const [avatar, setAvatar] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
-  const user = useSelector(state => state.session.user);
-  const dispatch = useDispatch();
+
+
+  if (user) { return <Redirect to='/dashboard' />; }    
 
   const onSignUp = async (e) => {
-    e.preventDefault();
-    if (password === repeatPassword) {
-      const data = await dispatch(signUp(username, email, password));
-      if (data) {
-        setErrors(data)
-      }
-    }
-  };
+		e.preventDefault();
+		if (password === repeatPassword) {
+			const data = await dispatch(signUp(username, avatar, email, password ));
+			if (data) {
+				setErrors(data);
+			}
+		} else if (password !== repeatPassword) {
+			setErrors(['password : Your passwords do not match.'])
+		}
+	};
 
-  const updateUsername = (e) => {
-    setUsername(e.target.value);
-  };
+  return (  
+    <>
+    <video className='signup_background'autoplay="autoplay" playsinline="playsinline" muted="muted" loop="loop" src={AHours}></video>
+      <form className="signup-form-container" autoComplete="off"  onSubmit={onSignUp}>
+        <h1 className="signup-header">Create an account</h1>
+          <div className='standardInput'>
+            <input
+              className='input'
+              type="text" 
+              name='username' 
+              placeholder=' ' 
+              value={username} 
+              onChange={(e) => setUsername(e.target.value)} 
+              required 
+            />  
+            <label className='label' htmlFor="username" >Username</label>
+            <span className='underline' ></span>
+          </div>  
+          <div className='standardInput'>
+            <input
+              className='input'
+              type="text" 
+              name='username' 
+              placeholder=' ' 
+              value={username} 
+              onChange={(e) => setUsername(e.target.value)} 
+              required 
+            />  
+            <label className='label' htmlFor="username" >Email</label>
+            <span className='underline' ></span>
+          </div>  
+          <div className='standardInput'>
+            <input
+              className='input'
+              type="text" 
+              name='username' 
+              placeholder=' ' 
+              value={username} 
+              onChange={(e) => setUsername(e.target.value)} 
+              required 
+            />  
+            <label className='label' htmlFor="username" >Avatar</label>
+            <span className='underline' ></span>
+          </div>  
+          <div className='standardInput'>
+            <input
+              className='input'
+              type="text" 
+              name='username' 
+              placeholder=' ' 
+              value={username} 
+              onChange={(e) => setUsername(e.target.value)} 
+              required 
+            />  
+            <label className='label' htmlFor="username" >Password</label>
+            <span className='underline' ></span>
+          </div>  
+          <div className='standardInput'>
+            <input
+              className='input'
+              type="text" 
+              name='username' 
+              placeholder=' ' 
+              value={username} 
+              onChange={(e) => setUsername(e.target.value)} 
+              required 
+            />  
+            <label className='label' htmlFor="username" >Confirm Password</label>
+            <span className='underline' ></span>
+          </div>   
+        <button className="signup-button" type="submit">Sign Up</button>
+        <div className="signup-tologin-container"> 
+          <p className="signup-tologin-label">Already have an account?</p><NavLink className="signup-tologin-link" to="/login">Login</NavLink>
+        </div>
+      </form>
+    </>
+  ); 
+}
 
-  const updateEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const updatePassword = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const updateRepeatPassword = (e) => {
-    setRepeatPassword(e.target.value);
-  };
-
-  if (user) {
-    return <Redirect to='/dashboard' />;
-  }
-
-  return (
-    <form onSubmit={onSignUp}>
-      <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
-      </div>
-      <div>
-        <label>User Name</label>
-        <input
-          type='text'
-          name='username'
-          onChange={updateUsername}
-          value={username}
-        ></input>
-      </div>
-      <div>
-        <label>Email</label>
-        <input
-          type='text'
-          name='email'
-          onChange={updateEmail}
-          value={email}
-        ></input>
-      </div>
-      <div>
-        <label>Password</label>
-        <input
-          type='password'
-          name='password'
-          onChange={updatePassword}
-          value={password}
-        ></input>
-      </div>
-      <div>
-        <label>Repeat Password</label>
-        <input
-          type='password'
-          name='repeat_password'
-          onChange={updateRepeatPassword}
-          value={repeatPassword}
-          required={true}
-        ></input>
-      </div>
-      <button type='submit'>Sign Up</button>
-    </form>
-  );
-};
 
 export default SignUpForm;

@@ -1,0 +1,48 @@
+.layout__splash_header
+{
+    grid-area: sp-header;
+}
+
+.layout__splash_body1
+{
+    grid-area: sp-body1;
+}
+
+.layout__splash_body2
+{
+    grid-area: sp-body2;
+}
+
+
+.layout__splash_body3
+{
+    grid-area: sp-body3;
+}
+
+
+.layout__splash_body4
+{
+    grid-area: sp-body4;
+}
+
+
+.layout__splash_body5
+{
+    grid-area: sp-body5;
+}
+
+
+.layout__splash_container
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 75vh auto 75vh;
+    grid-template-areas:
+        "sp-header sp-header"
+        "sp-body1 sp-body1"
+        "sp-body2 sp-body2"
+        "sp-body3 sp-body3"
+        "sp-body4 sp-body4"
+        "sp-body5 sp-body5"
+    ;
+} 
