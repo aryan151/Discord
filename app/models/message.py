@@ -1,4 +1,5 @@
 from .db import db
+from sqlalchemy.sql import func
 
 class Message(db.Model):
 
@@ -9,6 +10,8 @@ class Message(db.Model):
     userId = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     channelId = db.Column(db.Integer, db.ForeignKey('channels.id'))
     imageUrl = db.Column(db.String(200), nullable=True)
+    createdAt = db.Column(db.DateTime(timezone=True), server_default=func.now())
+    updatedAt = db.Column(db.DateTime(timezone=True), onupdate=func.now())
 
     #Relationship
 
@@ -21,5 +24,7 @@ class Message(db.Model):
             'body': self.body,
             'userId': self.userId,
             'channelId': self.channelId,
-            'imageUrl': self.imageUrl
+            'imageUrl': self.imageUrl,
+            'createdAt': self.createdAt.strftime("%Y/%m/%d %H:%M:%S"),
+            'updatedAt': self.updatedAt.strftime("%Y/%m/%d %H:%M:%S")
         }
