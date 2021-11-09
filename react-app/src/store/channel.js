@@ -49,9 +49,11 @@ export const addChannel = (payload) => async dispatch => {
 
       case LOAD_ONE_CHANNEL: {
         const newState = {
-            ...state,
-            [action.channel['id']]: action.channel
+            ...state
         }
+        const serverId = action.channel.serverId;
+        newState[serverId] ?  newState[serverId].push(action.channel) :  newState[serverId] = [action.channel]
+
         return newState
       }
 
