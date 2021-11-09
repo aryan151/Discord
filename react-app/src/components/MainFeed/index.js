@@ -25,7 +25,10 @@ export const MainFeed = () => {
     return (
         <div className='messages-container'>
             {messages?.map((message) => (
-                <div>{message?.body}</div>
+                <div>
+                    <div>{}</div>
+                    <div>{message?.body}</div>
+                </div>
             ))}
             <div>Message 1</div>
             <div>Message 2</div>
