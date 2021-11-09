@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { getServers, addServer } from '../../store/server'
 import { Link } from 'react-router-dom'
+import AddServerModal, { addServerModal } from '../AddServerModal'
 import './Server.css'
 
 function Server () {
@@ -14,16 +15,16 @@ function Server () {
         dispatch(getServers())
     }, [dispatch])
 
-    const [serverName, setServerName] = useState('')
+    // const [serverName, setServerName] = useState('')
 
-    const createServer = async (e) => {
-        e.preventDefault()
+    // const createServer = async (e) => {
+    //     e.preventDefault()
 
-        const payload = {name:serverName, owner_id:userId}
+    //     const payload = {name:serverName, owner_id:userId}
 
-        dispatch(addServer(payload))
-        setServerName('')
-    }
+    //     dispatch(addServer(payload))
+    //     setServerName('')
+    // }
 
     const serverInitials = (name)=> {
         if (!name.includes(' ')) {
@@ -45,18 +46,21 @@ function Server () {
     return (
         <div className='server-container'>
             {servers.map((server) => (
-            <Link className='server-links'to={`/${server.id}`}>    
+            <Link className='server-links'to={`/${server.id}`}>
                 <div className='server-links-div' style={{backgroundImage: `url(${server?.avatar})`}}>
-                    {serverInitials(server?.name)}   
+                    {serverInitials(server?.name)}
                 </div>
             </Link>
             ))}
+            <div className='server-links-div' style={{backgroundImage: 'url(https://cdn.discordapp.com/embed/avatars/0.png)'}}>
+                <AddServerModal />
+            </div>
 
-            <form onSubmit={createServer}>
+            {/* <form onSubmit={createServer}>
                 <label>Server Name</label>
                 <input value={serverName} onChange={(e) => setServerName(e.target.value)}></input>
                 <button type="submit">Create Server</button>
-            </form>
+            </form> */}
 
         </div>
     )
