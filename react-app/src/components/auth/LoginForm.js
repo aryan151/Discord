@@ -1,14 +1,26 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux'; 
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
+import AHours from '../video/AHours.mp4'   
+import './LoginForm.css';
 
-const LoginForm = () => {
+function LoginForm() {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loginError, setLoginError] = useState('');
+  const [loginErrorBorder, setLoginErrorBorder] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (errors.length) {
+      setLoginError('loginErrorLabel')
+      setLoginErrorBorder('loginErrorBorder')
+    }
+  }, [errors]);
 
   const onLogin = async (e) => {
     e.preventDefault();
@@ -16,6 +28,28 @@ const LoginForm = () => {
     if (data) {
       setErrors(data);
     }
+  };
+
+  const demoLogin = async (e) => {
+    const demoEmail = 'demo@aa.io';
+    const demoPassword = 'password'
+
+    setEmail(demoEmail)
+    setPassword(demoPassword)
+
+    await dispatch(login(email, password));
+
+  };
+
+  const demoLogin2 = async (e) => {
+    const demoEmail = 'marnie@aa.io';
+    const demoPassword = 'password'
+
+    setEmail(demoEmail)
+    setPassword(demoPassword)
+
+    await dispatch(login(email, password));  
+
   };
 
   const updateEmail = (e) => {
@@ -31,35 +65,58 @@ const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={onLogin}>
-      <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
+    <div className="loginPage">  
+      <video className='loginbackground'autoplay="autoplay" playsinline="playsinline" muted="muted" loop="loop" src={AHours}></video>
+ 
+        <div className="formContainer">
+            <h1>Welcome back!</h1>
+            <h2>We're so excited to see you again!</h2>
+
+          <form id="signUpForm" autoComplete="off" onSubmit={onLogin}>
+            <div className="formField">
+              <label id={loginError}>
+                EMAIL
+                {errors.length > 0 && (
+                  <span className="loginError"> - Login or password is invalid.</span>
+                )}
+              </label>
+              <input
+                id={loginErrorBorder}
+                name='email'
+                type="text"
+                required
+                autoComplete="off"
+                value={email}
+                onChange={updateEmail}
+              />
+            </div>
+            <div className="formField">
+              <label id={loginError}>
+                PASSWORD
+                {errors.length > 0 && (
+                  <span className="loginError"> - Login or password is invalid.</span>
+                )}
+              </label>
+               <input
+                id={loginErrorBorder}
+                name='password'
+                type="password"
+                required
+                autoComplete="off"
+                value={password}
+                onChange={updatePassword}
+              />
+            </div>
+            <div className="loginButtons">
+              <button className="formButton" type="submit">Login</button>
+              <button id="demoLoginButton" className="formButton" onClick={demoLogin}>Demo One</button>
+              <button id="demoLoginButton" className="formButton" onClick={demoLogin2}>Demo Two</button>
+            </div>
+          </form>
+          <p className="already">Need an account? <Link to="/signup" id="loginHere">Register</Link></p>
       </div>
-      <div>
-        <label htmlFor='email'>Email</label>
-        <input
-          name='email'
-          type='text'
-          placeholder='Email'
-          value={email}
-          onChange={updateEmail}
-        />
-      </div>
-      <div>
-        <label htmlFor='password'>Password</label>
-        <input
-          name='password'
-          type='password'
-          placeholder='Password'
-          value={password}
-          onChange={updatePassword}
-        />
-        <button type='submit'>Login</button>
-      </div>
-    </form>
-  );
-};
+    </div>
+  )
+}
 
 export default LoginForm;
