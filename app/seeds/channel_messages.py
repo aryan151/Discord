@@ -1,4 +1,3 @@
-from app.models import Message
 from app.models import Message, db
 
 def seed_messages():

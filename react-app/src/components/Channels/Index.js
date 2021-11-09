@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router'
 import { fetchChannels } from '../../store/channel'
 import './channels.css'
+import { Link } from 'react-router-dom'
 
 const Channels = ({id}) => {
 
@@ -24,12 +25,12 @@ const Channels = ({id}) => {
       {server ? <h1>{server.name}</h1> : <h1>Hello from channels</h1>}
 
       {channels?.map(channel =>
-      <div className="channel">
+      <Link to={`/${serverId}/${channel.id}`} className="channel">
         <span><i class="fas fa-hashtag"></i>
         <p>{channel.name}</p></span>
 
         <span className="settings-cog"><i class="fas fa-cog" ></i></span>
-      </div>
+      </Link>
         )}
     </div>
   )

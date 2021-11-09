@@ -10,6 +10,8 @@ import User from './components/User';
 import { authenticate } from './store/session';
 import Dashboard from './components/Dashboard/Index';
 
+
+
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
@@ -46,6 +48,9 @@ function App() {
         <Dashboard />
         </ProtectedRoute>
         <ProtectedRoute path='/:serverId' exact={true} >
+        <Dashboard />
+        </ProtectedRoute>
+        <ProtectedRoute path='/:serverId/:channelId' exact={true} >
         <Dashboard />
         </ProtectedRoute>
       </Switch>

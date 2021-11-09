@@ -29,11 +29,12 @@ function Server () {
         if (!name.includes(' ')) {
             return String(name[0]).toUpperCase()
         } else {
+            let newName = name.trim()
             let initials = ''
-            let array = name.split(' ')
+            let array = newName.split(' ')
             for (let i = 0; i < array.length; i++){
                 let word = array[i]
-                initials += String(word[0]).toUpperCase() + '.'
+                initials += String(word[0]).toUpperCase()
             }
             return initials
         }
