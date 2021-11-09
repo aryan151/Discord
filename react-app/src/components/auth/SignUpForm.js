@@ -53,53 +53,53 @@ const SignUpForm = () => {
           <div className='standardInput'>
             <input
               className='input'
-              type="text" 
-              name='username' 
+              type="email" 
+              name='email' 
               placeholder=' ' 
-              value={username} 
-              onChange={(e) => setUsername(e.target.value)} 
+              value={email} 
+              onChange={(e) => setEmail(e.target.value)} 
               required 
             />  
-            <label className='label' htmlFor="username" >Email</label>
+            <label className='label' htmlFor="email" >Email</label>
             <span className='underline' ></span>
           </div>  
           <div className='standardInput'>
             <input
               className='input'
-              type="text" 
-              name='username' 
+              type="url" 
+              name='avatar' 
               placeholder=' ' 
-              value={username} 
-              onChange={(e) => setUsername(e.target.value)} 
+              value={avatar} 
+              onChange={(e) => setAvatar(e.target.value)} 
               required 
             />  
-            <label className='label' htmlFor="username" >Avatar</label>
+            <label className='label' htmlFor="avatar" >Avatar</label>
             <span className='underline' ></span>
           </div>  
           <div className='standardInput'>
             <input
               className='input'
-              type="text" 
-              name='username' 
+              type="password" 
+              name='password' 
               placeholder=' ' 
-              value={username} 
-              onChange={(e) => setUsername(e.target.value)} 
+              value={password} 
+              onChange={(e) => setPassword(e.target.value)} 
               required 
             />  
-            <label className='label' htmlFor="username" >Password</label>
+            <label className='label' htmlFor="password" >Password</label>
             <span className='underline' ></span>
           </div>  
           <div className='standardInput'>
             <input
               className='input'
-              type="text" 
-              name='username' 
+              type="password" 
+              name='repeatPassword' 
               placeholder=' ' 
-              value={username} 
-              onChange={(e) => setUsername(e.target.value)} 
+              value={repeatPassword} 
+              onChange={(e) => setRepeatPassword(e.target.value)} 
               required 
             />  
-            <label className='label' htmlFor="username" >Confirm Password</label>
+            <label className='label' htmlFor="repeatPassword" >Confirm Password</label>
             <span className='underline' ></span>
           </div>   
         <button className="signup-button" type="submit">Sign Up</button>
