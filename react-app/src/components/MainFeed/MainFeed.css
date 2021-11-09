@@ -1,3 +1,19 @@
-.messages-container {
-    
+.messages-container,.empty-channel {
+  grid-column: 3/4;
+  grid-row: 1/6;
+}
+
+.empty-channel {
+  padding: 1em;
+  color: lightgray;
+}
+
+.empty-channel h2 {
+  padding-top: 15%;
+  font-size: 3rem;
+  padding-bottom: 2rem;
+}
+
+.empty-channel p{
+  line-height: 1.75rem;
 }

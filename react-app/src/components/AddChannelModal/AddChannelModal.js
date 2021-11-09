@@ -2,19 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Modal } from '../../context/Modal';
 import { useParams } from 'react-router'
-import { addChannel } from '../../store/channel'
-import { fetchChannels } from '../../store/channel';
+import { addChannel, fetchChannels } from '../../store/channel'
 
 
-function AddChannelModal ({  }) {
+
+function AddChannelModal ({serverId}) {
     // const userId = useSelector((state) => state.session?.user?.id);
-    const params = useParams()
-    let serverId = params.serverId
+    // const params = useParams()
+    // let serverId = params.serverId
 
     const [showModal, setShowModal] = useState(false);
     const [channelName, setChannelName] = useState('')
     const dispatch = useDispatch()
-    const channels = useSelector(state => state.channels[serverId])
+
 
     const createChannel = async (e) => {
         e.preventDefault()
