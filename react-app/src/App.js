@@ -30,9 +30,7 @@ function App() {
 
   return (
     <BrowserRouter>
-<<<<<<< HEAD
       {/* <NavBar /> */}
-=======
       <NavBar />
       {/* <Channels /> */}
 >>>>>>> main
