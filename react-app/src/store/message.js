@@ -21,8 +21,10 @@ const messagesReducer = (state = initialState, action) => {
     switch(action.type) {
         case LOAD: {
             const allMessages = {};
-            let channelId = action.messages.messages[0].channelId
-            allMessages[channelId] = action.messages.messages
+            if(action.messages.messages.length > 0){
+                let channelId = action.messages.messages[0].channelId
+                allMessages[channelId] = action.messages.messages
+            }
             return {
                 ...allMessages,
                 ...state,
