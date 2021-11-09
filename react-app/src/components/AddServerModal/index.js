@@ -20,8 +20,8 @@ function AddServerModal ({  }) {
 
     return (
         <>
-            <div className='add-server-container'>
-                <div className={showModal ? '' :  "far fa-edit"} onClick={() => setShowModal(true)}>Add Server</div>
+            <div className='add-server-container'  onClick={() => setShowModal(true)}>
+            <span><i class="fas fa-plus"></i> Add Server</span>
             </div>
             {showModal && (
             <Modal onClose={() => setShowModal(false)}>

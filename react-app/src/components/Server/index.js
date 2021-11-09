@@ -52,8 +52,8 @@ function Server () {
                 </div>
             </Link>
             ))}
-            <div className='server-links-div' style={{backgroundImage: 'url(https://cdn.discordapp.com/embed/avatars/0.png)'}}>
-                <AddServerModal />
+            <div className='server-links-div' >
+            <AddServerModal />
             </div>
 
             {/* <form onSubmit={createServer}>

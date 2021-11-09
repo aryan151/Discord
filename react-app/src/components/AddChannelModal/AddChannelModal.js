@@ -14,6 +14,7 @@ function AddChannelModal ({  }) {
     const [showModal, setShowModal] = useState(false);
     const [channelName, setChannelName] = useState('')
     const dispatch = useDispatch()
+    const channels = useSelector(state => state.channels[serverId])
 
     const createChannel = async (e) => {
         e.preventDefault()
@@ -22,6 +23,8 @@ function AddChannelModal ({  }) {
 
         dispatch(addChannel(payload))
         setChannelName('')
+        dispatch(fetchChannels(serverId))
+        setShowModal(false)
     }
 
     return (
