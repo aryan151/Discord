@@ -1,0 +1,7 @@
+.dashboard-container {
+  display: grid;
+  grid-template-columns: 150px 300px 1fr 200px;
+  grid-template-rows: 20px 75px 1fr 1fr 1fr;
+  min-height: 100vh;
+  background-color: rgb(46, 46, 46);
+}

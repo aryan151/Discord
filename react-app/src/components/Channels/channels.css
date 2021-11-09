@@ -1,0 +1,40 @@
+.channels-container {
+  background-color: black;
+  width: 100%;
+  height: 100vh;
+  color: lightgray;
+  grid-column: 2/ 3;
+  grid-row: 1 / 6;
+}
+.channels-container h1 {
+  text-align: center;
+}
+
+.channel {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(46, 45, 45);
+  margin: 3px 6px;
+  border-radius: 7px;
+}
+.channel * {
+  padding: 0 7px;
+  color: lightgray;
+
+}
+
+.channel:hover {
+  background-color: rgb(66, 66, 66);
+  cursor: pointer;
+}
+
+.channel p {
+  font-size: 16px;
+  display: inline-block;
+}
+
+.settings-cog:hover {
+  color: white;
+}

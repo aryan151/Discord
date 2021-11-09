@@ -9,6 +9,9 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import Splash from './components/Splash';
 import { authenticate } from './store/session';
+import Dashboard from './components/Dashboard/Index';
+
+
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -27,7 +30,12 @@ function App() {
 
   return (
     <BrowserRouter>
+<<<<<<< HEAD
       {/* <NavBar /> */}
+=======
+      <NavBar />
+      {/* <Channels /> */}
+>>>>>>> main
       <Switch>
         <Route path='/' exact={true}>
           <Splash />
@@ -38,14 +46,20 @@ function App() {
         <Route path='/signup' exact={true}>
           <SignUpForm />
         </Route>
-        <ProtectedRoute path='/users' exact={true} >
+        {/* <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
-        </ProtectedRoute>
+        </ProtectedRoute> */}
         <ProtectedRoute path='/dashboard' exact={true} >
-          <h1>My Home Page</h1>
+        <Dashboard />
+        </ProtectedRoute>
+        <ProtectedRoute path='/:serverId' exact={true} >
+        <Dashboard />
+        </ProtectedRoute>
+        <ProtectedRoute path='/:serverId/:channelId' exact={true} >
+        <Dashboard />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
