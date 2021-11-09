@@ -24,7 +24,6 @@ export const MainFeed = () => {
 
     }, [dispatch, channelId, serverId])
 
-    let messages = useSelector((state) => state?.messages[channelId])
     let channel = useSelector(state => state.channels[serverId]?.find(channel => channelId == channel.id))
 
 
@@ -55,9 +54,6 @@ export const MainFeed = () => {
                     <div>{message?.body}</div>
                 </div>
             ))}
-            <div>Message 1</div>
-            <div>Message 2</div>
-            <div>Message 3</div>
         <form onSubmit={createMessage}>
             <input value={body} onChange={(e) => setBody(e.target.value)}></input>
             <button type="submit">Send Message</button>
