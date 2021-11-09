@@ -44,9 +44,11 @@ function Server () {
     return (
         <div className='server-container'>
             {servers.map((server) => (
+            <Link className='server-links'to={`/${server.id}`}>    
                 <div className='server-links-div' style={{backgroundImage: `url(${server?.avatar})`}}>
-                    <Link className='server-links'to={`/${server.id}`}>{serverInitials(server?.name)}</Link>
+                    {serverInitials(server?.name)}   
                 </div>
+            </Link>
             ))}
 
             <form onSubmit={createServer}>
