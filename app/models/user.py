@@ -20,7 +20,7 @@ class User(db.Model, UserMixin):
 
     dm_server = db.relationship('DMServer', back_populates='owner')
 
-    # dm_sender = db.relationship('DMMessage', back_populates='sender')
+    dm_sender = db.relationship('DMMessage', back_populates='sender')
     # dm_receiver = db.relationship('DMMessage', back_populates='receiver')
 
     @property
