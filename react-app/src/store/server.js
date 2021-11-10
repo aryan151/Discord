@@ -1,5 +1,6 @@
 const LOAD = 'spots/LOAD'
 const ADD_SERVER = 'spots/ADD_SERVER'
+const LOAD_MY_SERVERS = 'spots/LOAD_MY_SERVERS'
 
 
 //LOAD ALL SERVERS
@@ -13,6 +14,11 @@ const addOneServer = server => ({
     type: ADD_SERVER,
     server
 })
+
+// const loadServers = servers => ({
+//     type: LOAD_MY_SERVERS,
+//     servers
+// })
 
 
 //THUNK ACTION GETTING ALL SERVERS
@@ -38,6 +44,14 @@ export const addServer = (payload) => async dispatch => {
     if (response.ok) {
         const server = await response.json()
         dispatch(addOneServer(server))
+    }
+}
+
+export const getMyServers = (userId) => async dispatch => {
+    const response = await fetch(`/api/servers/${userId}`)
+    if (response.ok) {
+        const servers = await response.json()
+        dispatch(load(servers))
     }
 }
 

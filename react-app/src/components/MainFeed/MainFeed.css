@@ -1,6 +1,8 @@
 .messages-container,.empty-channel {
   grid-column: 3/4;
   grid-row: 1/6;
+  padding-left: 10%;
+  padding-top: 5%;
 }
 
 .empty-channel {
@@ -16,4 +18,22 @@
 
 .empty-channel p{
   line-height: 1.75rem;
+}
+
+.create-message-form {
+  box-sizing: border-box;
+  bottom: 0;
+}
+
+#message-input {
+  width: 70%;
+  height: 30px;
+  border-radius: 8px;
+  background-color: rgb(145, 145, 145);
+}
+
+.message-body-div {
+  padding-top: 5%;
+  text-align: left;
+  color: white;
 }
