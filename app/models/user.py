@@ -1,7 +1,7 @@
 from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-    
+
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -17,6 +17,11 @@ class User(db.Model, UserMixin):
     messages = db.relationship('Message', back_populates='user', cascade='all, delete')
     servers = db.relationship('Server', back_populates='user', cascade='all, delete')
     server_members = db.relationship('ServerMember', cascade='all, delete')
+
+    dm_server = db.relationship('DMServer', back_populates='owner')
+
+    # dm_sender = db.relationship('DMMessage', back_populates='sender')
+    # dm_receiver = db.relationship('DMMessage', back_populates='receiver')
 
     @property
     def password(self):

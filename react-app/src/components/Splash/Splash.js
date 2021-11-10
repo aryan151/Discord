@@ -5,8 +5,8 @@ import SplashPart3 from './SplashPart3'
 import SplashPart4 from './SplashPart4';
 import SplashPart5 from './SplashPart5'
 import SplashPart6 from './SplashPart6';
-import { Link } from "react-router-dom"; 
-import './Splash.css'      
+import { Link } from "react-router-dom";
+import './Splash.css'
 
 function Splash() {
 
@@ -17,11 +17,11 @@ function Splash() {
     return (
         <>
         <SplashNav/>
-        <div className='layout__splash_container' >   
+        <div className='layout__splash_container' >
             <section className='layout__splash_header' >
                 <SplashPart1 />
             </section>
-            <section className='layout__splash_body1' >
+            {/* <section className='layout__splash_body1' >
                 <SplashPart2 />
             </section>
             <section className='layout__splash_body2' >
@@ -35,11 +35,11 @@ function Splash() {
             </section>
             <section className='layout__splash_body5' >
                 <SplashPart6 />
-            </section>
+            </section> */}
         </div>
         </>
     )
-};  
+};
 
 
-export default Splash;     
+export default Splash;
