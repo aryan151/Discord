@@ -10,10 +10,9 @@ import './Server.css'
 function Server () {
     const params = useParams()
     let {serverId} = params
-
+    const [homeServer, setHomeServer] = useState(null);
     // const [homeServer, setHomeServer] = useState(null)
     const user = useSelector((state) => state.session?.user);
-    const homeServer = useSelector(state => Object.values(state.servers).find(server => server?.name == user?.username))
     // const ownedServers = useSelector(state => Object.values(state.servers).filter((server) => server?.ownerId == user?.id))
     const userId = useSelector((state) => state.session?.user?.id);
     // const [servers, setServers] = useState([])
@@ -25,11 +24,11 @@ function Server () {
         dispatch(getMyServers(userId))
         dispatch(getServers())
 
-        // fetch(`/api/servers/${userId}`)
-        // .then((data) => data.json())
-        // .then((servers) => setServers(servers.servers)
+        fetch(`/api/servers/home/${user.username}`)
+        .then((data) => data.json())
+        .then((server) => setHomeServer(server))
 
-    }, [dispatch, serverId])
+    }, [dispatch, serverId, user])
 
 
     const serverInitials = (name)=> {

@@ -38,7 +38,7 @@ def get_my_servers(id):
     # owned = Server.query.filter(Server.ownerId == id).all()
     return {'servers': [server.to_dict() for server in servers]}
 
-@servers_routes.route('home')
+@servers_routes.route('home/<name>')
 def get_home_server(name):
     server = DMServer.query.filter(DMServer.name == name).one()
 
