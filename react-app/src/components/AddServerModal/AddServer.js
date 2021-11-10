@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addServer } from '../../store/server'
+import { getMyServers } from '../../store/server';
 import './AddServerModal.css'
 
 function AddServer(){
     const userId = useSelector((state) => state.session?.user?.id);
-    
+
 
     const [serverName, setServerName] = useState('')
     const dispatch = useDispatch()
@@ -15,24 +16,26 @@ function AddServer(){
         const payload = {name:serverName, owner_id:userId}
 
         dispatch(addServer(payload))
+        dispatch(getMyServers(userId))
         setServerName('')
- 
+        // setShowModal(false)
+
     }
-    
+
     return (
         <div>
             <form onSubmit={createServer}>
                 <fieldset>
                     <legend>Server Name</legend>
                         <div>
-                            <input 
+                            <input
                             type="text"
                             value={serverName}
                             onChange={(e) => setServerName(e.target.value)}
-                            />        
+                            />
                         </div>
                         <div>
-                            <button 
+                            <button
                             type="submit"
                             onClick={createServer}
                             >Create Server
@@ -40,7 +43,7 @@ function AddServer(){
                         </div>
                     </fieldset>
             </form>
-        </div>    
+        </div>
     )
 }
 

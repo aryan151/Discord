@@ -3,27 +3,29 @@ import { useEffect, useState } from 'react';
 import { getMyServers} from '../../store/server'
 import { Link } from 'react-router-dom'
 import AddServerModal, { addServerModal } from '../AddServerModal'
+import { useParams } from 'react-router';
 import './Server.css'
 
 function Server () {
+    const params = useParams()
+    let {serverId} = params
 
     // const [homeServer, setHomeServer] = useState(null)
     const user = useSelector((state) => state.session?.user);
-    const servers = useSelector(state => Object.values(state.servers));
     const homeServer = useSelector(state => Object.values(state.servers).find(server => server.name == user.username))
     const userId = useSelector((state) => state.session?.user?.id);
-    const [servers, setServers] = useState([])
-    // const servers = useSelector(state => Object.values(state.servers));
+    // const [servers, setServers] = useState([])
 
+    const servers = useSelector(state => Object.values(state.myServers));
 
     const dispatch = useDispatch()
     useEffect(() => {
-        // dispatch(getMyServers(userId))
-        fetch(`/api/servers/${userId}`)
-        .then((data) => data.json())
-        .then((servers) => setServers(servers.servers)
+        dispatch(getMyServers(userId))
+        // fetch(`/api/servers/${userId}`)
+        // .then((data) => data.json())
+        // .then((servers) => setServers(servers.servers)
 
-    )}, [dispatch])
+    }, [dispatch, serverId])
 
 
     const serverInitials = (name)=> {
