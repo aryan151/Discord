@@ -19,11 +19,15 @@ def add_server():
 
         server = Server(
             name = form.data['name'],
-            ownerId=form.data['owner_id']
+            ownerId=form.data['owner_id'],
         )
 
     # server = Server(name='fred', owner_id=1)
     db.session.add(server)
+    db.session.flush()
+    db.session.refresh(server)
+    my_server = ServerMember(userId=form.data['owner_id'], serverId=server.id, admin=True)
+    db.session.add(my_server)
     db.session.commit()
     return server.to_dict()
 

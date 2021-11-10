@@ -10,6 +10,7 @@ const Dashboard = () => {
       <Server />
       <Channels />
       <MainFeed />
+      {/* <Members / > */}
     </div>
   )
 }

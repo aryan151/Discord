@@ -27,7 +27,6 @@ function Explore() {
         const payload = {
             serverId,
             userId,
-            admin : 'False'
         }
         dispatch(createMemberToServer(payload))
         dispatch(getMyServers(userId))

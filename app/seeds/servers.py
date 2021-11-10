@@ -13,10 +13,25 @@ def seed_servers():
         ownerId=2,
         name='League of Legends'
     )
+    server4 = Server(
+        ownerId=1,
+        name='Demo'
+    )
+    server5 = Server(
+        ownerId=2,
+        name='marnie'
+    )
+    server6 = Server(
+        ownerId=3,
+        name='bobbie'
+    )
 
     db.session.add(server1)
     db.session.add(server2)
     db.session.add(server3)
+    db.session.add(server4)
+    db.session.add(server5)
+    db.session.add(server6)
     db.session.commit()
 
 def undo_servers():
