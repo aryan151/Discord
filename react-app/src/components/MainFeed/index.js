@@ -36,6 +36,18 @@ export const MainFeed = () => {
         dispatch(getMessages(channelId))
         setBody('')
     }
+    if (serverId === 'explore') return null;
+
+    if (!messages) {
+        return (
+            <div className="empty-channel">
+            <h2>Welcome to {channel ? channel.name + "!": "the channel!"}</h2>
+            <p>This is just the beginning. <br /> Be the first to leave a message.</p>
+            </div>
+        );
+    }
+
+
 
     if (!messages) {
         return (
@@ -56,11 +68,11 @@ export const MainFeed = () => {
         <div className='messages-container'>
             {messages?.map((message) => (
                 <div>
-                    <div>{message?.body}</div>
+                    <div className='message-body-div'>{message?.body}</div>
                 </div>
             ))}
-        <form onSubmit={createMessage}>
-            <input value={body} onChange={(e) => setBody(e.target.value)}></input>
+        <form className="create-message-form" onSubmit={createMessage}>
+            <input id="message-input" value={body} onChange={(e) => setBody(e.target.value)}></input>
             <button type="submit">Send Message</button>
         </form>
         </div>

@@ -1,0 +1,28 @@
+.explore-container {
+    /* position: relavive; */
+    position: absolute;
+    left: 15%;
+    top: 20%;
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    /* margin-left: 10%; */
+    /* margin-right: 20%; */
+    grid-row-gap: 5%;
+    grid-column-gap: 0.5%;
+}
+
+.explore-servers-card {
+    width: 90%;
+    height: 200px;
+    background-color: honeydew;
+    border-radius: 25px;
+}
+
+.explore-links-image {
+    width: 100%;
+    height: 60%;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+}
