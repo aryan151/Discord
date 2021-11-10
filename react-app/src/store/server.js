@@ -15,10 +15,10 @@ const addOneServer = server => ({
     server
 })
 
-// const loadServers = servers => ({
-//     type: LOAD_MY_SERVERS,
-//     servers
-// })
+const loadServers = servers => ({
+    type: LOAD_MY_SERVERS,
+    servers
+})
 
 
 //THUNK ACTION GETTING ALL SERVERS
@@ -51,13 +51,32 @@ export const getMyServers = (userId) => async dispatch => {
     const response = await fetch(`/api/servers/${userId}`)
     if (response.ok) {
         const servers = await response.json()
-        dispatch(load(servers))
+        dispatch(loadServers(servers))
     }
 }
 
 
 const initialState = {
     // list: []
+}
+
+export const myServersReducer = (state=initialState, action) => {
+    switch(action.type) {
+        case LOAD_MY_SERVERS: {
+            const allServers = {};
+             action.servers.servers.forEach(server => {
+                allServers[server.id] = server
+            });
+
+            return {
+                ...allServers,
+                ...state,
+                // list: action.list.servers,
+            }
+        }
+        default:
+        return state;
+    }
 }
 
 const serversReducer = (state = initialState, action) => {
@@ -73,6 +92,7 @@ const serversReducer = (state = initialState, action) => {
                 // list: action.list.servers,
             }
         }
+
         case ADD_SERVER: {
             const newState = {
                 ...state,

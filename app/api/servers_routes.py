@@ -1,3 +1,4 @@
+from operator import and_, or_
 from flask import Blueprint, jsonify, session, request, redirect
 from app.models import Server, ServerMember, db
 from app.forms import ServerForm
@@ -29,4 +30,5 @@ def add_server():
 @servers_routes.route('/<int:id>')
 def get_my_servers(id):
     servers = Server.query.join(ServerMember).filter(ServerMember.userId == id).all()
+    # owned = Server.query.filter(Server.ownerId == id).all()
     return {'servers': [server.to_dict() for server in servers]}

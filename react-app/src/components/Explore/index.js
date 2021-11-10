@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { getServers, addServer } from '../../store/server'
 import { Redirect } from 'react-router-dom';
 import {createMemberToServer} from '../../store/membersservers'
+import { getMyServers } from '../../store/server';
 import './Explore.css'
 
 function Explore() {
@@ -15,6 +16,7 @@ function Explore() {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getServers())
+        dispatch(getMyServers(userId))
     }, [dispatch])
 
 
@@ -28,6 +30,7 @@ function Explore() {
             admin : 'False'
         }
         dispatch(createMemberToServer(payload))
+        dispatch(getMyServers(userId))
         history.push(`/${serverId}`)
         // return <Redirect to={`/${serverId}`}/>
     }

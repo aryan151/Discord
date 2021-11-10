@@ -38,15 +38,6 @@ export const MainFeed = () => {
     }
     if (serverId === 'explore') return null;
 
-    if (!messages) {
-        return (
-            <div className="empty-channel">
-            <h2>Welcome to {channel ? channel.name + "!": "the channel!"}</h2>
-            <p>This is just the beginning. <br /> Be the first to leave a message.</p>
-            </div>
-        );
-    }
-
 
 
     if (!messages) {
