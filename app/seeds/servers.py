@@ -1,4 +1,4 @@
-from app.models import db, Server
+from app.models import db, Server, DMServer
 
 def seed_servers():
     server1 = Server(
@@ -13,15 +13,15 @@ def seed_servers():
         ownerId=2,
         name='League of Legends'
     )
-    server4 = Server(
+    server4 = DMServer(
         ownerId=1,
         name='Demo'
     )
-    server5 = Server(
+    server5 = DMServer(
         ownerId=2,
         name='marnie'
     )
-    server6 = Server(
+    server6 = DMServer(
         ownerId=3,
         name='bobbie'
     )

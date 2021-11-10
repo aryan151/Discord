@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, Server, db
+from app.models import User, Server, DMServer, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
@@ -71,7 +71,7 @@ def sign_up():
         db.session.add(user)
         db.session.flush()
         db.session.refresh(user)
-        default_server = Server(name = form.data['username'],
+        default_server = DMServer(name = form.data['username'],
         ownerId= user.id
         )
         db.session.add(default_server)
