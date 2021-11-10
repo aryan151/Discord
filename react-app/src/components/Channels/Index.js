@@ -6,35 +6,37 @@ import './channels.css'
 import { Link } from 'react-router-dom'
 import AddChannelModal from '../AddChannelModal/AddChannelModal'
 import Explore from '../Explore'
+import { getMyServers } from '../../store/server'
 
 
 const Channels = ({id}) => {
 
   const params = useParams()
-  let serverId = params.serverId
+  let serverId = params?.serverId
   // serverId = 1
+  const userId = useSelector(state => state.session?.user?.id)
+  const channels = useSelector(state => state.channels[serverId])
+  const server = useSelector(state => state.servers[serverId])
   const dispatch = useDispatch()
   useEffect(() => {
 
     dispatch(fetchChannels(serverId));
+    dispatch(getMyServers(userId))
 
   }, [dispatch, serverId])
 
-  const user = useSelector(state => state.session.user)
-  const channels = useSelector(state => state.channels[serverId])
-  const server = useSelector(state => state.servers[serverId])
 
   return (
 
     <>
       {serverId === 'explore' ? <Explore /> :
       <div className="channels-container">
-        {server ? <h1>{server.name}</h1> : <h1>Hello from channels</h1>}
+        {server ? <h1>{server?.name}</h1> : <h1>Hello from channels</h1>}
         <AddChannelModal serverId={serverId}/>
         {channels?.map(channel =>
-        <Link to={`/${serverId}/${channel.id}`} className="channel">
+        <Link to={`/${serverId}/${channel?.id}`} className="channel">
           <span><i class="fas fa-hashtag"></i>
-          <p>{channel.name}</p></span>
+          <p>{channel?.name}</p></span>
 
           <span className="settings-cog"><i class="fas fa-cog" ></i></span>
         </Link>

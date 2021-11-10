@@ -8,8 +8,6 @@ import { addChannel, fetchChannels } from '../../store/channel'
 
 function AddChannelModal ({serverId}) {
     // const userId = useSelector((state) => state.session?.user?.id);
-    // const params = useParams()
-    // let serverId = params.serverId
 
     const [showModal, setShowModal] = useState(false);
     const [channelName, setChannelName] = useState('')
@@ -22,8 +20,8 @@ function AddChannelModal ({serverId}) {
         const payload = {name:channelName, serverId}
 
         dispatch(addChannel(payload))
-        setChannelName('')
         dispatch(fetchChannels(serverId))
+        setChannelName('')
         setShowModal(false)
     }
 

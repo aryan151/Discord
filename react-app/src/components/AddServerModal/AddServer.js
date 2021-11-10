@@ -4,7 +4,7 @@ import { addServer } from '../../store/server'
 import { getMyServers } from '../../store/server';
 import './AddServerModal.css'
 
-function AddServer(){
+function AddServer({ setShowModal }){
     const userId = useSelector((state) => state.session?.user?.id);
 
 
@@ -18,7 +18,7 @@ function AddServer(){
         dispatch(addServer(payload))
         dispatch(getMyServers(userId))
         setServerName('')
-        // setShowModal(false)
+        setShowModal(false)
 
     }
 
