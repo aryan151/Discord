@@ -23,3 +23,6 @@ def add_message(channelId):
     db.session.add(message)
     db.session.commit()
     return message.to_dict()
+
+
+# hi
