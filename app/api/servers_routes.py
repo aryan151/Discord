@@ -30,4 +30,5 @@ def add_server():
 @servers_routes.route('/<int:id>')
 def get_my_servers(id):
     servers = Server.query.join(ServerMember).filter(ServerMember.userId == id).all()
-    return {'servers' : [server.to_dict() for server in servers]}
+    # owned = Server.query.filter(Server.ownerId == id).all()
+    return {'servers': [server.to_dict() for server in servers]}

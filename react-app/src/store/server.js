@@ -64,9 +64,10 @@ export const myServersReducer = (state=initialState, action) => {
     switch(action.type) {
         case LOAD_MY_SERVERS: {
             const allServers = {};
-            action.servers.servers.forEach(server => {
+             action.servers.servers.forEach(server => {
                 allServers[server.id] = server
             });
+
             return {
                 ...allServers,
                 ...state,
