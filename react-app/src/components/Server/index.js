@@ -7,9 +7,14 @@ import './Server.css'
 
 function Server () {
 
+    // const [homeServer, setHomeServer] = useState(null)
+    const user = useSelector((state) => state.session?.user);
+    const servers = useSelector(state => Object.values(state.servers));
+    const homeServer = useSelector(state => Object.values(state.servers).find(server => server.name == user.username))
     const userId = useSelector((state) => state.session?.user?.id);
     const [servers, setServers] = useState([])
     // const servers = useSelector(state => Object.values(state.servers));
+
 
     const dispatch = useDispatch()
     useEffect(() => {
@@ -22,6 +27,7 @@ function Server () {
 
 
     const serverInitials = (name)=> {
+        if (!name) return
         if (!name.includes(' ')) {
             return String(name[0]).toUpperCase()
         } else {
@@ -40,8 +46,16 @@ function Server () {
 
     return (
         <div className='server-container'>
-            {servers?.map((server) => (
+
+           { homeServer && <Link className='server-links'to={`/${homeServer.id}`}>
+                <div className='server-links-div' style={{backgroundImage: `url(${homeServer?.avatar})`}}>
+                    {serverInitials(homeServer?.name)}
+                </div>
+            </Link>}
+            {servers.map((server) => (
+            server !== homeServer &&
             <Link className='server-links'to={`/${server?.id}`}>
+
                 <div className='server-links-div' style={{backgroundImage: `url(${server?.avatar})`}}>
                     {serverInitials(server?.name)}
                 </div>

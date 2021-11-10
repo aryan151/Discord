@@ -25,6 +25,5 @@ class Message(db.Model):
             'userId': self.userId,
             'channelId': self.channelId,
             'imageUrl': self.imageUrl,
-            'createdAt': self.createdAt.strftime("%Y/%m/%d %H:%M:%S"),
-            'updatedAt': self.updatedAt.strftime("%Y/%m/%d %H:%M:%S")
+            'createdAt': self.createdAt.strftime("%Y/%m/%d %H:%M:%S")
         }

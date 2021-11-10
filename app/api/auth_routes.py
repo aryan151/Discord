@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db
+from app.models import User, Server, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
@@ -69,7 +69,14 @@ def sign_up():
             password=form.data['password']
         )
         db.session.add(user)
+        db.session.flush()
+        db.session.refresh(user)
+        default_server = Server(name = form.data['username'],
+        ownerId= user.id
+        )
+        db.session.add(default_server)
         db.session.commit()
+        # ownId = User.query.filter(User.username == form.data['username']).one()
         login_user(user)
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401

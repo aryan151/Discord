@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import AddChannelModal from '../AddChannelModal/AddChannelModal'
 import Explore from '../Explore'
 
+
 const Channels = ({id}) => {
 
   const params = useParams()
@@ -19,11 +20,11 @@ const Channels = ({id}) => {
 
   }, [dispatch, serverId])
 
+  const user = useSelector(state => state.session.user)
   const channels = useSelector(state => state.channels[serverId])
   const server = useSelector(state => state.servers[serverId])
 
   return (
-
 
     <>
       {serverId === 'explore' ? <Explore /> :

@@ -49,6 +49,21 @@ export const MainFeed = () => {
 
 
 
+    if (!messages) {
+        return (
+            <div className="empty-channel">
+            <h2>Welcome to {channel ? channel.name + "!": "the channel!"}</h2>
+            <p>This is just the beginning. <br /> Be the first to leave a message.</p>
+            <form onSubmit={createMessage}>
+            <input value={body} onChange={(e) => setBody(e.target.value)}></input>
+            <button type="submit">Send Message</button>
+             </form>
+            </div>
+        );
+    }
+
+
+
     return (
         <div className='messages-container'>
             {messages?.map((message) => (
