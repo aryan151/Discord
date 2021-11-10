@@ -4,6 +4,7 @@ import { getMyServers} from '../../store/server'
 import { Link } from 'react-router-dom'
 import AddServerModal, { addServerModal } from '../AddServerModal'
 import { useParams } from 'react-router';
+import { getServers } from '../../store/server';
 import './Server.css'
 
 function Server () {
@@ -12,15 +13,18 @@ function Server () {
 
     // const [homeServer, setHomeServer] = useState(null)
     const user = useSelector((state) => state.session?.user);
-    const homeServer = useSelector(state => Object.values(state.servers).find(server => server.name == user.username))
+    const homeServer = useSelector(state => Object.values(state.servers).find(server => server?.name == user?.username))
+    // const ownedServers = useSelector(state => Object.values(state.servers).filter((server) => server?.ownerId == user?.id))
     const userId = useSelector((state) => state.session?.user?.id);
     // const [servers, setServers] = useState([])
 
-    const servers = useSelector(state => Object.values(state.myServers));
+    const servers = useSelector(state => Object.values(state.myServers))
 
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getMyServers(userId))
+        dispatch(getServers())
+
         // fetch(`/api/servers/${userId}`)
         // .then((data) => data.json())
         // .then((servers) => setServers(servers.servers)
@@ -56,7 +60,7 @@ function Server () {
             </Link>}
             {servers.map((server) => (
             server !== homeServer &&
-            <Link className='server-links'to={`/${server?.id}`}>
+            <Link className='server-links' to={`/${server?.id}`}>
 
                 <div className='server-links-div' style={{backgroundImage: `url(${server?.avatar})`}}>
                     {serverInitials(server?.name)}
