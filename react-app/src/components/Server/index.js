@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { getServers, addServer } from '../../store/server'
+import { getMyServers} from '../../store/server'
 import { Link } from 'react-router-dom'
 import AddServerModal, { addServerModal } from '../AddServerModal'
 import './Server.css'
@@ -8,23 +8,18 @@ import './Server.css'
 function Server () {
 
     const userId = useSelector((state) => state.session?.user?.id);
-    const servers = useSelector(state => Object.values(state.servers));
+    const [servers, setServers] = useState([])
+    // const servers = useSelector(state => Object.values(state.servers));
 
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(getServers())
-    }, [dispatch])
+        // dispatch(getMyServers(userId))
+        fetch(`/api/servers/${userId}`)
+        .then((data) => data.json())
+        .then((servers) => setServers(servers.servers)
 
-    // const [serverName, setServerName] = useState('')
+    )}, [dispatch])
 
-    // const createServer = async (e) => {
-    //     e.preventDefault()
-
-    //     const payload = {name:serverName, owner_id:userId}
-
-    //     dispatch(addServer(payload))
-    //     setServerName('')
-    // }
 
     const serverInitials = (name)=> {
         if (!name.includes(' ')) {
@@ -45,8 +40,8 @@ function Server () {
 
     return (
         <div className='server-container'>
-            {servers.map((server) => (
-            <Link className='server-links'to={`/${server.id}`}>
+            {servers?.map((server) => (
+            <Link className='server-links'to={`/${server?.id}`}>
                 <div className='server-links-div' style={{backgroundImage: `url(${server?.avatar})`}}>
                     {serverInitials(server?.name)}
                 </div>
@@ -55,12 +50,9 @@ function Server () {
             <div className='server-links-div' >
             <AddServerModal />
             </div>
-
-            {/* <form onSubmit={createServer}>
-                <label>Server Name</label>
-                <input value={serverName} onChange={(e) => setServerName(e.target.value)}></input>
-                <button type="submit">Create Server</button>
-            </form> */}
+            <div className='server-links-div'>
+                <Link to='/explore'>Explore</Link>
+            </div>
 
         </div>
     )

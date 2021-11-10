@@ -5,6 +5,7 @@ import { fetchChannels } from '../../store/channel'
 import './channels.css'
 import { Link } from 'react-router-dom'
 import AddChannelModal from '../AddChannelModal/AddChannelModal'
+import Explore from '../Explore'
 
 const Channels = ({id}) => {
 
@@ -22,18 +23,24 @@ const Channels = ({id}) => {
   const server = useSelector(state => state.servers[serverId])
 
   return (
-    <div className="channels-container">
-      {server ? <h1>{server.name}</h1> : <h1>Hello from channels</h1>}
-      <AddChannelModal serverId={serverId}/>
-      {channels?.map(channel =>
-      <Link to={`/${serverId}/${channel.id}`} className="channel">
-        <span><i class="fas fa-hashtag"></i>
-        <p>{channel.name}</p></span>
 
-        <span onClickclassName="settings-cog"><i class="fas fa-cog" ></i></span>
-      </Link>
-        )}
-    </div>
+
+    <>
+      {serverId === 'explore' ? <Explore /> :
+      <div className="channels-container">
+        {server ? <h1>{server.name}</h1> : <h1>Hello from channels</h1>}
+        <AddChannelModal serverId={serverId}/>
+        {channels?.map(channel =>
+        <Link to={`/${serverId}/${channel.id}`} className="channel">
+          <span><i class="fas fa-hashtag"></i>
+          <p>{channel.name}</p></span>
+
+          <span className="settings-cog"><i class="fas fa-cog" ></i></span>
+        </Link>
+          )}
+      </div>}
+    </>
+
   )
 }
 
