@@ -10,6 +10,8 @@ import User from './components/User';
 import Splash from './components/Splash';
 import { authenticate } from './store/session';
 import Dashboard from './components/Dashboard/Index';
+import Server from './components/Server';
+import Explore from './components/Explore';
 
 
 
@@ -49,14 +51,15 @@ function App() {
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute> */}
+        
         <ProtectedRoute path='/dashboard' exact={true} >
-        <Dashboard />
+          <Dashboard />
         </ProtectedRoute>
         <ProtectedRoute path='/:serverId' exact={true} >
-        <Dashboard />
+          <Dashboard />
         </ProtectedRoute>
         <ProtectedRoute path='/:serverId/:channelId' exact={true} >
-        <Dashboard />
+          <Dashboard />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

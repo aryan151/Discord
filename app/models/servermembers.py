@@ -15,9 +15,10 @@ class ServerMember(db.Model):
 
     def to_dict(self):
         return {
-            'id': self.id,
-            'userId': self.ownerId,
+            # 'id': self.id,
+            'userId': self.userId,
             'serverId': self.serverId,
-            'createdAt': self.createdAt.strftime("%Y/%m/%d %H:%M:%S"),
-            'updatedAt': self.updatedAt.strftime("%Y/%m/%d %H:%M:%S")
+            'admin': self.admin
+            # 'createdAt': self.createdAt.strftime("%Y/%m/%d %H:%M:%S"),
+            # 'updatedAt': self.updatedAt.strftime("%Y/%m/%d %H:%M:%S")
         }
