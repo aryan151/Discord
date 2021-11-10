@@ -17,8 +17,9 @@ class DMMessage(db.Model):
     #Relationship
 
     # channel = db.relationship('Channel', back_populates='messages')
-    # sender = db.relationship('User', back_populates='dm_sender')
-    # receiver = db.relationship('User', back_populates='dm_server')
+    # sender = db.relationship('User', foreign_keys='User.dm_sender' ,back_populates='dm_sender')
+    # receiver = db.relationship('User', foreign_keys='User.dm_receiver',back_populates='dm_reviever')
+
     dm_server =db.relationship('DMServer', back_populates='dm_messages')
 
     def to_dict(self):
