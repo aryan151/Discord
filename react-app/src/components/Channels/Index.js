@@ -6,6 +6,7 @@ import './channels.css'
 import { Link } from 'react-router-dom'
 import AddChannelModal from '../AddChannelModal/AddChannelModal'
 
+
 const Channels = ({id}) => {
 
   const params = useParams()
@@ -18,12 +19,13 @@ const Channels = ({id}) => {
 
   }, [dispatch, serverId])
 
+  const user = useSelector(state => state.session.user)
   const channels = useSelector(state => state.channels[serverId])
   const server = useSelector(state => state.servers[serverId])
 
   return (
     <div className="channels-container">
-      {server ? <h1>{server.name}</h1> : <h1>Hello from channels</h1>}
+      {server ? <h1>{server.name}</h1> : <h1>{user?.username}</h1>}
       <AddChannelModal serverId={serverId}/>
       {channels?.map(channel =>
       <Link to={`/${serverId}/${channel.id}`} className="channel">
