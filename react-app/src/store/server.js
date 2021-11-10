@@ -1,6 +1,7 @@
 const LOAD = 'spots/LOAD'
 const ADD_SERVER = 'spots/ADD_SERVER'
 const LOAD_MY_SERVERS = 'spots/LOAD_MY_SERVERS'
+// const EDIT_SERVER = 'spots/EDIT_SERVER'
 
 
 //LOAD ALL SERVERS
@@ -19,6 +20,11 @@ const loadServers = servers => ({
     type: LOAD_MY_SERVERS,
     servers
 })
+
+// const editOneServer = edit_server => ({
+//     type: EDIT_SERVER,
+//     edit_server
+// })
 
 
 //THUNK ACTION GETTING ALL SERVERS
@@ -54,6 +60,10 @@ export const getMyServers = (userId) => async dispatch => {
         dispatch(loadServers(servers))
     }
 }
+
+// export const editServer = () => async dispatch =>{
+    
+// }
 
 
 const initialState = {
