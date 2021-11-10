@@ -23,6 +23,8 @@ const Channels = ({id}) => {
   const server = useSelector(state => state.servers[serverId])
 
   return (
+
+
     <>
       {serverId === 'explore' ? <Explore /> :
       <div className="channels-container">
@@ -38,6 +40,7 @@ const Channels = ({id}) => {
           )}
       </div>}
     </>
+
   )
 }
 
