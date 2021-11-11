@@ -4,3 +4,10 @@
     align-items: center;
     padding:5px;
 }
+
+#add-server-icon-div {
+    font-size: 20px;
+    color: rgb(77, 146, 37);
+    margin-left: 10px;
+    margin-top: 5px;
+}

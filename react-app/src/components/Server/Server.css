@@ -18,6 +18,7 @@
     box-sizing: border-box;
     border-radius: 50%;
     margin: 5%;
+
     height: 60px;
     width: 60px;
     text-align: center;
@@ -49,8 +50,16 @@
 
 }
 
-.server-container div:last-child {
-    background-color: chartreuse;
+.add-server-modal, .server-links-explore{
+    background-color: rgb(56, 56, 56);
+    box-sizing: border-box;
+    border-radius: 50%;
+    margin: 5%;
+    height: 60px;
+    width: 60px;
+    text-align: center;
+    padding-top: 13%;
+    font-size: 20px;
 
 }
 
@@ -61,4 +70,10 @@
     text-align: center;
     padding-left: 5px;
     font-weight: 700;
+}
+
+.explore-server-icon {
+    color: rgb(77, 146, 37);
+    font-size: bigger;
+    margin-top: 5px;
 }

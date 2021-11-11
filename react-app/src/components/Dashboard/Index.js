@@ -3,6 +3,7 @@ import Server from '../Server'
 import Channels from '../Channels/Index'
 import './dashboard.css'
 import { MainFeed } from '../MainFeed'
+import ServerMembersFeed from '../ServerMembersFeed'
 
 
 const Dashboard = () => {
@@ -11,6 +12,7 @@ const Dashboard = () => {
       <Server />
       <Channels />
       <MainFeed />
+      <ServerMembersFeed />
       {/* <Members / > */}
     </div>
   )

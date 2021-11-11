@@ -11,9 +11,9 @@ class Server(db.Model):
     banner = db.Column(db.String(500), default='https://images.pexels.com/videos/3045163/free-video-3045163.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500')
 
     #relationships
-    channels = db.relationship('Channel', back_populates='server')
+    channels = db.relationship('Channel', back_populates='server', cascade='all, delete')
     user = db.relationship('User', back_populates='servers')
-    server_members = db.relationship('ServerMember', back_populates='servers')
+    server_members = db.relationship('ServerMember', back_populates='servers', cascade='all, delete')
 
 
     def to_dict(self):

@@ -7,8 +7,12 @@ import { Link } from 'react-router-dom'
 import AddChannelModal from '../AddChannelModal/AddChannelModal'
 import Explore from '../Explore'
 import { getMyServers } from '../../store/server'
+
 import ChannelEdit from './edit-channel'
 import HomeServer from '../Server/HomeServer'
+
+import LoggedIn from '../LoggedIn'
+
 
 
 const Channels = ({id}) => {
@@ -57,6 +61,7 @@ const Channels = ({id}) => {
         </Link>
 
           )}
+          <LoggedIn />
       </div>}
 
       {showSettings && <ChannelEdit channel={channelToEdit} serverId={serverId} setShowSettings={setShowSettings} showSettings={showSettings}/>}

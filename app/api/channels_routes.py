@@ -11,16 +11,13 @@ def channels(id):
   if request.method == 'GET':
     channels = Channel.query.filter(Channel.serverId == id).all()
 
-    if channels:
-      data = {channels[0].serverId: [channel.to_dict() for channel in channels]}
-      print(data)
 
-
-      return data
-  # if request.method == 'PUT':
-  #   pass
-  # if request.method == 'DELETE':
-  #   pass
+  if channels:
+    data = {channels[0].serverId: [channel.to_dict() for channel in channels]}
+    print(data)
+    return data
+  else:
+    return {}
 
 @channels_routes.route('/', methods = ['POST'])
 def addChannel():

@@ -7,6 +7,8 @@ import { useParams } from 'react-router';
 import { getServers } from '../../store/server';
 import HomeServer from './HomeServer';
 import './Server.css'
+import EditServerModal from '../EditServer';
+import { getServerMembers } from '../../store/membersservers';
 
 function Server () {
     const params = useParams()
@@ -22,6 +24,9 @@ function Server () {
 
     const dispatch = useDispatch()
     useEffect(() => {
+        if (serverId) {
+            dispatch(getServerMembers(serverId))
+        }
         dispatch(getMyServers(userId))
         dispatch(getServers())
 
@@ -48,6 +53,12 @@ function Server () {
         }
     }
 
+    function handleRightClick (e) {
+        if (e.type === 'contextmenu') {
+            window.alert('right click')
+        }
+    }
+
 
 
     return (
@@ -60,18 +71,23 @@ function Server () {
             </Link>}
             {servers.map((server) => (
             server !== homeServer &&
-            <Link className='server-links' to={`/${server?.id}`}>
-
-                <div className='server-links-div' style={{backgroundImage: `url(${server?.avatar})`}}>
-                    {serverInitials(server?.name)}
-                </div>
-            </Link>
+            <div>
+                <Link className='server-links' to={`/${server?.id}`}>
+                    <div className='server-links-div' style={{backgroundImage: `url(${server?.avatar})`}}>
+                        {serverInitials(server?.name)}
+                    </div>
+                </Link>
+                {server.ownerId === userId ?
+                <div className = 'edit-server-button'>
+                    <EditServerModal serverId={server?.id}/>
+                </div> : ''}
+            </div>
             ))}
-            <div className='server-links-div' >
+            <div className='add-server-modal' >
             <AddServerModal />
             </div>
-            <div className='server-links-div'>
-                <Link to='/explore'>Explore</Link>
+            <div className='server-links-explore'>
+                <Link to='/explore'><div className="explore-server-icon"><i className="fas fa-compass"></i></div></Link>
             </div>
 
         </div>
