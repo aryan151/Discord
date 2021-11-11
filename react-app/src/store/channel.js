@@ -1,5 +1,7 @@
 const LOAD_CHANNELS = 'channels/GET_CHANNELS'
 const LOAD_ONE_CHANNEL = 'channels/LOAD_ONE_CHANNEL'
+const DELETE_ONE = 'channels/DELETE_ONE'
+
 
 const getChannelsForServer = (channels) => ({
   type: LOAD_CHANNELS,
@@ -12,12 +14,17 @@ const addOneChannel = (channel) => ({
 })
 
 
+const deleteOneChannel = (channelId, serverId) => ({
+  type: DELETE_ONE,
+  channelId,
+  serverId
+})
 
 export const fetchChannels = (serverId) =>  async (dispatch) => {
   if(!serverId) return
   const channels = await fetch(`/api/channels/${serverId}`)
   const data = await channels.json();
-    console.log(data)
+    // console.log(data)
     dispatch(getChannelsForServer(data))
 }
 
@@ -34,6 +41,18 @@ export const addChannel = (payload) => async dispatch => {
         const channel = await response.json()
         dispatch(addOneChannel(channel))
     }
+  }
+
+  export const deleteChannel = (id) => async dispatch => {
+    const res = await fetch(`/api/channels/delete/${id}`, {
+      method: 'DELETE'
+    })
+      if (res.ok) {
+      const {channelId, serverId} = await res.json()
+      dispatch(deleteOneChannel(channelId, serverId))
+      return null;
+      }
+      else return ['An Error has occured']
   }
 
   const initialState = {}
@@ -56,6 +75,16 @@ export const addChannel = (payload) => async dispatch => {
 
         return newState
       }
+      case DELETE_ONE:
+        const copy = {...state}
+        // const server_Id = action.payload["serverId"]
+        // const channel_Id = action.payload['channelId']
+
+        copy[action.serverId].filter(channel => {
+          console.log(channel)
+          return channel.id !== action.channelId;
+        })
+        return copy
 
       default:
         return state;

@@ -6,7 +6,7 @@ class Channel(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(30), nullable=False)
-    description = db.Column(db.String(30), nullable=False, default="A new channel in After Hours")
+    description = db.Column(db.String(1024), nullable=False, default="A new channel in After Hours")
     serverId = db.Column(db.Integer, db.ForeignKey('servers.id'), nullable=False)
 
     #Relationships

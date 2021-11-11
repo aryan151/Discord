@@ -6,10 +6,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router'
 import '../Dashboard/dashboard.css'
 import { getMessages, createOneMessage } from '../../store/message';
+
 import DeleteMessageModal from './DeleteMessageModal'
 import MessageBox from './MessageBox'
 import MessageHover from './MessageHover'
 import { Modal } from '../../context/Modal'  
+
 import './MainFeed.css'
    
 
@@ -165,6 +167,7 @@ export const MainFeed = () => {
                         const Mdate = 'date'
                         const MTime = 'time'
 
+
                         return (
                             <div key={message.id}>
                             { showDeleteMessageModal === message.id &&
@@ -216,6 +219,7 @@ export const MainFeed = () => {
                         )
                     })}
                 </div>
+
 
                 <div onSubmit={createMessage} className="channel-content-chat-input-container">
                     <form className="new-message-form">
