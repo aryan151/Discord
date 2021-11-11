@@ -191,7 +191,9 @@
   border: none;
   border-radius: 7px;
   padding: 0.5rem 1.35rem;
+  margin-left: 0.75rem;
   background-color: #3ba55d;
+  align-self: flex-start;
 
 }
 

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Modal } from '../../context/Modal';
 import { useParams } from 'react-router'
 import { addChannel, fetchChannels } from '../../store/channel'
-
+import './AddChannelModal.css'
 
 
 function AddChannelModal ({serverId}) {
@@ -25,17 +25,30 @@ function AddChannelModal ({serverId}) {
         setShowModal(false)
     }
 
+    useEffect(() => {
+      if (!channelName.length){
+
+      }
+    }, [channelName])
     return (
         <>
             <div className='add-server-container'>
-                <div className={showModal ? '' :  "far fa-edit"} onClick={() => setShowModal(true)}>Add Channel</div>
+                <div className="add-channel" onClick={() => setShowModal(true)}>Add Channel</div>
             </div>
             {showModal && (
-            <Modal onClose={() => setShowModal(false)}>
-              <form onSubmit={createChannel}>
+            <Modal onClose={() => {setShowModal(false); setChannelName('')}}>
+              <form onSubmit={createChannel} className="create-channel">
+                <h2>Create New Channel</h2>
+
                 <label>Channel Name</label>
-                <input value={channelName} onChange={(e) => setChannelName(e.target.value)}></input>
-                <button type="submit">Create Channel</button>
+                <input value={channelName} onChange={(e) => setChannelName(e.target.value)}
+                 placeholder="new-channel"
+                 required
+                ></input>
+                <div className="button-container">
+                <span onClick={()=> setShowModal(false)}>cancel</span>
+                <button className={!channelName.length ? "empty" : "not-empty"}type="submit">Create Channel</button>
+                </div>
               </form>
             </Modal>
           )}
