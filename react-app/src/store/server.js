@@ -1,6 +1,9 @@
 const LOAD = 'spots/LOAD'
 const ADD_SERVER = 'spots/ADD_SERVER'
 const LOAD_MY_SERVERS = 'spots/LOAD_MY_SERVERS'
+const LOAD_EDIT_SERVER = 'spots/LOAD_EDIT_SERVER'
+const LOAD_AFTER_DELETE = 'spots/LOAD_AFTER_DELETE'
+const ADD_MY_SERVER = 'spots/ADD_MY_SERVER'
 // const EDIT_SERVER = 'spots/EDIT_SERVER'
 
 
@@ -19,6 +22,21 @@ const addOneServer = server => ({
 const loadServers = servers => ({
     type: LOAD_MY_SERVERS,
     servers
+})
+
+const addEditServer = server => ({
+    type: LOAD_EDIT_SERVER,
+    server
+})
+
+const loadAfterDelete = id => ({
+    type: LOAD_AFTER_DELETE,
+    id
+})
+
+const addOneMyServer = server => ({
+    type: ADD_MY_SERVER,
+    server
 })
 
 // const editOneServer = edit_server => ({
@@ -50,8 +68,10 @@ export const addServer = (payload) => async dispatch => {
     if (response.ok) {
         const server = await response.json()
         dispatch(addOneServer(server))
+        dispatch(addOneMyServer(server))
     }
 }
+
 
 export const getMyServers = (userId) => async dispatch => {
     const response = await fetch(`/api/servers/${userId}`)
@@ -61,9 +81,36 @@ export const getMyServers = (userId) => async dispatch => {
     }
 }
 
-// export const editServer = () => async dispatch =>{
-    
-// }
+export const editOneServer = (payload, serverId) => async dispatch =>{
+    const response = await fetch(`/api/servers/${serverId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type' : 'application/json',
+        },
+        body: JSON.stringify({...payload})
+    })
+
+    if (response.ok) {
+        const server = await response.json()
+        dispatch(addEditServer(server))
+    }
+}
+
+export const deleteOneServer = (serverId) => async dispatch => {
+    const response = await fetch(`/api/servers/delete/${serverId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type' : 'application/json',
+        },
+
+    })
+        if (response.ok) {
+            const { id } = await response.json()
+            dispatch(loadAfterDelete(id))
+        }
+}
+
+
 
 
 const initialState = {
@@ -84,10 +131,29 @@ export const myServersReducer = (state=initialState, action) => {
                 // list: action.list.servers,
             }
         }
+        case LOAD_AFTER_DELETE: {
+            const newState = {...state}
+            delete newState[action.id]
+            return newState;
+        }
+        case LOAD_EDIT_SERVER: {
+            const newState = { ...state }
+            delete newState[action.server.id]
+            newState[action.server.id] = action.server
+            return newState;
+        }
+        case ADD_MY_SERVER: {
+            const newState = {
+                ...state,
+                [action.server['id']]: action.server
+            }
+            return newState
+        }
         default:
         return state;
     }
 }
+
 
 const serversReducer = (state = initialState, action) => {
     switch(action.type) {
@@ -102,6 +168,7 @@ const serversReducer = (state = initialState, action) => {
                 // list: action.list.servers,
             }
         }
+
 
         case ADD_SERVER: {
             const newState = {

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import AddServer from './AddServer';
+import './AddServerModal.css'
 
 
 
@@ -10,7 +11,9 @@ function AddServerModal () {
     return (
         <>
             <div className='add-server-container'  onClick={() => setShowModal(true)}>
-            <span><i class="fas fa-plus"></i> Add Server</span>
+              <div id="add-server-icon-div">
+                <i class="fas fa-plus"></i>
+              </div>
             </div>
             {showModal && (
             <Modal  onClose={() => setShowModal(false)}>

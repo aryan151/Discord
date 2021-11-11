@@ -18,9 +18,9 @@ class User(db.Model, UserMixin):
     servers = db.relationship('Server', back_populates='user', cascade='all, delete')
     server_members = db.relationship('ServerMember', cascade='all, delete')
 
-    dm_server = db.relationship('DMServer', back_populates='owner')
+    dm_server = db.relationship('DMServer', back_populates='owner', cascade='all, delete')
 
-    dm_sender = db.relationship('DMMessage', back_populates='sender')
+    dm_sender = db.relationship('DMMessage', back_populates='sender', cascade='all, delete')
     # dm_receiver = db.relationship('DMMessage', back_populates='receiver')
 
     @property

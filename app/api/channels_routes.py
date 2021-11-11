@@ -12,9 +12,9 @@ def channels(id):
   if channels:
     data = {channels[0].serverId: [channel.to_dict() for channel in channels]}
     print(data)
-
-
     return data
+  else:
+    return []
 
 
 @channels_routes.route('/', methods = ['POST'])

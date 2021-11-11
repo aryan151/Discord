@@ -1,7 +1,7 @@
 from operator import and_, or_
 from flask import Blueprint, jsonify, session, request, redirect
 from app.models import Server, ServerMember, DMServer, db
-from app.forms import ServerForm
+from app.forms import ServerForm, EditServerForm
 from app.models.dm_server import DMServer
 
 servers_routes = Blueprint('servers', __name__)
@@ -43,3 +43,18 @@ def get_home_server(name):
     server = DMServer.query.filter(DMServer.name == name).one()
 
     return server.to_dict()
+
+@servers_routes.route('/<int:serverId>', methods=['POST'])
+def edit_server(serverId):
+    form = EditServerForm()
+    server = Server.query.get(serverId)
+    server.name = form.data['name']
+    db.session.commit()
+    return server.to_dict()
+
+@servers_routes.route('/delete/<int:serverId>', methods=['DELETE'])
+def delete_server(serverId):
+    server = Server.query.get(serverId)
+    db.session.delete(server)
+    db.session.commit()
+    return { 'id' : serverId}
