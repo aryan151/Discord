@@ -7,6 +7,7 @@ import { useParams } from 'react-router';
 import { getServers } from '../../store/server';
 import './Server.css'
 import EditServerModal from '../EditServer';
+import { getServerMembers } from '../../store/membersservers';
 
 function Server () {
     const params = useParams()
@@ -23,6 +24,9 @@ function Server () {
 
     const dispatch = useDispatch()
     useEffect(() => {
+        if (serverId) {
+            dispatch(getServerMembers(serverId))
+        }
         dispatch(getMyServers(userId))
         dispatch(getServers())
 

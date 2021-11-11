@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import AddChannelModal from '../AddChannelModal/AddChannelModal'
 import Explore from '../Explore'
 import { getMyServers } from '../../store/server'
+import LoggedIn from '../LoggedIn'
 
 
 const Channels = ({id}) => {
@@ -41,6 +42,7 @@ const Channels = ({id}) => {
           <span className="settings-cog"><i class="fas fa-cog" ></i></span>
         </Link>
           )}
+          <LoggedIn />
       </div>}
     </>
 
