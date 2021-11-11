@@ -2,7 +2,7 @@
   background-color: rgb(53, 53, 53);
   width: 100%;
   height: 100vh;
-  color: lightgray;
+  color: rgb(241, 239, 239);
   padding-left: 3px;
   padding-right: 3px;
   grid-column: 2/ 3;
@@ -11,8 +11,8 @@
 }
 .channels-container h1 {
   text-align: center;
-  font-size: 18px;
-  padding: 0.5em;
+  font-size: 20px;
+  padding: 1em 0 2rem 0;
 }
 
 .channel {
@@ -27,8 +27,9 @@
 }
 .channel * {
   padding: 0 7px;
+}
+.channel {
   color: lightgray;
-
 }
 
 .channel:hover {
@@ -40,10 +41,10 @@
   font-size: 16px;
   display: inline-block;
 }
-
 .settings-cog:hover {
-  color: white;
+  color: rgb(140, 127, 141) !important;
 }
+
 
 .add-server-container {
   /* color: pink; */
@@ -70,12 +71,12 @@
 
 .form-container {
   position: relative;
-  margin: 0 auto;
+
 }
 .close-icon {
   position: absolute;
-  top: 5rem;
-  right: -25rem;
+  top: 2.5rem;
+  right: -7rem;
   font-size: 2.8rem;
   cursor: pointer;
 }
@@ -144,13 +145,19 @@
 .delete-channel-div {
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
   padding: 1rem;
   font-size: 1.5rem;
   height: 100%;
   text-align: center;
   background-color: #2f3136;
+  width: 35%;
 
 }
+.delete-channel-div * {
+  padding-right: 1rem;
+}
+
 .delete-channel-div h2 {
   margin-bottom: 5rem;
 }
@@ -166,9 +173,10 @@
 }
 .delete-channel-div span {
   border-bottom: solid 1px #fffffb;
-  width: 80%;
+  width: 45%;
   margin: 0 auto 5px auto;
   opacity: 35%;
+  margin-right: 0;
 }
 
 .delete-channel:hover {
