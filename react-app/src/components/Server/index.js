@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import AddServerModal, { addServerModal } from '../AddServerModal'
 import { useParams } from 'react-router';
 import { getServers } from '../../store/server';
+import HomeServer from './HomeServer';
 import './Server.css'
 
 function Server () {
@@ -52,7 +53,7 @@ function Server () {
     return (
         <div className='server-container'>
 
-           { homeServer && <Link className='server-links'to={`/${homeServer.id}`}>
+           { homeServer && <Link className='server-links'to={`/home/${homeServer.id}`}>
                 <div className='server-links-div' style={{backgroundImage: `url(${homeServer?.avatar})`}}>
                     {serverInitials(homeServer?.name)}
                 </div>
