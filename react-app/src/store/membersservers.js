@@ -43,7 +43,7 @@ const membersReducer = (state = initialState, action) => {
             });
             return {
                 ...allMembers,
-                ...state,
+                // ...state,
                 // list: action.list.servers,
             }
         }
