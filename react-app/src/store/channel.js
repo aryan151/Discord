@@ -79,7 +79,9 @@ export const addChannel = (payload) => async dispatch => {
         const copy = {...state}
         // const server_Id = action.payload["serverId"]
         // const channel_Id = action.payload['channelId']
-
+        if (copy[action.serverId].length <=  1){
+          return []
+        }
         copy[action.serverId].filter(channel => {
           console.log(channel)
           return channel.id !== action.channelId;
