@@ -10,26 +10,26 @@ import { getMessages, createOneMessage } from '../../store/message';
 import DeleteMessageModal from './DeleteMessageModal'
 import MessageBox from './MessageBox'
 import MessageHover from './MessageHover'
-import { Modal } from '../../context/Modal'  
+import { Modal } from '../../context/Modal'
 
 import './MainFeed.css'
-   
+
 
 export const MainFeed = () => {
 
     const params = useParams()
     let {serverId, channelId} = params
     const messageRef = useRef();
-    const scrollRef = useRef();   
+    const scrollRef = useRef();
     const [body, setBody] = useState('')
     const [showEmojiPicker, setShowEmojiPicker] = useState('');
-    const [emoji, setEmoji] = useState('😎'); 
+    const [emoji, setEmoji] = useState('😎');
     const [messageCharacterCounter, setMessageCharacterCounter] = useState(0);
     const [messageError, setMessageError] = useState('');
     const [showHoverTime, setShowHoverTime] = useState(false);
     const [showMessagePopup, setShowMessagePopup] = useState(false);
     const [messageBeingEdited, setMessageBeingEdited] = useState(false);
-    const [showDeleteMessageModal, setShowDeleteMessageModal] = useState(false);  
+    const [showDeleteMessageModal, setShowDeleteMessageModal] = useState(false);
 
     const userId = useSelector((state) => state.session?.user?.id);
     let messages = useSelector((state) => state?.messages[channelId])
@@ -38,7 +38,7 @@ export const MainFeed = () => {
     const dispatch = useDispatch()
 
 
-    //Sockets? Maybe --> pass socket={socket} where needed 
+    //Sockets? Maybe --> pass socket={socket} where needed
     // useEffect(() => {
     //     socket.on('receive-message', message => {
     //         dispatch(addMessage(message));
@@ -59,7 +59,7 @@ export const MainFeed = () => {
         }
 
     }, [dispatch, channelId, serverId])
-    
+
     useEffect(() => {
         if (!showEmojiPicker) return;
 
@@ -68,7 +68,7 @@ export const MainFeed = () => {
         };
 
         document.querySelector('.new-message-input').addEventListener('click', closeMenu);
-        
+
         return () => document.removeEventListener("click", closeMenu);
     }, [showEmojiPicker]);
 
@@ -79,12 +79,12 @@ export const MainFeed = () => {
         } else {
             setShowEmojiPicker(true);
         }
-    }    
+    }
 
     const handleChange = (e) => {
         setBody(e.target.value)
         setMessageCharacterCounter(0+e.target.value.length)
-    } 
+    }
 
     //Create Message
     const createMessage = async (e) => {
@@ -99,23 +99,23 @@ export const MainFeed = () => {
         setMessageCharacterCounter(0)
     }
 
-    //Prevents Blank Messages   
+    //Prevents Blank Messages
     const handleEnter = (e) => {
         if (messageCharacterCounter > 2000 && e.key === "Enter") {
             e.preventDefault();
             setMessageError('Message cannot exceed 2000 characters.');
             return;
         }
-        
+
         if (/^\s*$/.test(body)) {
             return;
-        } 
-        
+        }
+
         if (e.key === "Enter") {
             createMessage(e);
-            setMessageError('')  
+            setMessageError('')
         }
-    }    
+    }
 
     const handleHoverOn = (messageId) => {
         setShowHoverTime(messageId);
@@ -152,7 +152,7 @@ export const MainFeed = () => {
             </div>
         );
     }
-    
+
     return (
         <div className="Message-content-outer-container">
             <div className="Message-content-container">
@@ -169,53 +169,53 @@ export const MainFeed = () => {
 
 
                         return (
-                            <div key={message.id}>
-                            { showDeleteMessageModal === message.id &&
+                            <div key={message?.id}>
+                            { showDeleteMessageModal === message?.id &&
                                 <Modal onClose={() => setShowDeleteMessageModal(false)} message={message}>
                                     <DeleteMessageModal onClose={() => setShowDeleteMessageModal(false)} message={message}/>
                                 </Modal>
                             }
                             { NextHasSameOwner ? (
-                                <div 
+                                <div
                                 className="message-without-profile-pic-container"
                                 onMouseOver={() => handleHoverOn(message.id)}
                                 onMouseLeave={handleHoverOff}
                                 >
                                 <div className="message-profile-standin">
                                     { showHoverTime === message.id && <p className="message-hover-time">{MTime}</p>}
-                                </div> 
+                                </div>
                                 <div className="username-message-container">
-                                    <MessageBox 
-                                        setMessageBeingEdited={setMessageBeingEdited} 
-                                        message={message} 
-                                        messageBeingEdited={messageBeingEdited} 
-                                        setShowDeleteMessageModal={setShowDeleteMessageModal}  
-                                    />    
-                                </div>  
+                                    <MessageBox
+                                        setMessageBeingEdited={setMessageBeingEdited}
+                                        message={message}
+                                        messageBeingEdited={messageBeingEdited}
+                                        setShowDeleteMessageModal={setShowDeleteMessageModal}
+                                    />
+                                </div>
                                 { showMessagePopup === message.id && userId === message.userId && <MessageHover message={message} setMessageBeingEdited={setMessageBeingEdited} setShowMessagePopup={setShowMessagePopup} setShowDeleteMessageModal={setShowDeleteMessageModal}/>}
-                                </div>  
+                                </div>
                             ):(
-                                <div 
+                                <div
                                     className="message-with-profile-pic-container"
                                     onMouseOver={() => handleHoverOn(message.id)}
                                     onMouseLeave={handleHoverOff}
                                 >
-                                <div className="message-profile-pic-container"> 
+                                <div className="message-profile-pic-container">
                                     <img className="message-profile-pic" src='https://image.shutterstock.com/image-illustration/red-stamp-on-white-background-260nw-1165179109.jpg' alt="" />
                                 </div>
-                                <div className="username-message-container"> 
+                                <div className="username-message-container">
                                     <div className="message-username">{message.User.username}<span className="message-date-time">{Mdate}</span></div>
-                                    <MessageBox 
-                                        setMessageBeingEdited={setMessageBeingEdited} 
-                                        message={message} 
-                                        messageBeingEdited={messageBeingEdited} 
-                                        setShowDeleteMessageModal={setShowDeleteMessageModal}    
-                                    />    
-                                </div>   
+                                    <MessageBox
+                                        setMessageBeingEdited={setMessageBeingEdited}
+                                        message={message}
+                                        messageBeingEdited={messageBeingEdited}
+                                        setShowDeleteMessageModal={setShowDeleteMessageModal}
+                                    />
+                                </div>
                                 { showMessagePopup === message.id && userId === message.userId && <MessageHover message={message} setMessageBeingEdited={setMessageBeingEdited} setShowMessagePopup={setShowMessagePopup} setShowDeleteMessageModal={setShowDeleteMessageModal}/>}
                                 </div>
                             )}
-                            </div>     
+                            </div>
                         )
                     })}
                 </div>
@@ -223,20 +223,20 @@ export const MainFeed = () => {
 
                 <div onSubmit={createMessage} className="channel-content-chat-input-container">
                     <form className="new-message-form">
-                        { showEmojiPicker && 
-                            <NimblePicker 
+                        { showEmojiPicker &&
+                            <NimblePicker
                                 set='google'
                                 data={data}
-                                theme={"dark"} 
-                                style={{position: 'absolute', zIndex: 3, left: "10px", bottom: "100px"}} 
-                                onSelect={(emoji) => handleEmoji(emoji)}  
+                                theme={"dark"}
+                                style={{position: 'absolute', zIndex: 3, left: "10px", bottom: "100px"}}
+                                onSelect={(emoji) => handleEmoji(emoji)}
                             />
                         }
 
                         <p onClick={handleEmojiPicker} className="emoji-selector">{emoji}</p>
                         <label className="new-message-label">
-                            <textarea 
-                                type="text" 
+                            <textarea
+                                type="text"
                                 className="new-message-input"
                                 value={body}
                                 onChange={handleChange}
@@ -245,15 +245,15 @@ export const MainFeed = () => {
                                 placeholder={`Message #${channel?.name}`}
                             ></textarea>
                             <p className={`message-character-counter message-counter-negative-${messageCharacterCounter > 2000}`}>{messageCharacterCounter}/2000</p>
-                            { messageError && 
+                            { messageError &&
                                 <p className="message-error">{messageError}</p>
                             }
-                        </label> 
+                        </label>
                     </form>
                 </div>
             </div>
         </div>
-     );  
+     );
 }
 
 
@@ -262,5 +262,5 @@ export const MainFeed = () => {
 {/* //     {messages?.map((message) => (
                 <div>
                     <div className='message-body-div'>{message?.body}</div>
-                </div>  
+                </div>
             ))} */}

@@ -6,3 +6,4 @@ from .channel_form import ChannelEditForm
 from .message_form import MessageForm
 from .member_form import MemberForm
 from .edit_server_form import EditServerForm
+from .edit_message_form import EditMessageForm

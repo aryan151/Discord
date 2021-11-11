@@ -1,15 +1,19 @@
 import './DeleteMessageModal.css'
+import { useDispatch } from 'react-redux';
+import { deleteOneMessage } from '../../../store/message';
 
 function DeleteMessageModal ({ message, onClose }) {
 
     // const messageDate = new Date(message.createdAt)
+    const dispatch = useDispatch()
 
     const submitDelete = (e) => {
         e.preventDefault();
-        onClose();  
+        dispatch(deleteOneMessage(message.id))
+        onClose();
     }
-     
-    return ( 
+
+    return (
         <form onSubmit={submitDelete} className="delete-message-form">
             <h1 className="delete-message-header">Delete Message</h1>
             <div className="delete-message-content">
@@ -24,7 +28,7 @@ function DeleteMessageModal ({ message, onClose }) {
             </div>
             <div className="delete-message-cancel-submit-container">
                 <p className="delete-message-cancel" onClick={onClose}>Cancel</p>
-                <button className={`delete-message-button`} >Delete</button>    
+                <button className={`delete-message-button`} >Delete</button>
             </div>
         </form>
     );

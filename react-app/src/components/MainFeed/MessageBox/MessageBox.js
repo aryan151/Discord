@@ -2,17 +2,20 @@ import { useState, useRef } from 'react';
 import data from 'emoji-mart/data/google.json'
 import 'emoji-mart/css/emoji-mart.css'
 import './MessageBox.css'
-import { NimblePicker } from 'emoji-mart'    
+import { NimblePicker } from 'emoji-mart'
+import { updateMessage } from '../../../store/message';
+import {useDispatch} from 'react-redux'
 
 function MessageBox({ message, setMessageBeingEdited, messageBeingEdited, setShowDeleteMessageModal }) {
 
-    const editMessageRef = useRef(); 
+    const editMessageRef = useRef();
     const [editedMessage, setEditedMessage] = useState(message.body);
     const [editMessageError, setEditMessageError] = useState('');
-    const [messageCharacterCounter, setMessageCharacterCounter] = useState(message.body.length);  
+    const [messageCharacterCounter, setMessageCharacterCounter] = useState(message?.body.length);
     const [showEmojiPicker, setShowEmojiPicker] = useState('');
     const [emoji, setEmoji] = useState('😎');
-    
+    const dispatch = useDispatch()
+
     const handleChange = (e) => {
         setEditedMessage(e.target.value);
         setMessageCharacterCounter(e.target.value.length);
@@ -20,7 +23,7 @@ function MessageBox({ message, setMessageBeingEdited, messageBeingEdited, setSho
 
     const handleEscEnter = (e) => {
         if (e.key === "Escape") {
-            setMessageBeingEdited(false);   
+            setMessageBeingEdited(false);
             setEditedMessage(message.body)
             return
         }
@@ -34,14 +37,14 @@ function MessageBox({ message, setMessageBeingEdited, messageBeingEdited, setSho
         if (e.key === "Enter" && messageCharacterCounter === 0) {
             setEditMessageError('');
             setMessageBeingEdited(false);
-            setEditedMessage(message.body);
-            setShowDeleteMessageModal(message.id);
+            setEditedMessage(message?.body);
+            setShowDeleteMessageModal(message?.id);
             return
         }
 
         if (/^\s*$/.test(editedMessage)) {
             return;
-        } 
+        }
 
         if (e.key === "Enter") {
             handleSubmit(e)
@@ -52,17 +55,17 @@ function MessageBox({ message, setMessageBeingEdited, messageBeingEdited, setSho
         setShowEmojiPicker(false);
         setMessageBeingEdited(false);
         setEditMessageError('');
-        setEditedMessage(message.body);
-        setMessageCharacterCounter(message.body.length);
+        setEditedMessage(message?.body);
+        setMessageCharacterCounter(message?.body.length);
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         if (messageCharacterCounter === 0) {
-            setShowDeleteMessageModal(message.id);
+            setShowDeleteMessageModal(message?.id);
             setMessageBeingEdited(false);
-            setEditedMessage(message.body);
+            setEditedMessage(message?.body);
             return
         }
 
@@ -74,18 +77,19 @@ function MessageBox({ message, setMessageBeingEdited, messageBeingEdited, setSho
         if (/^\s*$/.test(editedMessage)) {
             setEditMessageError('Messages cannot contain only spaces.')
             return;
-        } 
+        }
 
         setEditMessageError('');
         setShowEmojiPicker(false);
 
         const newMessage = {
-            id: message.id,
             body: editedMessage
         }
-        // THIS IS WHERE YOU WOULD PASS EDIT W/O SOCKETS 
 
-        //W SOCKET:           socket.emit('message-edit', newMessage)  
+        dispatch(updateMessage(newMessage, message.id))
+        // THIS IS WHERE YOU WOULD PASS EDIT W/O SOCKETS
+
+        //W SOCKET:           socket.emit('message-edit', newMessage)
 
 
         setMessageBeingEdited(false);
@@ -105,26 +109,26 @@ function MessageBox({ message, setMessageBeingEdited, messageBeingEdited, setSho
         }
     }
 
-    return ( 
+    return (
         messageBeingEdited === message.id ? (
             <>
                 <form className="message-edit-form">
-                    { showEmojiPicker && 
-                        <NimblePicker 
+                    { showEmojiPicker &&
+                        <NimblePicker
                             set='google'
                             data={data}
-                            theme={"dark"} 
-                            style={{position: 'absolute', zIndex: 3, right: "60px", bottom: "100px"}} 
+                            theme={"dark"}
+                            style={{position: 'absolute', zIndex: 3, right: "60px", bottom: "100px"}}
                             onSelect={(emoji) => handleEmoji(emoji)}
                         />
                     }
 
                     <p onClick={handleEmojiPicker} className="emoji-selector-edit">{emoji}</p>
-                        
-                    <textarea 
+
+                    <textarea
                         ref={editMessageRef}
-                        className="message-edit-input" 
-                        value={editedMessage} 
+                        className="message-edit-input"
+                        value={editedMessage}
                         onChange={handleChange}
                         onKeyDown={handleEscEnter}
                         rows={(editedMessage.length / 200) + 3}
@@ -134,7 +138,7 @@ function MessageBox({ message, setMessageBeingEdited, messageBeingEdited, setSho
                             <p className="message-edit-cancel">escape to <span onClick={handleCancel} className="message-edit-cancel-button">cancel</span></p>
                             <span className="message-edit-dot">|</span>
                             <p className="message-edit-save"> enter to <span onClick={handleSubmit} className="message-edit-save-button">save</span></p>
-                            { editMessageError && 
+                            { editMessageError &&
                                 <p className="message-edit-error">{editMessageError}</p>
                             }
                         </div>

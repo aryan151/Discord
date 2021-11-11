@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, session, request, redirect
 from app.models import Message, db
-from app.forms import MessageForm
+from app.forms import MessageForm, EditMessageForm
 
 messages_routes = Blueprint('messages', __name__)
 
@@ -24,5 +24,19 @@ def add_message(channelId):
     db.session.commit()
     return message.to_dict()
 
+@messages_routes.route('/edit/<int:messageId>', methods=['POST'])
+def update_message(messageId):
+    form = EditMessageForm()
+    message = Message.query.get(messageId)
+    message.body = form.data['body']
+    db.session.commit()
+    return message.to_dict()
+
+@messages_routes.route('/delete/<int:messageId>', methods=['DELETE'])
+def delete_message(messageId):
+    message = Message.query.get(messageId)
+    db.session.delete(message)
+    db.session.commit()
+    return { 'messageId' : messageId, 'channelId' : message.channelId }
 
 # hi
