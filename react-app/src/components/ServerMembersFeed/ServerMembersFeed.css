@@ -1,0 +1,9 @@
+.member-div {
+    display: flex;
+    padding-top: 10%;
+}
+
+.member-name {
+    padding-left: 10px;
+    color: gray;
+}
