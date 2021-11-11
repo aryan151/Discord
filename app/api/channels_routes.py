@@ -14,7 +14,7 @@ def channels(id):
     print(data)
     return data
   else:
-    return []
+    return {}
 
 
 @channels_routes.route('/', methods = ['POST'])

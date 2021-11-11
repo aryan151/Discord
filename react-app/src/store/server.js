@@ -4,6 +4,7 @@ const LOAD_MY_SERVERS = 'spots/LOAD_MY_SERVERS'
 const LOAD_EDIT_SERVER = 'spots/LOAD_EDIT_SERVER'
 const LOAD_AFTER_DELETE = 'spots/LOAD_AFTER_DELETE'
 const ADD_MY_SERVER = 'spots/ADD_MY_SERVER'
+const LOAD_All_AFTER_DELETE = 'spots/LOAD_All_AFTER_DELETE'
 // const EDIT_SERVER = 'spots/EDIT_SERVER'
 
 
@@ -31,6 +32,10 @@ const addEditServer = server => ({
 
 const loadAfterDelete = id => ({
     type: LOAD_AFTER_DELETE,
+    id
+})
+const loadAllAfterDelete = id => ({
+    type: LOAD_All_AFTER_DELETE,
     id
 })
 
@@ -107,6 +112,7 @@ export const deleteOneServer = (serverId) => async dispatch => {
         if (response.ok) {
             const { id } = await response.json()
             dispatch(loadAfterDelete(id))
+            dispatch(loadAllAfterDelete(id))
         }
 }
 
@@ -168,7 +174,11 @@ const serversReducer = (state = initialState, action) => {
                 // list: action.list.servers,
             }
         }
-
+        case LOAD_All_AFTER_DELETE: {
+            const newState = {...state}
+            delete newState[action.id]
+            return newState;
+        }
 
         case ADD_SERVER: {
             const newState = {
