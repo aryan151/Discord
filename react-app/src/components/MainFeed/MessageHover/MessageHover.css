@@ -1,0 +1,35 @@
+.track-to-prevent-hover-above {
+    position: absolute;
+    right: 20px;
+    top: -20px;
+    padding-left: 60px;
+    z-index: 2;
+}
+
+.message-hover-container {
+    background-color: #36393F;
+    display: flex;
+    border-radius: 3px;
+    border: 1px solid #2a2c31; 
+}
+
+.message-hover-container:hover {
+    box-shadow: 0px 7px 5px -3px rgba(0, 0, 0, 0.58);
+}
+
+.message-edit-icon,
+.message-delete-icon {
+    padding: 5px;
+    color: #DBDCDD;
+    font-size: 20px;
+}
+
+.message-edit-icon:hover,
+.message-delete-icon:hover {
+    cursor: pointer;
+    background-color: #3A3E44;
+}
+
+.pointer-events-off {
+    pointer-events: none;
+}
