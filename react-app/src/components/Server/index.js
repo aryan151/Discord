@@ -9,6 +9,7 @@ import HomeServer from './HomeServer';
 import './Server.css'
 import EditServerModal from '../EditServer';
 import { getServerMembers } from '../../store/membersservers';
+// import {fetchChannels} from '../../store/channel'
 
 function Server () {
     const params = useParams()
@@ -29,7 +30,6 @@ function Server () {
         }
         dispatch(getMyServers(userId))
         dispatch(getServers())
-
         fetch(`/api/servers/home/${user.username}`)
         .then((data) => data.json())
         .then((server) => setHomeServer(server))

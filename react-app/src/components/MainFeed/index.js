@@ -141,6 +141,9 @@ export const MainFeed = () => {
 
 
     if (!messages) {
+        if(!channelId) return (
+            null
+        )
         return (
             <div className="empty-channel">
             <h2>Welcome to {channel ? channel.name + "!": "the channel!"}</h2>
@@ -159,6 +162,7 @@ export const MainFeed = () => {
                 <div className="Message-content-header-container">
                     <span className="Message-content-header-hashtag">#</span>
                     <h1 className="Message-content-header">{channel?.name}</h1>
+                    {channel && <p>{channel.descripion}</p>}
                 </div>
                 <div className="Main-Message-content">
                 {messages.map((message, index) => {

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField
+from wtforms import StringField, IntegerField, TextAreaField
 
 class ChannelForm(FlaskForm):
     name = StringField('name')
@@ -7,4 +7,4 @@ class ChannelForm(FlaskForm):
 
 class ChannelEditForm(FlaskForm):
     name = StringField('name')
-    description = StringField('description')
+    description = TextAreaField('description')
