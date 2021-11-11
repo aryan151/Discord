@@ -1,0 +1,97 @@
+.message-edit-form {
+    display: flex;
+    flex-direction: column;
+    padding-right: 20px;
+    position: relative;
+}
+
+.message-edit-input {
+    background-color: #40444B;
+    border-radius: 10px;
+    width: 100%;
+    color: #DCDDDE;
+    resize: none;
+    padding: 10px;
+    padding-right: 50px;
+    box-sizing: border-box;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.message-edit-input::-webkit-scrollbar {
+    width: 0;
+}
+
+.message-edit-options-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 3px;
+}
+
+.message-edit-cancel,
+.message-edit-save {
+    color: #D1CBC3;
+    font-size: 12px;
+}
+
+.message-edit-dot {
+    color: #D1CBC3;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.message-edit-cancel-button,
+.message-edit-save-button {
+    color: #1FA4D6;
+}
+
+.message-edit-cancel-button:hover,
+.message-edit-save-button:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.message-edit-save-button {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.message-edited-true {
+    font-size: 11px;
+    color: #6B6F75;
+    margin-left: 3px;
+}
+
+.message-edit-error {
+    color: #fd5f5f;
+    font-size: 13px;
+    margin-left: 20px;
+}
+
+.message-edit-character-counter {
+    color: #9B979A;
+    position: absolute;
+    right: 40px;
+    bottom: 0px;
+    font-size: 12px;
+}
+
+.message-edit-counter-negative-true {
+    color: #fd5f5f;
+}
+
+.emoji-selector-edit {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    z-index: 3;
+    font-size: 24px;
+    transform: translateY(-50%);
+    filter: grayscale();
+    transition: .1s;
+}
+
+.emoji-selector-edit:hover {
+    cursor: pointer;
+    transform: translateY(-50%) scale(1.2);
+    filter: grayscale(0);
+}

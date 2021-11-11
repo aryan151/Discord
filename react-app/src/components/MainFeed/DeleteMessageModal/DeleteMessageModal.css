@@ -1,0 +1,93 @@
+.delete-message-form {
+    background-color: #303339;
+    border-radius: 10px;
+    padding: 15px;
+    width: 500px;
+    max-height: 600px;
+}
+
+.delete-message-content {
+    overflow: auto;
+    max-height: 400px;
+    padding-right: 10px;
+}
+
+.delete-message-content::-webkit-scrollbar {
+    background-color: rgba(255, 0, 0, 0);
+    width: 10px;
+}
+
+.delete-message-content::-webkit-scrollbar-thumb {
+    background-color: #232529;
+    margin-left: 14px;
+    border-radius: 100px;
+}
+
+.delete-message-header {
+    color: white;
+    font-weight: 500;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.delete-message-subheader {
+    color: rgb(236, 234, 234);
+    font-weight: normal;
+    margin-top: 5px;
+}
+
+.delete-message-card {
+    border: 1px solid black;
+    padding: 10px 8px;
+    margin-top: 20px;
+    display: flex;
+}
+
+.delete-message-profile-picture {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.delete-message-username-content {
+    margin-left: 10px;
+}
+
+.delete-message-username {
+    color: white;
+    font-weight: 500;
+}
+
+.delete-message-datetime {
+    color: #6B6F75;
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+.delete-message-cancel-submit-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-top: 15px;
+    margin-right: 10px;
+}
+
+.delete-message-cancel {
+    color: white;
+    margin-right: 20px;
+}
+
+.delete-message-button {
+    background-color: #ED4143;
+    color: white;
+    width: 120px;
+    height: 40px;
+    border-radius: 5px;
+    transition: .3s;
+}
+
+.delete-message-cancel:hover,
+.delete-message-button:hover {
+    cursor: pointer;
+}

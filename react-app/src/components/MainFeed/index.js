@@ -1,31 +1,92 @@
-
+import data from 'emoji-mart/data/google.json'
+import 'emoji-mart/css/emoji-mart.css'
+import { NimblePicker  } from 'emoji-mart'
+import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
 import { useParams } from 'react-router'
 import '../Dashboard/dashboard.css'
 import { getMessages, createOneMessage } from '../../store/message';
-import DMFeed from './DMFeed';
-import './MainFeed.css'
 
+import DeleteMessageModal from './DeleteMessageModal'
+import MessageBox from './MessageBox'
+import MessageHover from './MessageHover'
+import { Modal } from '../../context/Modal'  
+
+import './MainFeed.css'
+   
 
 export const MainFeed = () => {
 
     const params = useParams()
     let {serverId, channelId} = params
+    const messageRef = useRef();
+    const scrollRef = useRef();   
     const [body, setBody] = useState('')
-    let messages = useSelector((state) => state?.messages[channelId])
-    const userId = useSelector((state) => state.session?.user?.id);
+    const [showEmojiPicker, setShowEmojiPicker] = useState('');
+    const [emoji, setEmoji] = useState('😎'); 
+    const [messageCharacterCounter, setMessageCharacterCounter] = useState(0);
+    const [messageError, setMessageError] = useState('');
+    const [showHoverTime, setShowHoverTime] = useState(false);
+    const [showMessagePopup, setShowMessagePopup] = useState(false);
+    const [messageBeingEdited, setMessageBeingEdited] = useState(false);
+    const [showDeleteMessageModal, setShowDeleteMessageModal] = useState(false);  
 
+    const userId = useSelector((state) => state.session?.user?.id);
+    let messages = useSelector((state) => state?.messages[channelId])
+    //const orderedMessages = messages.sort((a, b) => a.createdAt < b.createdAt ? 1: -1)
+    let channel = useSelector(state => state.channels[serverId]?.find(channel => channelId == channel.id))
     const dispatch = useDispatch()
+
+
+    //Sockets? Maybe --> pass socket={socket} where needed 
+    // useEffect(() => {
+    //     socket.on('receive-message', message => {
+    //         dispatch(addMessage(message));
+    //     });
+
+    //     socket.on('receive-message-edit', message => {
+    //         dispatch(editMessage(message));
+    //     });
+
+    //     socket.on('receive-message-delete', deletedMessageId => {
+    //         dispatch(deleteMessage(deletedMessageId));
+    //     })
+    // }, [dispatch, socket])
+
     useEffect(() => {
         if (channelId){
             dispatch(getMessages(channelId))
         }
 
     }, [dispatch, channelId, serverId])
+    
+    useEffect(() => {
+        if (!showEmojiPicker) return;
 
-    let channel = useSelector(state => state.channels[serverId]?.find(channel => channelId == channel.id))
+        const closeMenu = () => {
+            setShowEmojiPicker(false);
+        };
 
+        document.querySelector('.new-message-input').addEventListener('click', closeMenu);
+        
+        return () => document.removeEventListener("click", closeMenu);
+    }, [showEmojiPicker]);
+
+
+    const handleEmojiPicker = () => {
+        if (showEmojiPicker) {
+            setShowEmojiPicker(false);
+        } else {
+            setShowEmojiPicker(true);
+        }
+    }    
+
+    const handleChange = (e) => {
+        setBody(e.target.value)
+        setMessageCharacterCounter(0+e.target.value.length)
+    } 
+
+    //Create Message
     const createMessage = async (e) => {
         e.preventDefault()
         const payload = {
@@ -35,9 +96,48 @@ export const MainFeed = () => {
         await dispatch(createOneMessage(payload, channelId))
         dispatch(getMessages(channelId))
         setBody('')
+        setMessageCharacterCounter(0)
     }
-    if (serverId === 'explore') return null;
 
+    //Prevents Blank Messages   
+    const handleEnter = (e) => {
+        if (messageCharacterCounter > 2000 && e.key === "Enter") {
+            e.preventDefault();
+            setMessageError('Message cannot exceed 2000 characters.');
+            return;
+        }
+        
+        if (/^\s*$/.test(body)) {
+            return;
+        } 
+        
+        if (e.key === "Enter") {
+            createMessage(e);
+            setMessageError('')  
+        }
+    }    
+
+    const handleHoverOn = (messageId) => {
+        setShowHoverTime(messageId);
+        setShowMessagePopup(messageId)
+    }
+
+    const handleHoverOff = () => {
+        setShowHoverTime(false)
+        setShowMessagePopup(false)
+    }
+
+    const handleEmoji = (emoji) => {
+        setBody(body + emoji.native);
+        messageRef.current.focus();
+        setShowEmojiPicker(false);
+    }
+
+
+
+
+
+    if (serverId === 'explore') return null;
 
 
     if (!messages) {
@@ -46,30 +146,121 @@ export const MainFeed = () => {
             <h2>Welcome to {channel ? channel.name + "!": "the channel!"}</h2>
             <p>This is just the beginning. <br /> Be the first to leave a message.</p>
             <form onSubmit={createMessage}>
-            <input value={body} onChange={(e) => setBody(e.target.value)}></input>
+            <input value={body} onChange={handleChange}></input>
             <button type="submit">Send Message</button>
              </form>
             </div>
         );
     }
-
-    if (window.location.href.includes("home")){
-        return <DMFeed />
-      }
-
-
-
+    
     return (
-        <div className='messages-container'>
-            {messages?.map((message) => (
+        <div className="Message-content-outer-container">
+            <div className="Message-content-container">
+                <div className="Message-content-header-container">
+                    <span className="Message-content-header-hashtag">#</span>
+                    <h1 className="Message-content-header">{channel?.name}</h1>
+                </div>
+                <div className="Main-Message-content">
+                {messages.map((message, index) => {
+                        const nextMessage = messages[index+1]
+                        const NextHasSameOwner = nextMessage?.User?.id === message?.User?.id
+                        const Mdate = 'date'
+                        const MTime = 'time'
+
+
+                        return (
+                            <div key={message.id}>
+                            { showDeleteMessageModal === message.id &&
+                                <Modal onClose={() => setShowDeleteMessageModal(false)} message={message}>
+                                    <DeleteMessageModal onClose={() => setShowDeleteMessageModal(false)} message={message}/>
+                                </Modal>
+                            }
+                            { NextHasSameOwner ? (
+                                <div 
+                                className="message-without-profile-pic-container"
+                                onMouseOver={() => handleHoverOn(message.id)}
+                                onMouseLeave={handleHoverOff}
+                                >
+                                <div className="message-profile-standin">
+                                    { showHoverTime === message.id && <p className="message-hover-time">{MTime}</p>}
+                                </div> 
+                                <div className="username-message-container">
+                                    <MessageBox 
+                                        setMessageBeingEdited={setMessageBeingEdited} 
+                                        message={message} 
+                                        messageBeingEdited={messageBeingEdited} 
+                                        setShowDeleteMessageModal={setShowDeleteMessageModal}  
+                                    />    
+                                </div>  
+                                { showMessagePopup === message.id && userId === message.userId && <MessageHover message={message} setMessageBeingEdited={setMessageBeingEdited} setShowMessagePopup={setShowMessagePopup} setShowDeleteMessageModal={setShowDeleteMessageModal}/>}
+                                </div>  
+                            ):(
+                                <div 
+                                    className="message-with-profile-pic-container"
+                                    onMouseOver={() => handleHoverOn(message.id)}
+                                    onMouseLeave={handleHoverOff}
+                                >
+                                <div className="message-profile-pic-container"> 
+                                    <img className="message-profile-pic" src='https://image.shutterstock.com/image-illustration/red-stamp-on-white-background-260nw-1165179109.jpg' alt="" />
+                                </div>
+                                <div className="username-message-container"> 
+                                    <div className="message-username">{message.User.username}<span className="message-date-time">{Mdate}</span></div>
+                                    <MessageBox 
+                                        setMessageBeingEdited={setMessageBeingEdited} 
+                                        message={message} 
+                                        messageBeingEdited={messageBeingEdited} 
+                                        setShowDeleteMessageModal={setShowDeleteMessageModal}    
+                                    />    
+                                </div>   
+                                { showMessagePopup === message.id && userId === message.userId && <MessageHover message={message} setMessageBeingEdited={setMessageBeingEdited} setShowMessagePopup={setShowMessagePopup} setShowDeleteMessageModal={setShowDeleteMessageModal}/>}
+                                </div>
+                            )}
+                            </div>     
+                        )
+                    })}
+                </div>
+
+
+                <div onSubmit={createMessage} className="channel-content-chat-input-container">
+                    <form className="new-message-form">
+                        { showEmojiPicker && 
+                            <NimblePicker 
+                                set='google'
+                                data={data}
+                                theme={"dark"} 
+                                style={{position: 'absolute', zIndex: 3, left: "10px", bottom: "100px"}} 
+                                onSelect={(emoji) => handleEmoji(emoji)}  
+                            />
+                        }
+
+                        <p onClick={handleEmojiPicker} className="emoji-selector">{emoji}</p>
+                        <label className="new-message-label">
+                            <textarea 
+                                type="text" 
+                                className="new-message-input"
+                                value={body}
+                                onChange={handleChange}
+                                onKeyDown={handleEnter}
+                                ref={messageRef}
+                                placeholder={`Message #${channel?.name}`}
+                            ></textarea>
+                            <p className={`message-character-counter message-counter-negative-${messageCharacterCounter > 2000}`}>{messageCharacterCounter}/2000</p>
+                            { messageError && 
+                                <p className="message-error">{messageError}</p>
+                            }
+                        </label> 
+                    </form>
+                </div>
+            </div>
+        </div>
+     );  
+}
+
+
+
+
+{/* //     {messages?.map((message) => (
                 <div>
                     <div className='message-body-div'>{message?.body}</div>
-                </div>
-            ))}
-        <form className="create-message-form" onSubmit={createMessage}>
-            <input id="message-input" value={body} onChange={(e) => setBody(e.target.value)}></input>
-            <button type="submit">Send Message</button>
-        </form>
-        </div>
-    )
-}
+                </div>  
+            ))} */}

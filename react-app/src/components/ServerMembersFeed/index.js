@@ -1,9 +1,11 @@
 import { useSelector } from "react-redux";
+import { useState, useEffect, useRef } from 'react';
 import { useParams } from "react-router";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
 import { getServerMembers } from "../../store/membersservers";
 import './ServerMembersFeed.css'
+
+
 
 function ServerMembersFeed() {
 
@@ -11,8 +13,7 @@ function ServerMembersFeed() {
 
     const params = useParams()
     let { serverId } = params
-    const userId = useSelector((state) => state.session?.user?.id)
-
+    const userId = useSelector((state) => state.session?.user?.id) 
     const members = useSelector((state) => Object.values(state.members).filter((member) => member.id !== userId))
     console.log(members)
 
