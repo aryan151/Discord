@@ -58,6 +58,9 @@ function App() {
         <ProtectedRoute path='/dashboard' exact={true} >
           <Dashboard />
         </ProtectedRoute>
+        <ProtectedRoute path='/home/:serverId' exact={true} >
+          <Dashboard />
+        </ProtectedRoute>
         <ProtectedRoute path='/:serverId' exact={true} >
           <Dashboard />
         </ProtectedRoute>

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router'
 import '../Dashboard/dashboard.css'
 import { getMessages, createOneMessage } from '../../store/message';
-
+import DMFeed from './DMFeed';
 import './MainFeed.css'
 
 
@@ -52,6 +52,10 @@ export const MainFeed = () => {
             </div>
         );
     }
+
+    if (window.location.href.includes("home")){
+        return <DMFeed />
+      }
 
 
 
