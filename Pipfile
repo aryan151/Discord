@@ -25,13 +25,11 @@ python-dateutil = "==2.8.1"
 python-editor = "==1.0.4"
 greenlet = "==1.1.0"
 Mako = "==1.1.4"
-
-flask-socketio = "*"
 gevent-websocket = "*"
 eventlet = "*"
 coolname = "==1.1.0"
 Faker = "==9.8.0"
-
+Flask-SocketIO = "*"
 
 [dev-packages]
 psycopg2-binary = "==2.8.6"
