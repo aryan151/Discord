@@ -4,6 +4,7 @@ import { NimblePicker  } from 'emoji-mart'
 import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router'
+import { useHistory } from 'react-router-dom';
 import '../Dashboard/dashboard.css'
 import { getMessages, createOneMessage } from '../../store/message';
 
@@ -36,10 +37,12 @@ export const MainFeed = () => {
     const [showDeleteMessageModal, setShowDeleteMessageModal] = useState(false);
     const [chat, setChat] = useState([])
 
+    const history = useHistory()
     const userId = useSelector((state) => state.session?.user?.id);
     let messages = useSelector((state) => state?.messages[channelId])
     //const orderedMessages = messages.sort((a, b) => a.createdAt < b.createdAt ? 1: -1)
     let channel = useSelector(state => state.channels[serverId]?.find(channel => channelId == channel.id))
+    let general = useSelector(state => state.channels[serverId]?.find(channel => channel.name == "general"))
     const dispatch = useDispatch()
 
 
@@ -182,9 +185,13 @@ export const MainFeed = () => {
 
 
     if (!messages) {
-        if(!channelId) return (
-            null
-        )
+        if(!channelId) {
+            if (general){
+                history.push(`/${serverId}/${general.id}`)
+            }
+            return null;
+        }
+
         return (
             <div className="empty-channel">
             <h2>Welcome to {channel ? channel.name + "!": "the channel!"}</h2>
@@ -204,7 +211,7 @@ export const MainFeed = () => {
                 <div className="Message-content-header-container">
                     <span className="Message-content-header-hashtag">#</span>
                     <h1 className="Message-content-header">{channel?.name}</h1>
-                    {channel && <p>{channel.descripion}</p>}
+                    <p className="channel-description" > <span className="vert-line">|</span> {channel?.description.slice(0, 100) + "..."}</p>
                 </div>
                 <div className="Main-Message-content">
                 {chatmessages.map((message) => (
@@ -283,7 +290,6 @@ export const MainFeed = () => {
 
                     </div>
                 </div>
-
 
                 <div onSubmit={createMessage} className="channel-content-chat-input-container">
                     <form className="new-message-form">
