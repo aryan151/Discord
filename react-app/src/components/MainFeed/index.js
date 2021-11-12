@@ -65,7 +65,7 @@ export const MainFeed = () => {
             let user = data.split('@')[1]
             let avatar = data.split('@')[2]
             // setChatMessages((message) => [data, ...message])
-            setChatMessages((message) => [[chat, user, avatar], ...message])
+            setChatMessages((message) => [...message, [chat, user, avatar]])
         })
         // when component unmounts, disconnect
         return (() => {
@@ -99,6 +99,7 @@ export const MainFeed = () => {
         if (channelId){
             dispatch(getMessages(channelId))
         }
+        setChatMessages([])
 
     }, [dispatch, channelId, serverId])
 
@@ -214,7 +215,7 @@ export const MainFeed = () => {
                     <p className="channel-description" > <span className="vert-line">|</span> {channel?.description.slice(0, 100) + "..."}</p>
                 </div>
                 <div className="Main-Message-content">
-                {chatmessages.map((message) => (
+                {/* {chatmessages.map((message) => (
                     <div className="live-chat-div">
 
                         <div className="username-message-container">
@@ -222,10 +223,11 @@ export const MainFeed = () => {
                             <div className="channel-content-message">
                                 {`${message[1]}:${message[0]}`}
                             </div>
-                    </div>
+                        </div>
 
                     </div>
-                        ))}
+                        ))} */}
+
                 {messages.map((message, index)  => {
                         const nextMessage = messages[index+1]
                         const NextHasSameOwner = nextMessage?.User?.id === message?.User?.id
@@ -283,12 +285,19 @@ export const MainFeed = () => {
                             </div>
                         )
                     })}
-                    <div className="Main-Message-content">
-                        {/* {chatmessages.map((message) => (
-                            <div className="message-without-profile-pic-container">{message}</div>
-                        ))} */}
+                    {chatmessages.map((message) => (
+                    <div className="live-chat-div">
+
+                        <div className="username-message-container">
+                        <div className='live-chat-avatar-div' style={{backgroundImage: `url(${message[2]})`}}></div>
+                            <div className="channel-content-message">
+                                {`${message[1]}:${message[0]}`}
+                            </div>
+                        </div>
 
                     </div>
+                        ))}
+
                 </div>
 
                 <div onSubmit={createMessage} className="channel-content-chat-input-container">
