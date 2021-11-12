@@ -71,7 +71,7 @@ export const addChannel = (payload) => async dispatch => {
             ...state
         }
         const serverId = action.channel.serverId;
-        newState[serverId] ?  newState[serverId].push(action.channel) :  newState[serverId] = [action.channel]
+        newState[serverId] ? newState[serverId] = [...newState[serverId], action.channel] :  newState[serverId] = [action.channel]
 
         return newState
       }
