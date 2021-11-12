@@ -1,9 +1,11 @@
 import os
 from flask import Flask, render_template, request, session, redirect
+from flask.json.tag import JSONTag
 from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
+from werkzeug.wrappers.request import StreamOnlyMixin
 
 from .models import db, User
 from .api.user_routes import user_routes
@@ -18,14 +20,23 @@ from .api.servers_routes import servers_routes
 from .api.members import members_routes
 
 from .seeds import seed_commands
+from flask_socketio import emit, disconnect, send, join_room, leave_room
 
 from .config import Config
+from .socket import socketio
 
 app = Flask(__name__)
+
 
 # Setup login manager
 login = LoginManager(app)
 login.login_view = 'auth.unauthorized'
+
+
+
+
+# handle chat messages
+
 
 
 @login.user_loader
@@ -47,6 +58,7 @@ app.register_blueprint(members_routes, url_prefix='/api/members')
 
 db.init_app(app)
 Migrate(app, db)
+socketio.init_app(app)
 
 # Application Security
 CORS(app)
@@ -84,3 +96,28 @@ def react_root(path):
     if path == 'favicon.ico':
         return app.send_static_file('favicon.ico')
     return app.send_static_file('index.html')
+
+
+
+@socketio.on("join")
+def join_room(data):
+    print('Join room', data)
+    room = data
+    join_room(room)
+    send(' has entered the room.', to=room)
+
+
+@socketio.on("chat")
+def handle_chat(data):
+    print(data['msg'])
+    room = data['channelId']
+    emit('chat', data['msg'], to=room, Broadcast=True)
+
+# @socketio.on("json")
+# def handle_chat(data):
+#     print(data['msg'])
+#     emit(data, json=True)
+
+
+if __name__ == '__main__':
+    socketio.run(app)

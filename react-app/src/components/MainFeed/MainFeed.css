@@ -94,7 +94,7 @@
 .message-with-profile-pic-container:hover,
 .message-without-profile-pic-container:hover {
     background-color: #32353B;
-    
+
 }
 
 .message-profile-pic {
@@ -225,4 +225,12 @@
     overflow: scroll;
     height: 100%;
     width: 100%;
-} 
+}
+
+.chat-messages {
+    position: absolute;
+    z-index: 1;
+    background-color: rgb(145, 32, 50);
+    height: 500px;
+    width: 500px;
+}

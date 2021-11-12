@@ -82,7 +82,7 @@ const messagesReducer = (state = initialState, action) => {
 
             if(action.messages.messages.length > 0) {
 
-                let channelId = action.messages.messages[0].channelId
+                const channelId = action.messages.messages[0].channelId
                 allMessages[channelId] = action.messages.messages
             }
             return {
@@ -93,7 +93,7 @@ const messagesReducer = (state = initialState, action) => {
         case UPDATE_ONE_MESSAGE: {
             const oldMessages = {...state}
             const oldMessage = oldMessages[action.message.channelId].find((message) => message.id === action.message.id)
-            let index = oldMessages[action.message.channelId].indexOf(oldMessage)
+            const index = oldMessages[action.message.channelId].indexOf(oldMessage)
             oldMessages[action.message.channelId][index] = action.message
             return oldMessages
 
@@ -117,8 +117,10 @@ const messagesReducer = (state = initialState, action) => {
             const newState = {
                 ...state,
             }
-            newState[action.message['channelId']] ? newState[action.message.channelId].unshift(action.message) : action.message.channelId = [action.message]
+            newState[action.message['channelId']] ? newState[action.message['channelId']] = [action.message, ...newState[action.message.channelId]] : action.message.channelId = [action.message]
+            // newState[action.message['channelId']] = [action.message]
             return newState
+
         }
         default:
         return state;
