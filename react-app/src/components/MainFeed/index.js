@@ -58,15 +58,17 @@ export const MainFeed = () => {
 
         socket.on("chat", (data) => {
             console.log('recieved socket message!!', data)
-            setChatMessages((message) => [data, ...message])
-            // let combinedMessages = [...messages, ...chatmessages]
-            // dispatch(getMessages(channelId))
+            let chat = data.split('@')[0]
+            let user = data.split('@')[1]
+            let avatar = data.split('@')[2]
+            // setChatMessages((message) => [data, ...message])
+            setChatMessages((message) => [[chat, user, avatar], ...message])
         })
         // when component unmounts, disconnect
         return (() => {
             socket.disconnect()
         })
-    }, [])
+    }, [dispatch])
 
 
 
@@ -131,8 +133,8 @@ export const MainFeed = () => {
             userId
         }
         dispatch(createOneMessage(payload, channelId))
+        socket.emit("chat", { 'msg': `${body}@${user?.username}@${user?.avatar}`, 'channelId': channelId, 'user': user?.username})
         // dispatch(getMessages(channelId))
-        socket.emit("chat", { 'user': userId, 'msg': body, 'channelId': channelId})
         setBody('')
         setChatInput("")
         setMessageCharacterCounter(0)
@@ -202,8 +204,15 @@ export const MainFeed = () => {
                 </div>
                 <div className="Main-Message-content">
                 {chatmessages.map((message) => (
-                    <div className="username-message-container">
-                        <div className="channel-content-message">{message}</div>
+                    <div className="live-chat-div">
+
+                        <div className="username-message-container">
+                        <div className='live-chat-avatar-div' style={{backgroundImage: `url(${message[2]})`}}></div>
+                            <div className="channel-content-message">
+                                {`${message[1]}:${message[0]}`}
+                            </div>
+                        </div>
+
                     </div>
                         ))}
                 {messages.map((message, index)  => {

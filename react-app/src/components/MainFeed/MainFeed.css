@@ -234,3 +234,16 @@
     height: 500px;
     width: 500px;
 }
+
+.live-chat-div {
+    padding-left: 4rem;
+    padding-top: 0.2rem;
+}
+
+.live-chat-avatar-div {
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    background-size: contain;
+    z-index: 5;
+}

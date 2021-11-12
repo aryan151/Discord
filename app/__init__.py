@@ -100,24 +100,24 @@ def react_root(path):
 
 
 @socketio.on("join")
-def join_room(data):
+def join(data):
     print('Join room', data)
     room = data
     join_room(room)
-    send(' has entered the room.', to=room)
+    # send(' has entered the room.', to=room)
 
+
+# @socketio.on("chat")
+# def handle_chat(data):
+#     print(data, 'HELLLLLLOOOOO!!!!!!!!')
+#     room = data['channelId']
+#     emit('chat', {'data' : {'msg' : data['msg'], 'user' : data['user']}}, to=room, broadcast=True, include_self=False, json=True)
 
 @socketio.on("chat")
 def handle_chat(data):
-    print(data['msg'])
+    print(data, 'HELLLLLLOOOOO!!!!!!!!')
     room = data['channelId']
-    emit('chat', data['msg'], to=room, Broadcast=True)
-
-# @socketio.on("json")
-# def handle_chat(data):
-#     print(data['msg'])
-#     emit(data, json=True)
-
+    emit('chat', data['msg'], to=room, broadcast=True)
 
 if __name__ == '__main__':
     socketio.run(app)

@@ -117,7 +117,7 @@ const messagesReducer = (state = initialState, action) => {
             const newState = {
                 ...state,
             }
-            newState[action.message['channelId']] ? newState[action.message['channelId']] = [action.message, ...newState[action.message.channelId]] : action.message.channelId = [action.message]
+            // newState[action.message['channelId']] ? newState[action.message['channelId']] = [action.message, ...newState[action.message.channelId]] : action.message.channelId = [action.message]
             // newState[action.message['channelId']] = [action.message]
             return newState
 
