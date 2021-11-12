@@ -31,24 +31,25 @@
 }
 
 
-
-
-.Main-Message-content {
-    flex: auto;
-
-    display: flex;
-    flex-direction: column-reverse;
+.messages-container,.empty-channel {
+    grid-column: 3/4;
+    grid-row: 1/6;
 }
 
+.empty-channel {
+    padding: 1em;
+    color: lightgray;
+}
 
+.empty-channel h2 {
+    padding-top: 15%;
+    font-size: 3rem;
+    padding-bottom: 2rem;
+}
 
+.empty-channel p{
+    line-height: 1.75rem;
 
-
-.message-with-profile-pic-container {
-    display: flex;
-    margin-top: 20px;
-    align-items: flex-start;
-    width: 100%;
 }
 
 .message-with-profile-pic-container .channel-content-message {
@@ -227,6 +228,7 @@
     width: 100%;
 }
 
+
 .chat-messages {
     position: absolute;
     z-index: 1;
@@ -247,3 +249,4 @@
     background-size: contain;
     z-index: 5;
 }
+

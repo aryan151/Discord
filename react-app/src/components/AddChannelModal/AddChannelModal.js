@@ -12,24 +12,30 @@ function AddChannelModal ({serverId}) {
     const [showModal, setShowModal] = useState(false);
     const [channelName, setChannelName] = useState('')
     const dispatch = useDispatch()
-
-
+    const [sentRequest, setSentRequest] = useState(false)
     const createChannel = async (e) => {
         e.preventDefault()
 
         const payload = {name:channelName, serverId}
 
         dispatch(addChannel(payload))
+
         dispatch(fetchChannels(serverId))
         setChannelName('')
-        setShowModal(false)
+        setSentRequest(true)
+
     }
-
     useEffect(() => {
-      if (!channelName.length){
-
+      if (sentRequest){
+        setShowModal(false)
       }
-    }, [channelName])
+    }, [sentRequest])
+
+    // useEffect(() => {
+    //   if (!channelName.length){
+
+    //   }
+    // }, [channelName])
     return (
         <>
             <div className='add-server-container'>

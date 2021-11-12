@@ -26,6 +26,7 @@ const Channels = ({id}) => {
   const channels = useSelector(state => state.channels[serverId])
   const server = useSelector(state => state.servers[serverId])
   const dispatch = useDispatch()
+
   useEffect(() => {
 
     dispatch(fetchChannels(serverId));

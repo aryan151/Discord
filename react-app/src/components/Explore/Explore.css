@@ -8,7 +8,7 @@
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(3, 1fr);
     /* margin-left: 10%; */
-    /* margin-right: 20%; */ 
+    /* margin-right: 20%; */   
     grid-row-gap: 5%;
     grid-column-gap: 0.5%;
 }

@@ -4,17 +4,22 @@ import Channels from '../Channels/Index'
 import './dashboard.css'
 import { MainFeed } from '../MainFeed'
 import ServerMembersFeed from '../ServerMembersFeed'
-
+import { useParams } from 'react-router'
 
 const Dashboard = () => {
-  return (
+  const params = useParams()
+  let serverId = params?.serverId  
+
+  return ( 
+    <>
     <div className="dashboard-container">
       <Server />
       <Channels />
       <MainFeed />
-      <ServerMembersFeed />
+      {serverId != 'explore' ? <ServerMembersFeed /> : null}
       {/* <Members / > */}
     </div>
+    </>
   )
 }
 
