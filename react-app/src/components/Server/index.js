@@ -64,11 +64,16 @@ function Server () {
     return (
         <div className='server-container'>
 
-           { homeServer && <Link className='server-links'to={`/home/${homeServer.id}`}>
+           { homeServer &&
+            <div className="home-server">
+           <Link className='server-links' to={`/home/${homeServer.id}`}>
                 <div className='server-links-div' style={{backgroundImage: `url(${homeServer?.avatar})`}}>
                     {serverInitials(homeServer?.name)}
                 </div>
-            </Link>}
+
+            </Link>
+            <span className="home-divider">_______</span>
+            </div>}
             {servers.map((server) => (
             server !== homeServer &&
             <div>

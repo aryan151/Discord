@@ -14,6 +14,7 @@
     height: 50px;
     border-bottom: solid 1px #202225;
     flex: 0 0 auto;
+    color: white;
 }
 
 .Message-content-header-hashtag {
@@ -30,7 +31,15 @@
     margin-left: 10px;
 }
 
-
+.channel-description {
+    margin-left: 1rem;
+    overflow-x: hidden;
+    max-width: 70%;
+    white-space: nowrap;
+}
+.channel-description span {
+    margin-right: 0.5rem;
+}
 .messages-container,.empty-channel {
     grid-column: 3/4;
     grid-row: 1/6;

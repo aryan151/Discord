@@ -49,6 +49,7 @@ const Channels = ({id}) => {
     <>
       {serverId === 'explore' ? <Explore /> :
       <div className="channels-container">
+        <div className="scroll">
         {server ? <h1>{server?.name}</h1> : <h1>Hello from channels</h1>}
 
        { (server?.ownerId == userId) && <AddChannelModal serverId={serverId}/>}
@@ -62,6 +63,7 @@ const Channels = ({id}) => {
         </Link>
 
           )}
+          </div>
           <LoggedIn />
       </div>}
 
