@@ -169,7 +169,7 @@ export const MainFeed = () => {
                 <div className="Message-content-header-container">
                     <span className="Message-content-header-hashtag">#</span>
                     <h1 className="Message-content-header">{channel?.name}</h1>
-                    <p className="channel-description"> <span>-</span> {channel?.description}</p>
+                    <p className="channel-description" > <span className="vert-line">|</span> {channel?.description.slice(0, 100) + "..."}</p>
                 </div>
                 <div className="Main-Message-content">
                 {messages.map((message, index) => {

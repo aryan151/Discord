@@ -35,6 +35,7 @@
     margin-left: 1rem;
     overflow-x: hidden;
     max-width: 70%;
+    white-space: nowrap;
 }
 .channel-description span {
     margin-right: 0.5rem;
