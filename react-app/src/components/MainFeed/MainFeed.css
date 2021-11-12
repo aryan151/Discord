@@ -227,3 +227,26 @@
     height: 100%;
     width: 100%;
 }
+
+
+.chat-messages {
+    position: absolute;
+    z-index: 1;
+    background-color: rgb(145, 32, 50);
+    height: 500px;
+    width: 500px;
+}
+
+.live-chat-div {
+    padding-left: 4rem;
+    padding-top: 0.2rem;
+}
+
+.live-chat-avatar-div {
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    background-size: contain;
+    z-index: 5;
+}
+

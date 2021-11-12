@@ -14,6 +14,10 @@ import { Modal } from '../../context/Modal'
 
 import './MainFeed.css'
 
+import { io } from 'socket.io-client';
+let socket;
+
+
 
 export const MainFeed = () => {
 
@@ -30,12 +34,44 @@ export const MainFeed = () => {
     const [showMessagePopup, setShowMessagePopup] = useState(false);
     const [messageBeingEdited, setMessageBeingEdited] = useState(false);
     const [showDeleteMessageModal, setShowDeleteMessageModal] = useState(false);
+    const [chat, setChat] = useState([])
 
     const userId = useSelector((state) => state.session?.user?.id);
     let messages = useSelector((state) => state?.messages[channelId])
     //const orderedMessages = messages.sort((a, b) => a.createdAt < b.createdAt ? 1: -1)
     let channel = useSelector(state => state.channels[serverId]?.find(channel => channelId == channel.id))
     const dispatch = useDispatch()
+
+
+
+    const [chatInput, setChatInput] = useState("");
+    const [chatmessages, setChatMessages] = useState([]);
+    const user = useSelector(state => state.session.user)
+
+    useEffect(() => {
+        // open socket connection
+        // create websocket
+        socket = io();
+        socket.on('connect', function() {
+            socket.emit('join', channelId )
+        })
+
+        socket.on("chat", (data) => {
+            console.log('recieved socket message!!', data)
+            let chat = data.split('@')[0]
+            let user = data.split('@')[1]
+            let avatar = data.split('@')[2]
+            // setChatMessages((message) => [data, ...message])
+            setChatMessages((message) => [[chat, user, avatar], ...message])
+        })
+        // when component unmounts, disconnect
+        return (() => {
+            socket.disconnect()
+        })
+    }, [dispatch])
+
+
+
 
 
     //Sockets? Maybe --> pass socket={socket} where needed
@@ -52,6 +88,9 @@ export const MainFeed = () => {
     //         dispatch(deleteMessage(deletedMessageId));
     //     })
     // }, [dispatch, socket])
+
+
+
 
     useEffect(() => {
         if (channelId){
@@ -93,9 +132,11 @@ export const MainFeed = () => {
             body,
             userId
         }
-        await dispatch(createOneMessage(payload, channelId))
-        dispatch(getMessages(channelId))
+        dispatch(createOneMessage(payload, channelId))
+        socket.emit("chat", { 'msg': `${body}@${user?.username}@${user?.avatar}`, 'channelId': channelId, 'user': user?.username})
+        // dispatch(getMessages(channelId))
         setBody('')
+        setChatInput("")
         setMessageCharacterCounter(0)
     }
 
@@ -158,6 +199,7 @@ export const MainFeed = () => {
 
     return (
         <div className="Message-content-outer-container">
+
             <div className="Message-content-container">
                 <div className="Message-content-header-container">
                     <span className="Message-content-header-hashtag">#</span>
@@ -165,7 +207,19 @@ export const MainFeed = () => {
                     {channel && <p>{channel.descripion}</p>}
                 </div>
                 <div className="Main-Message-content">
-                {messages.map((message, index) => {
+                {chatmessages.map((message) => (
+                    <div className="live-chat-div">
+
+                        <div className="username-message-container">
+                        <div className='live-chat-avatar-div' style={{backgroundImage: `url(${message[2]})`}}></div>
+                            <div className="channel-content-message">
+                                {`${message[1]}:${message[0]}`}
+                            </div>
+                        </div>
+
+                    </div>
+                        ))}
+                {messages.map((message, index)  => {
                         const nextMessage = messages[index+1]
                         const NextHasSameOwner = nextMessage?.User?.id === message?.User?.id
                         const Mdate = 'date'
@@ -222,6 +276,12 @@ export const MainFeed = () => {
                             </div>
                         )
                     })}
+                    <div className="Main-Message-content">
+                        {/* {chatmessages.map((message) => (
+                            <div className="message-without-profile-pic-container">{message}</div>
+                        ))} */}
+
+                    </div>
                 </div>
 
 

@@ -16,6 +16,7 @@ import Explore from './components/Explore';
 
 
 function App() {
+
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
 
