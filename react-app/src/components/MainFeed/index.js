@@ -231,7 +231,6 @@ export const MainFeed = () => {
                     })}
                 </div>
 
-
                 <div onSubmit={createMessage} className="channel-content-chat-input-container">
                     <form className="new-message-form">
                         { showEmojiPicker &&
