@@ -4,6 +4,7 @@ import { NimblePicker  } from 'emoji-mart'
 import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router'
+import { useHistory } from 'react-router-dom';
 import '../Dashboard/dashboard.css'
 import { getMessages, createOneMessage } from '../../store/message';
 
@@ -31,10 +32,12 @@ export const MainFeed = () => {
     const [messageBeingEdited, setMessageBeingEdited] = useState(false);
     const [showDeleteMessageModal, setShowDeleteMessageModal] = useState(false);
 
+    const history = useHistory()
     const userId = useSelector((state) => state.session?.user?.id);
     let messages = useSelector((state) => state?.messages[channelId])
     //const orderedMessages = messages.sort((a, b) => a.createdAt < b.createdAt ? 1: -1)
     let channel = useSelector(state => state.channels[serverId]?.find(channel => channelId == channel.id))
+    let general = useSelector(state => state.channels[serverId]?.find(channel => channel.name == "general"))
     const dispatch = useDispatch()
 
 
@@ -141,9 +144,13 @@ export const MainFeed = () => {
 
 
     if (!messages) {
-        if(!channelId) return (
-            null
-        )
+        if(!channelId) {
+            if (general){
+                history.push(`/${serverId}/${general.id}`)
+            }
+            return null;
+        }
+
         return (
             <div className="empty-channel">
             <h2>Welcome to {channel ? channel.name + "!": "the channel!"}</h2>
@@ -162,7 +169,7 @@ export const MainFeed = () => {
                 <div className="Message-content-header-container">
                     <span className="Message-content-header-hashtag">#</span>
                     <h1 className="Message-content-header">{channel?.name}</h1>
-                    {channel && <p>{channel.descripion}</p>}
+                    <p className="channel-description"> <span>-</span> {channel?.description}</p>
                 </div>
                 <div className="Main-Message-content">
                 {messages.map((message, index) => {

@@ -1,6 +1,6 @@
 from operator import and_, or_
 from flask import Blueprint, jsonify, session, request, redirect
-from app.models import Server, ServerMember, DMServer, db
+from app.models import Server, ServerMember, DMServer, Channel, db
 from app.forms import ServerForm, EditServerForm
 from app.models.dm_server import DMServer
 
@@ -29,6 +29,8 @@ def add_server():
     db.session.refresh(server)
     my_server = ServerMember(userId=form.data['owner_id'], serverId=server.id, admin=True)
     db.session.add(my_server)
+    general = Channel(name='general', serverId=server.id)
+    db.session.add(general)
     db.session.commit()
     return server.to_dict()
 

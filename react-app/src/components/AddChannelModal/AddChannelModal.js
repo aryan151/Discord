@@ -13,21 +13,30 @@ function AddChannelModal ({serverId}) {
     const [channelName, setChannelName] = useState('')
     const dispatch = useDispatch()
     const [sentRequest, setSentRequest] = useState(false)
-    const createChannel = async (e) => {
+
+    const createChannel = (e) => {
         e.preventDefault()
-
         const payload = {name:channelName, serverId}
-
+        setSentRequest(false)
         dispatch(addChannel(payload))
-
-        dispatch(fetchChannels(serverId))
+        // dispatch(fetchChannels(serverId))
         setChannelName('')
         setSentRequest(true)
+    }
 
+    const handleEnter = (e) => {
+      if (e.key === 'Enter'){
+        e.preventDefault()
+        window.alert('Press use the Create Button')
+      }
     }
     useEffect(() => {
       if (sentRequest){
-        setShowModal(false)
+        setTimeout(()=> {
+          dispatch(fetchChannels(serverId))
+          setShowModal(false)
+        },[30])
+
       }
     }, [sentRequest])
 
@@ -39,15 +48,16 @@ function AddChannelModal ({serverId}) {
     return (
         <>
             <div className='add-server-container'>
-                <div className="add-channel" onClick={() => setShowModal(true)}>Add Channel</div>
+                <div className="add-channel" onClick={() => {setShowModal(true); setChannelName("")}}>Add Channel</div>
             </div>
             {showModal && (
             <Modal onClose={() => {setShowModal(false); setChannelName('')}}>
-              <form onSubmit={createChannel} className="create-channel">
+              <form onSubmit={e =>createChannel(e)} onKeyDown={handleEnter} className="create-channel">
                 <h2>Create New Channel</h2>
 
                 <label>Channel Name</label>
-                <input value={channelName} onChange={(e) => setChannelName(e.target.value)}
+                <input value={channelName} onChange={e =>
+                setChannelName(e.target.value) }
                  placeholder="new-channel"
                  required
                 ></input>
