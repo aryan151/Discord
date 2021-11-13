@@ -7,6 +7,7 @@ import './LoggedIn.css'
 
 function LoggedIn () {
     const [showModal, setShowModal] = useState(false);
+    const [showSettings, setShowSettings] = useState(false);
     const user = useSelector(state => state.session?.user)
     return (
         <div className="loggedin-container">
