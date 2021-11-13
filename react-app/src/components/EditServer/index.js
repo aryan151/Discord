@@ -19,4 +19,4 @@ function EditServerModal ({serverId}) {
         </>
     )
 }
-export default EditServerModal
+export default EditServerModal;
