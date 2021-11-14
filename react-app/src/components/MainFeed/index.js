@@ -317,7 +317,7 @@ export const MainFeed = () => {
                             <div>
 
                         <div className="date-div"><span className='username-div-message'>{message[1]}</span><span className='time-message'>{isSameDay(message[3]) === true ? "Today at  " : ''}{convertTime(new Date(message[3]).toString())}</span></div>
-                        <div className="channel-content-message">{message[0]} <p className="message-edited-true">(edited)</p></div>
+                        <div className="channel-content-message">{message[0]}</div>
 
                     </div>
                                 {/* <div className="channel-content-message">
