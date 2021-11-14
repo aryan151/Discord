@@ -7,6 +7,8 @@ class MessageForm(FlaskForm):
     body = StringField('body')
     userId = IntegerField('userId')
     channelId = IntegerField('channelId')
+    imageUrl = StringField('imageUrl')
+    userName = StringField('userName')
 
 class DmMessageForm(FlaskForm):
     body = StringField('body')
@@ -14,6 +16,3 @@ class DmMessageForm(FlaskForm):
     dm_server_Id = IntegerField('dm_server_Id')
     username = StringField('username')
     imageUrl = StringField('imageUrl')
-    imageUrl = StringField('imageUrl')
-    userName = StringField('userName')
-
