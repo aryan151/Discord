@@ -207,3 +207,10 @@
 .edit-channel button[type='submit']:hover {
   background-color: #2a7e45;
 }
+
+.profile-dropdown {
+  background-color: rgb(46, 45, 45);
+  margin: 3px 6px;
+  border-radius: 7px;
+  min-height: 2.75rem;
+}

@@ -59,6 +59,45 @@ function MessageBox({ message, setMessageBeingEdited, messageBeingEdited, setSho
         setMessageCharacterCounter(message?.body.length);
     }
 
+    // const formattedDate = messageDate.toLocaleString();
+    // const formattedTime = messageDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    // const messageDate = new Date(message.createdAt)
+
+
+//     const formatDateAndTime = (date) => {
+//         const time = new Date(date).toLocaleTimeString('en');
+
+//         const arr = date.split('-');
+//         const monthAndDay = `${arr[1]}/${arr[2].slice(0,2)}/${arr[0]}`
+
+//         return `${monthAndDay} ${time}`;
+
+//   }
+
+const convertTime = function(oldTime){
+    let newTime = oldTime.split(' ')[1]
+    let time = newTime.split(':');
+    let hours = time[0];
+    let minutes = time[1];
+    let timeValue = "" + ((hours >12) ? hours -12 :hours);
+        timeValue += (minutes < 10) ? ':' + minutes : ":" + minutes;
+        timeValue += (hours >= 12) ? " pm" : " am";
+        // timeValue += "" + date
+        return timeValue;
+    }
+
+    const isSameDay = function(oldTime) {
+        // let today = Date.now().getDate().toString()
+        let newToday = new Date().getDate().toString()
+        let newOldTime = new Date(oldTime).getDate()
+        console.log('todays date:', newToday)
+        console.log('message date:', newOldTime)
+        if (newToday == newOldTime){
+            return true
+        }
+        return false
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -145,7 +184,29 @@ function MessageBox({ message, setMessageBeingEdited, messageBeingEdited, setSho
                         <p className={`message-edit-character-counter message-edit-counter-negative-${messageCharacterCounter > 2000}`}>{messageCharacterCounter}/2000</p>
             </>
         ):(
-            <div className="channel-content-message">{message.body} <p className="message-edited-true">(edited)</p></div>
+            <div className="message-container">
+
+                <div className='decorated'>
+
+                        <span>
+                            {new Intl.DateTimeFormat('en-US', { month: 'long' }).format(new Date(message?.createdAt))} {new Date(message?.createdAt).getDate()}, 2021
+                        </span>
+
+                </div>
+                <div className="username-message-container">
+                    <div>
+                        <div className='live-chat-avatar-div' style={{backgroundImage: `url(${message?.imageUrl})`}}></div>
+                    </div>
+                    <div>
+
+                        <div className="date-div"><span className='username-div-message'>{message?.userName}</span><span className='time-message'>{isSameDay(message?.createdAt) === true ? "Today at  " : ''}{message?.createdAt ? convertTime(message?.createdAt) : ''}</span></div>
+                        <div className="channel-content-message">{message.body}</div>
+
+                    </div>
+
+                </div>
+
+            </div>
             // {message.updatedAt !== message.createdAt &&
         )
     );

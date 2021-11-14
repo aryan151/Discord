@@ -13,6 +13,8 @@ import HomeServer from '../Server/HomeServer'
 
 import LoggedIn from '../LoggedIn'
 
+import EditServerModal from '../EditServer'
+
 
 
 const Channels = ({id}) => {
@@ -25,14 +27,35 @@ const Channels = ({id}) => {
   const userId = useSelector(state => state.session?.user?.id)
   const channels = useSelector(state => state.channels[serverId])
   const server = useSelector(state => state.servers[serverId])
+  const [showMenu, setShowMenu] = useState(false);
   const dispatch = useDispatch()
 
   useEffect(() => {
 
     dispatch(fetchChannels(serverId));
     dispatch(getMyServers(userId))
+    setShowMenu(false)
 
   }, [dispatch, serverId, showSettings])
+
+
+  // useEffect(() => {
+  //   if (!showMenu) return;
+
+  //   const closeMenu = () => {
+  //     setShowMenu(false);
+  //   };
+
+  //   document.addEventListener('click', closeMenu);
+  //   // let element = document.getElementById('edit-server-button')
+  //   // element.addEventListener('click', closeMenu);
+
+  //   return () => document.removeEventListener("click", closeMenu);
+  // }, [showMenu]);
+
+  const closeMenu = () => {
+    setShowMenu(false);
+  };
 
   const handleEdit = (channel) => {
     setChannelToEdit(channel)
@@ -44,13 +67,40 @@ const Channels = ({id}) => {
   }
 
 
+
+
+  const openMenu = () => {
+    if (showMenu) return;
+    setShowMenu(true);
+  };
+
+
+
   return (
 
     <>
       {serverId === 'explore' ? <Explore /> :
       <div className="channels-container">
         <div className="scroll">
-        {server ? <h1>{server?.name}</h1> : <h1>Hello from channels</h1>}
+        {server ?
+          <div>
+            <div>
+            <span>{server?.name}</span>
+              {server.ownerId === userId ?
+              <span>
+                <i id="edit-server-button" onClick={showMenu === false ? openMenu : closeMenu} className="far fa-edit edit-server-icon"></i>
+                {showMenu && (
+                  <ul className="profile-dropdown">
+                    <li><EditServerModal serverId={server?.id}/></li>
+                  </ul>
+                  )}
+
+              </span> : ''}
+
+            </div>
+
+          </div>
+        : <h1>Hello from channels</h1>}
 
        { (server?.ownerId == userId) && <AddChannelModal serverId={serverId}/>}
         {channels?.map(channel =>

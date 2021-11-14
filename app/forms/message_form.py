@@ -5,3 +5,5 @@ class MessageForm(FlaskForm):
     body = StringField('body')
     userId = IntegerField('userId')
     channelId = IntegerField('channelId')
+    imageUrl = StringField('imageUrl')
+    userName = StringField('userName')

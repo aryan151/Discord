@@ -9,7 +9,8 @@ function EditServerModal ({serverId}) {
     return (
         <>
             <div className='edit-server-container'  onClick={() => setShowModal(true)}>
-            <i class="far fa-edit edit-server-icon"></i>
+            {/* <i class="far fa-edit edit-server-icon"></i> */}
+            Edit Server
             </div>
             {showModal && (
             <Modal  onClose={() => setShowModal(false)}>
