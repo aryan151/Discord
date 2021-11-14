@@ -111,7 +111,7 @@
   padding: 5rem 3rem;
 }
 
-.edit-channel-form input, textarea{
+.edit-channel-form input, .edit-channel-form textarea{
   margin-bottom: 2rem;
   background-color: #313339;
   border-color: black;

@@ -11,8 +11,8 @@ class DMServer(db.Model):
 
     #relationships
     # channels = db.relationship('Channel', back_populates='server')
-    owner = db.relationship('User', back_populates='dm_server')
-    dm_messages= db.relationship('DMMessage', back_populates='dm_server')
+    # owner = db.relationship('User', back_populates='dm_server')
+
 
 
 

@@ -4,6 +4,7 @@ const UPDATE_ONE_MESSAGE = 'messages/UPDATE_ONE_MESSAGE'
 const REMOVE_ONE_MESSAGE = 'messages/REMOVE_ONE_MESSAGE'
 
 
+
 const load = messages => ({
     type: LOAD,
     messages
