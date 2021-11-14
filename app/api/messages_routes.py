@@ -18,7 +18,9 @@ def add_message(channelId):
         message = Message(
             body = form.data['body'],
             channelId = channelId,
-            userId = form.data['userId']
+            userId = form.data['userId'],
+            imageUrl = form.data['imageUrl'],
+            userName = form.data['userName']
         )
     db.session.add(message)
     db.session.commit()

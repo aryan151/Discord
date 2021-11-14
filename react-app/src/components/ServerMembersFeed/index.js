@@ -13,17 +13,25 @@ function ServerMembersFeed() {
 
     const params = useParams()
     let { serverId } = params
-    const userId = useSelector((state) => state.session?.user?.id) 
+    const userId = useSelector((state) => state.session?.user?.id)
     const members = useSelector((state) => Object.values(state.members).filter((member) => member.id !== userId))
-    console.log(members)
+
+
+   const countMembers = () => {
+       let count = 0;
+       for (let i = 0; i < members.length; i++) {
+           count += 1;
+       }
+       return count
+   }
 
     useEffect(() => {
         dispatch(getServerMembers(serverId))
     }, [dispatch, serverId])
 
     return (
-        <div>
-            <h2>Server Members</h2>
+        <div className="server-members-div">
+            <h2 id="server-members-title">MEMBERS - {countMembers()}</h2>
             {members ? members.map((member) => (
                 <div className="member-div">
                     <div className="user-avatar" style={{backgroundImage: `url(${member?.avatar})`}}></div>
