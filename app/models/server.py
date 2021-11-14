@@ -1,6 +1,6 @@
 from enum import unique
 from app.models.servermembers import ServerMember
-from .db import db  
+from .db import db
 
 class Server(db.Model):
     __tablename__ = 'servers'
@@ -12,7 +12,7 @@ class Server(db.Model):
     banner = db.Column(db.String(1000), default='https://images.pexels.com/videos/3045163/free-video-3045163.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500')
     tag = db.Column(db.String(50), default='Home')
 
-    #relationships    
+    #relationships
     channels = db.relationship('Channel', back_populates='server', cascade='all, delete')
     user = db.relationship('User', back_populates='servers')
     server_members = db.relationship('ServerMember', back_populates='servers', cascade='all, delete-orphan')

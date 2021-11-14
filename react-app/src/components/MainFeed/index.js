@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router'
 import { useHistory } from 'react-router-dom';
 import '../Dashboard/dashboard.css'
-import { getMessages, createOneMessage } from '../../store/message';
+import { getMessages, createOneMessage, createFirstMessage } from '../../store/message';
 
 import DeleteMessageModal from './DeleteMessageModal'
 import MessageBox from './MessageBox'
@@ -35,6 +35,7 @@ export const MainFeed = () => {
     const [showMessagePopup, setShowMessagePopup] = useState(false);
     const [messageBeingEdited, setMessageBeingEdited] = useState(false);
     const [showDeleteMessageModal, setShowDeleteMessageModal] = useState(false);
+    const [sentFirst, setSentFirst] = useState(false)
     const [chat, setChat] = useState([])
 
     const history = useHistory()
@@ -162,6 +163,22 @@ export const MainFeed = () => {
         setMessageCharacterCounter(0)
     }
 
+    const createFirstMessage = async (e) => {
+         {
+            e.preventDefault()
+            const payload = {
+                body,
+                userId
+            }
+            dispatch(createFirstMessage(payload, channelId))
+            socket.emit("chat", { 'msg': `${body}@${user?.username}@${user?.avatar}`, 'channelId': channelId, 'user': user?.username})
+            // dispatch(getMessages(channelId))
+            setSentFirst(true)
+            setBody('')
+            setChatInput("")
+            setMessageCharacterCounter(0)
+        }
+    }
     //Prevents Blank Messages
     const handleEnter = (e) => {
         if (messageCharacterCounter > 2000 && e.key === "Enter") {
@@ -176,6 +193,24 @@ export const MainFeed = () => {
 
         if (e.key === "Enter") {
             createMessage(e);
+            setMessageError('')
+        }
+    }
+
+    const handleFirstEnter = (e) => {
+        if (messageCharacterCounter > 2000 && e.key === "Enter") {
+            e.preventDefault();
+            setMessageError('Message cannot exceed 2000 characters.');
+            return;
+        }
+
+        if (/^\s*$/.test(body)) {
+            return;
+        }
+
+        if (e.key === "Enter") {
+            createMessage(e);
+            setSentFirst(true)
             setMessageError('')
         }
     }
@@ -203,7 +238,7 @@ export const MainFeed = () => {
     if (serverId === 'explore') return null;
 
 
-    if (!messages) {
+    if (!messages?.length && !sentFirst) {
         if(!channelId) {
             if (general){
                 history.push(`/${serverId}/${general.id}`)
@@ -215,10 +250,36 @@ export const MainFeed = () => {
             <div className="empty-channel">
             <h2>Welcome to {channel ? channel.name + "!": "the channel!"}</h2>
             <p>This is just the beginning. <br /> Be the first to leave a message.</p>
-            <form onSubmit={createMessage}>
-            <input value={body} onChange={handleChange}></input>
-            <button type="submit">Send Message</button>
-             </form>
+            <div onSubmit={() => createFirstMessage} className="channel-content-chat-input-container">
+                    <form className="new-message-form">
+                        { showEmojiPicker &&
+                            <NimblePicker
+                                set='google'
+                                data={data}
+                                theme={"dark"}
+                                style={{position: 'absolute', zIndex: 3, left: "10px", bottom: "100px"}}
+                                onSelect={(emoji) => handleEmoji(emoji)}
+                            />
+                        }
+
+                        <p onClick={handleEmojiPicker} className="emoji-selector">{emoji}</p>
+                        <label className="new-message-label">
+                            <textarea
+                                type="text"
+                                className="new-message-input"
+                                value={body}
+                                onChange={handleChange}
+                                onKeyDown={handleFirstEnter}
+                                ref={messageRef}
+                                placeholder={`Message #${channel?.name}`}
+                            ></textarea>
+                            <p className={`message-character-counter message-counter-negative-${messageCharacterCounter > 2000}`}>{messageCharacterCounter}/2000</p>
+                            { messageError &&
+                                <p className="message-error">{messageError}</p>
+                            }
+                        </label>
+                    </form>
+                </div>
             </div>
         );
     }
@@ -230,7 +291,7 @@ export const MainFeed = () => {
                 <div className="Message-content-header-container">
                     <span className="Message-content-header-hashtag">#</span>
                     <h1 className="Message-content-header">{channel?.name}</h1>
-                    <p className="channel-description" > <span className="vert-line">|</span> {channel?.description.slice(0, 100) + "..."}</p>
+                    <p className="channel-description" > <span className="vert-line">|</span> {channel?.description.length < 90 ? channel?.description : channel?.description.slice(0, 90) + "..."}</p>
                 </div>
                 <div className="Main-Message-content">
                 {/* {chatmessages.map((message) => (

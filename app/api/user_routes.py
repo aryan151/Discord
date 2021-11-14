@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required
 from app.models import User
+# from sqlalchemy import in_
 
 user_routes = Blueprint('users', __name__)
 
@@ -22,3 +23,12 @@ def user(id):
 def get_user(term):
     users = User.query.filter(User.username.ilike(f'%{term}%'))
     return {'users': [user.to_dict() for user in users]}
+
+
+@user_routes.route('dms/<users>')
+def get_dm_users(users):
+    ids = users.split('-')
+    ids = [int(i) for i in ids]
+    dmUsers = User.query.filter(User.id.in_(ids)).all()
+    return {"users": [user.to_dict() for user in dmUsers]}
+    pass
