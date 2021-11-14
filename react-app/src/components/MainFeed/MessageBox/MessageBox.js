@@ -200,7 +200,7 @@ const convertTime = function(oldTime){
                     <div>
 
                         <div className="date-div"><span className='username-div-message'>{message?.userName}</span><span className='time-message'>{isSameDay(message?.createdAt) === true ? "Today at  " : ''}{message?.createdAt ? convertTime(message?.createdAt) : ''}</span></div>
-                        <div className="channel-content-message">{message.body} <p className="message-edited-true">(edited)</p></div>
+                        <div className="channel-content-message">{message.body}</div>
 
                     </div>
 
