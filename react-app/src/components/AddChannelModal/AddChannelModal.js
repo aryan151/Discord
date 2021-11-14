@@ -22,6 +22,7 @@ function AddChannelModal ({serverId}) {
         // dispatch(fetchChannels(serverId))
         setChannelName('')
         setSentRequest(true)
+        setShowModal(false)
     }
 
     const handleEnter = (e) => {
@@ -34,7 +35,6 @@ function AddChannelModal ({serverId}) {
       if (sentRequest){
         setTimeout(()=> {
           dispatch(fetchChannels(serverId))
-          setShowModal(false)
         },[30])
 
       }

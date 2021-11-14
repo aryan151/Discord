@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, session, request, redirect
-from app.models import Message, db
+from app.models import Message, DMMessage, db
 from app.forms import MessageForm, EditMessageForm
+
 
 messages_routes = Blueprint('messages', __name__)
 
