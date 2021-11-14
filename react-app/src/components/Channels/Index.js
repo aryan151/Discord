@@ -81,10 +81,6 @@ const Channels = ({id}) => {
     <>
       {serverId === 'explore' ? <Explore /> :
       <div className="channels-container">
-
-        <div >
-        {server ? <h1>{server?.name}</h1> : <h1>Hello from channels</h1>}
-
         <div className="scroll">
         {server ?
           <div>
@@ -106,10 +102,7 @@ const Channels = ({id}) => {
           </div>
         : <h1>Hello from channels</h1>}
 
-
        { (server?.ownerId == userId) && <AddChannelModal serverId={serverId}/>}
-
-       <div className="scroll">
         {channels?.map(channel =>
 
         <Link to={`/${serverId}/${channel?.id}`} className="channel">
@@ -120,7 +113,6 @@ const Channels = ({id}) => {
         </Link>
 
           )}
-        </div>
           </div>
           <LoggedIn />
       </div>}
