@@ -14,3 +14,6 @@ class DmMessageForm(FlaskForm):
     dm_server_Id = IntegerField('dm_server_Id')
     username = StringField('username')
     imageUrl = StringField('imageUrl')
+    imageUrl = StringField('imageUrl')
+    userName = StringField('userName')
+

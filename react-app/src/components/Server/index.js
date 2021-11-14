@@ -82,10 +82,10 @@ function Server () {
                         {serverInitials(server?.name)}
                     </div>
                 </Link>
-                {server.ownerId === userId ?
+                {/* {server.ownerId === userId ?
                 <div className = 'edit-server-button'>
                     <EditServerModal serverId={server?.id}/>
-                </div> : ''}
+                </div> : ''} */}
             </div>
             ))}
             <div className='add-server-modal' >

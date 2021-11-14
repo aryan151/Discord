@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -26,6 +27,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	font-family: 'Roboto';
 }
 ol, ul {
 	list-style: none;
@@ -47,6 +49,7 @@ q:before, q:after {
     justify-content: center;
     align-items: center;
 }
+
 .nav-container {
 	display: flex;
 	background-color: rgb(26, 25, 25);
@@ -66,3 +69,4 @@ q:before, q:after {
 	gap: 3rem;
 
 }
+

@@ -52,6 +52,42 @@ export const MainFeed = () => {
     const [chatmessages, setChatMessages] = useState([]);
     const user = useSelector(state => state.session.user)
 
+    // const convertTime = function(oldTime){
+    //     var time = oldTime.split(':');
+    //     var date = time[0]
+    //     var hours = time[1];
+    //     var minutes = time[2];
+    //     let timeValue = "" + ((hours >12) ? hours -12 :hours);
+    //         timeValue += (minutes < 10) ? ':' + minutes : ":" + minutes;
+    //         timeValue += (hours >= 12) ? " pm" : " am";
+    //         return timeValue;
+    //     }
+
+        const convertTime = function(oldTime){
+            console.log(oldTime)
+            let newTime = oldTime.split(' ')[4]
+            let time = newTime.split(':');
+            let hours = time[0];
+            let minutes = time[1];
+            let timeValue = "" + ((hours >12) ? hours -12 :hours);
+                timeValue += (minutes < 10) ? ':' + minutes : ":" + minutes;
+                timeValue += (hours >= 12) ? " pm" : " am";
+                // timeValue += "" + date
+                return timeValue;
+            }
+
+        const isSameDay = function(oldTime) {
+            // let today = Date.now().getDate().toString()
+            let newToday = new Date().getDate().toString()
+            let newOldTime = new Date(oldTime).getDate()
+            console.log('todays date:', newToday)
+            console.log('message date:', newOldTime)
+            if (newToday == newOldTime){
+                return true
+            }
+            return false
+        }
+
     useEffect(() => {
         // open socket connection
         // create websocket
@@ -65,8 +101,9 @@ export const MainFeed = () => {
             let chat = data.split('@')[0]
             let user = data.split('@')[1]
             let avatar = data.split('@')[2]
+            let createdAt = Date.now()
             // setChatMessages((message) => [data, ...message])
-            setChatMessages((message) => [[chat, user, avatar], ...message])
+            setChatMessages((message) => [...message, [chat, user, avatar, createdAt]])
         })
         // when component unmounts, disconnect
         return (() => {
@@ -75,31 +112,11 @@ export const MainFeed = () => {
     }, [dispatch])
 
 
-
-
-
-    //Sockets? Maybe --> pass socket={socket} where needed
-    // useEffect(() => {
-    //     socket.on('receive-message', message => {
-    //         dispatch(addMessage(message));
-    //     });
-
-    //     socket.on('receive-message-edit', message => {
-    //         dispatch(editMessage(message));
-    //     });
-
-    //     socket.on('receive-message-delete', deletedMessageId => {
-    //         dispatch(deleteMessage(deletedMessageId));
-    //     })
-    // }, [dispatch, socket])
-
-
-
-
     useEffect(() => {
         if (channelId){
             dispatch(getMessages(channelId))
         }
+        setChatMessages([])
 
     }, [dispatch, channelId, serverId])
 
@@ -134,7 +151,9 @@ export const MainFeed = () => {
         e.preventDefault()
         const payload = {
             body,
-            userId
+            userId,
+            imageUrl: user?.avatar,
+            userName: user?.username
         }
         dispatch(createOneMessage(payload, channelId))
         socket.emit("chat", { 'msg': `${body}@${user?.username}@${user?.avatar}`, 'channelId': channelId, 'user': user?.username})
@@ -275,7 +294,7 @@ export const MainFeed = () => {
                     <p className="channel-description" > <span className="vert-line">|</span> {channel?.description.length < 90 ? channel?.description : channel?.description.slice(0, 90) + "..."}</p>
                 </div>
                 <div className="Main-Message-content">
-                {chatmessages.map((message) => (
+                {/* {chatmessages.map((message) => (
                     <div className="live-chat-div">
 
                         <div className="username-message-container">
@@ -286,7 +305,8 @@ export const MainFeed = () => {
                         </div>
 
                     </div>
-                        ))}
+                        ))} */}
+
                 {messages.map((message, index)  => {
                         const nextMessage = messages[index+1]
                         const NextHasSameOwner = nextMessage?.User?.id === message?.User?.id
@@ -344,12 +364,31 @@ export const MainFeed = () => {
                             </div>
                         )
                     })}
-                    <div className="Main-Message-content">
-                        {/* {chatmessages.map((message) => (
-                            <div className="message-without-profile-pic-container">{message}</div>
-                        ))} */}
+                    {chatmessages.map((message) => (
+                    <div className="live-chat-div">
+                        <div className='decorated'>
+                        <span>
+                            {new Intl.DateTimeFormat('en-US', { month: 'long' }).format(new Date(message[3]))} {new Date(message[3]).getDate()}, 2021
+                        </span>
+                        </div>
+
+                        <div className="username-message-container">
+
+                            <div className='live-chat-avatar-div' style={{backgroundImage: `url(${message[2]})`}}></div>
+                            <div>
+
+                        <div className="date-div"><span className='username-div-message'>{message[1]}</span><span className='time-message'>{isSameDay(message[3]) === true ? "Today at  " : ''}{convertTime(new Date(message[3]).toString())}</span></div>
+                        <div className="channel-content-message">{message[0]}</div>
 
                     </div>
+                                {/* <div className="channel-content-message">
+                                    {`${message[1]}:${message[0]}`}
+                                </div> */}
+                        </div>
+
+                    </div>
+                        ))}
+
                 </div>
 
                 <div onSubmit={createMessage} className="channel-content-chat-input-container">

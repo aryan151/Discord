@@ -58,7 +58,7 @@ function AddChannelModal ({serverId}) {
                 <label>Channel Name</label>
                 <input value={channelName} onChange={e =>
                 setChannelName(e.target.value) }
-                 placeholder="new-channel"
+                //  placeholder="new-channel"
                  required
                 ></input>
                 <div className="button-container">
