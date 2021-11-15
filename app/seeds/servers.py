@@ -40,11 +40,26 @@ def seed_servers():
         banner=fake.image_url(),
         tag=random.choice(tags),
         createdAt=randomDate() 
-    ) 
+    ),
+    server4 = DMServer(
+      ownerId=1,
+      name='Demo'
+    )
+    server5 = DMServer(
+      ownerId=2,
+      name='marnie'
+    )
+    server6 = DMServer(
+      ownerId=3,
+      name='bobbie'
+    )
 
     db.session.add(server1)   
     db.session.add(server2)
     db.session.add(server3) 
+    db.session.add(server4)   
+    db.session.add(server5)
+    db.session.add(server6) 
 
 
 
