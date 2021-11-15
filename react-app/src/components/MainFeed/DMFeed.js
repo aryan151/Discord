@@ -98,7 +98,7 @@ const isSameDay = function(oldTime) {
      }
     dispatch(createDm(payload))
     socket.emit("chat", { 'msg': `${body}@${user?.username}@${user?.avatar}`, 'channelId': 5, 'user': user?.username})
-
+     scrollToBottom()
     setBody("")
       return
   }
@@ -121,7 +121,7 @@ const isSameDay = function(oldTime) {
 
 function scrollToBottom () {
   var div = document.querySelector('.dm-message-container');
-  console.log(div)
+
   if (div) div.scrollTop = div.scrollHeight - div.clientHeight;
 
 }

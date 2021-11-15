@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addServer } from '../../store/server'
 import { getMyServers } from '../../store/server';
@@ -7,7 +7,7 @@ import { useParams } from 'react-router';
 import { editOneServer } from '../../store/server';
 import { deleteOneServer } from '../../store/server';
 
-const EditServer = ({serverId, setShowModal}) => {
+const EditServer = ({serverId, setShowMenu}) => {
     const userId = useSelector((state) => state.session?.user?.id);
     // const params = useParams()
     // let {serverId} = params
@@ -18,6 +18,14 @@ const EditServer = ({serverId, setShowModal}) => {
 
     const dispatch = useDispatch()
 
+    useEffect(() => {
+        const closeModal = () => {
+          setShowMenu(false);
+        };
+        document.addEventListener('click', closeModal);
+        return () => document.removeEventListener("click", closeModal);
+      }, []);
+
 
     const handleEdit = (e) => {
         e.preventDefault()
@@ -25,45 +33,37 @@ const EditServer = ({serverId, setShowModal}) => {
             name : editServer
         }
         dispatch(editOneServer(payload, serverId))
-        setShowModal(false)
+        setShowMenu(false)
     }
 
     const handleDelete = (e) => {
         e.preventDefault()
         dispatch(deleteOneServer(serverId))
-        setShowModal(false)
+        setShowMenu(false)
     }
 
     return (
-        <div>
-            <form onSubmit={handleEdit}>
-                <fieldset>
-                    <legend>Server Edit Options</legend>
-                        <div>
-                            <label>edit Server Name</label>
-                            <div>
-                                <input
-                                type='text'
-                                value={editServer}
-                                onChange={(e) => setEditServer(e.target.value)}
-                                />
-                            </div>
-                            <div>
-                                <button type='submit'>Update Name</button>
-                            </div>
-                        </div>
-                </fieldset>
-            </form>
-            <form onSubmit={handleDelete}>
+        <div className="edit-server-dropdown" onClick={e => e.stopPropagation()}>
+            <form className="server-edit-form" onSubmit={handleEdit}>
 
-                        <div>
-                            <div>
-                                <label>DELETE SERVER</label>
-                            </div>
-                            <div>
-                                <button type='submit'>DELETE Server</button>
-                            </div>
-                        </div>
+            <h3>Server Edit Options</h3>
+                <div className='rndm'>
+                    <label>Edit Server Name</label>
+                      <input
+                        type='text'
+                        value={editServer}
+                        onChange={(e) => setEditServer(e.target.value)}
+                        required
+                        />
+                    <div>
+                        <button className='edit-server-name' type='submit'>Update Name</button>
+                    </div>
+                </div>
+
+            </form>
+            <form  className='delete-server-button-form' onSubmit={handleDelete}>
+
+                <button className= "delete-server" type='submit'>Delete Server</button>
 
             </form>
 
