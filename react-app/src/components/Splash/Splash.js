@@ -5,49 +5,51 @@ import './Splash.css'
 import { AiOutlineLogin } from 'react-icons/ai'
 import { IoIosMail } from "react-icons/io";
 import { IoMdVolumeHigh } from "react-icons/io";  
-import part1 from '../video/Splash1.svg'       
+import { RiDiscLine } from "react-icons/ri";
+import { DiUikit } from "react-icons/di";
+import { AiOutlineArrowUp, AiOutlineArrowDown, AiFillGithub, AiFillLinkedin } from 'react-icons/ai';    
 
-function Splash() {
+function Splash() {  
                 
      
-    return (   
+    return (       
         <>
         <div className='splash-page'>
             <video className='loginbackground'autoplay="autoplay" playsinline="playsinline" muted="muted" loop="loop" src={AHours}></video>
+            <div >
+                    <Link to="/signup"> 
+                        <RiDiscLine className='Logo'/>    
+                    </Link>      
+                </div>
             <ul className='logIn'>
                 <li className='loginbutton'>
                     <a href="/login">  
                         <AiOutlineLogin/>
                     </a>  
-                </li>  
-                <li className='loginbutton'>
-                    <Link to="/signup"> 
-                    <i class="fas fa-user-plus"></i>
-                    </Link>  
-                </li>          
+                </li>        
                 <li className='loginbutton'>
                     <a href="#Screen1">    
-                    <i class="fas fa-cocktail"></i>
+                    <DiUikit/>
                     </a>  
                 </li>
                 <li className='loginbutton'>
                     <a href="#Screen2">  
-                    <i class="fas fa-cocktail"></i>
+                    <DiUikit/>
                     </a>  
                 </li>
                 <li className='loginbutton'>
                     <a href="#Screen3">  
-                    <i class="fas fa-gamepad"></i>
-                    </a>  
+                    <DiUikit/>
+                    </a>    
                 </li>
                 <li className='loginbutton'>
                     <a href="#Screen4">  
-                        <AiOutlineLogin/>
-                    </a>  
+                        <DiUikit/>
+                    </a>    
                 </li>
                 <li className='loginbutton'>
                     <a href="#Screen5">  
-                        <AiOutlineLogin/>
+                        <DiUikit/>
                     </a>  
                 </li>
                 <li className='loginbutton'>
@@ -81,8 +83,8 @@ function Splash() {
                 </div>
                 <div className='secondimg'>
                     <p className='hiddentext'>sssssssssdddddddddddsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>     
-                </div>
-            </div>
+                </div>  
+            </div>    
   
             <div className="Screen4" id='Screen4'>
             <div className='thirdimg'>
@@ -92,29 +94,37 @@ function Splash() {
                     <h3>From few to a fandom</h3>
                     <h4>Get any community running with moderation tools and custom member access. Give members special powers, set up private channels, and more.</h4>
                 </div>
-            </div>     
-
+            </div>         
    
             <div className="Screen5" id='Screen5'>
                 <h3>RELIABLE TECH FOR STAYING CLOSE</h3> 
                 <h4>Low-latency voice and video feels like you’re in the same room. Wave hello over video, watch friends stream their games, or gather up and have a drawing session with screen share.</h4>
                 <div className='fourthimg'>
                         <p className='hiddentext'>ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>     
-                    </div>
-            </div>
+                    </div>  
+            </div>    
 
-                 
-            <div className='footer' id='footer'>
-                <p> Created By</p>
-                <p> Aryan Attul</p>
-                <p> Nick Frase</p>
-                <p> Ethan Harwell</p>   
-                <p> Joey Peterson</p>
+            <div className="footer" id='footer'>
+                <div className="github-repo">  
+                   <h2><AiFillGithub /><a target="_blank" href="www.google.com" >Github Repo</a> </h2>  
+                </div>
+                <div className="github-links">
+                    <div className="Link"><AiFillGithub /><a href="www.google.com"  target="_blank">Aryan Attul</a></div>
+                    <div className="Link"><AiFillGithub /><a href="www.google.com"  target="_blank">Nick Frase </a></div>
+                    <div className="Link"><AiFillGithub /><a href="www.google.com"  target="_blank">Ethan Harwell</a></div>
+                    <div className="Link"><AiFillGithub /><a href="www.google.com"  target="_blank">Joey Peterson</a></div>
+                </div>
+                <div className="linkedIn-links">
+                    <div className="Link"><AiFillLinkedin /><a href="www.google.com"  target="_blank">Aryan Attul</a></div>
+                    <div className="Link"><AiFillLinkedin /><a href="www.google.com"  target="_blank">Nick Frase </a></div>
+                    <div className="Link"><AiFillLinkedin /><a href="www.google.com"  target="_blank">Ethan Harwell</a></div>
+                    <div className="Link"><AiFillLinkedin /><a href="www.google.com"  target="_blank">Joey Peterson</a></div>
+                </div>   
             </div>
-        </div>   
-        </>
+        </div>    
+        </>    
     )  
-};
+}; 
 
 
 export default Splash;

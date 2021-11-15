@@ -24,62 +24,102 @@ function AddServer({ setShowModal, servers }){
         dispatch(addServer(payload))
         dispatch(getMyServers(userId))  
         setServerName('')  
-        setShowModal(false)
-
-    }       
-             
-    const joinServer = (enteredPassword) => async () => {
+        setShowModal(false)    
+    }           
+                   
+    const joinServer = async (e) => {
+        e.preventDefault()    
         servers.map(server => {
             if (enteredPassword === server.join_password ) {
                 const payload = { 
-                    serverId: server.id,  
-                    userId,    
-                }
+                    serverId: server.id,   
+                    userId,      
+                }     
                 dispatch(createMemberToServer(payload))
                 dispatch(getMyServers(userId))
-                setShowModal(false)  
+                setShowModal(false)   
                 return   
-            }
-        })
+            }      
+        }) 
         alert('That Server Does Not Exit')
         dispatch(getMyServers(userId))
         setShowModal(false)     
-    }      
-  //Change line 51 -using to test 
-    return (
-        <div>  
-            <form onSubmit={createServer}>    
+    }            
+        
+    return (  
+        <div>                
+            <form className='formContainer'>     
                 <fieldset>
-                    <legend>Server Name </legend>
-                        <div>
+                    <div className='formField'>     
+                    <legend className='servername'>Add Your Own Server </legend>
+                    <h1>Create Your Own Server</h1>    
+                    <label className='ServerCreateLabel'> Name</label>
+                    <div>  
                             <input
-                            type="text"  
-                            value={serverName}
+                            className='ServerCreateButton'
+                            type="text"    
+                            value={serverName}    
                             onChange={(e) => setServerName(e.target.value)}
-                            />
-                        </div>
-                        <div>
-                            <button
-                            type="submit"
-                            onClick={createServer}
-                            >Create Server
-                            </button>
-                        </div> 
-                        <p>Join A Server</p>
-                        <div>
+                            />     
+                        </div>  
+                        <label className='ServerCreateLabel'> Description</label>  
                             <input
-                            type="text"
-                            value={enteredPassword}
-                            onChange={(e) => setEnteredPassword(e.target.value)}  
-                            />
-                        </div>
-                        <div>
+                            className='ServerCreateButton'  
+                            type="text"   
+                            />     
+                        <label className='ServerCreateLabel'>Choose Your Tag </label>
+                        <div className='loginButtons'>
                             <button
-                            type="submit"
-                            onClick={joinServer}  
-                            >Join Server 
+                            className="formButton"
+                            type="submit"       
+                            onClick={createServer}  
+                            >Gaming  
                             </button>
                         </div> 
+                        <div className='loginButtons'>
+                            <button
+                            className="formButton"
+                            type="submit"       
+                            onClick={createServer}  
+                            >Music   
+                            </button>
+                        </div> 
+                        <div className='loginButtons'>
+                            <button
+                            className="formButton"
+                            type="submit"       
+                            onClick={createServer}  
+                            >Videos  
+                            </button>
+                        </div> 
+                        <div className='loginButtons'>
+                            <button
+                            className="formButton"
+                            type="submit"       
+                            onClick={createServer}  
+                            >Tech  
+                            </button>
+                        </div> 
+                        <div className='loginButtons'>
+                            <button
+                            className="formButton"
+                            type="submit"       
+                            onClick={createServer}  
+                            >Sports  
+                            </button>
+                        </div> 
+                        <div className='loginButtons'>  
+                            <button
+                            className="formButton"
+                            type="submit"       
+                            onClick={createServer}  
+                            >Misc.   
+                            </button>
+                        </div> 
+                        </div>
+
+                        
+
                     </fieldset>
             </form>
         </div>

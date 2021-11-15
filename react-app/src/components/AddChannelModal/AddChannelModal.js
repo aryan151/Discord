@@ -6,7 +6,7 @@ import { addChannel, fetchChannels } from '../../store/channel'
 import './AddChannelModal.css'
 
 
-function AddChannelModal ({serverId}) {
+function AddChannelModal ({serverId}) {  
     // const userId = useSelector((state) => state.session?.user?.id);
 
     const [showModal, setShowModal] = useState(false);
@@ -43,8 +43,8 @@ function AddChannelModal ({serverId}) {
     // useEffect(() => {
     //   if (!channelName.length){
 
-    //   }
-    // }, [channelName])
+    //   }  
+    // }, [channelName])      
     return (
         <>
             <div className='add-server-container'>

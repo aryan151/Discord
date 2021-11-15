@@ -72,6 +72,7 @@ const SignUpForm = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="signup-email-input"
+            required
           />
           { emailError && (  
             <div className="signup-error-container" id={emailError}>
@@ -86,6 +87,7 @@ const SignUpForm = () => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             className="signup-username-input"
+            required
           />
           { usernameError && (
             <div className="signup-error-container">
@@ -100,6 +102,7 @@ const SignUpForm = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="signup-password-input"
+            required
           />
           { passwordError && (
             <div className="signup-error-container">
@@ -114,6 +117,7 @@ const SignUpForm = () => {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             className="signup-confirm-input"
+            required
           />
           { confirmPasswordError && (
             <div className="signup-error-container">

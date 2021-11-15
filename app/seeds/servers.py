@@ -44,7 +44,7 @@ def seed_servers():
 
     db.session.add(server1)   
     db.session.add(server2)
-    db.session.add(server3)
+    db.session.add(server3) 
 
 
 
