@@ -2,11 +2,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
+import logo from './images/logo.png'
 
 const NavBar = () => {
   return (
     <nav className="nav-container">
-      <h3>After Hours</h3>
+      <img src={logo}></img>
       {/* <ul className='nav-list'>
         <li>
           <NavLink to='/' exact={true} activeClassName='active'>
