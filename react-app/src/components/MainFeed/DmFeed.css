@@ -51,3 +51,30 @@
   min-width: 300px;
   width: 95%;
 }
+
+.decorated{
+  overflow: hidden;
+  text-align: center;
+  color: grey;
+  font-size: 10px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.decorated > span{
+ position: relative;
+ display: inline-block;
+}
+.decorated > span:before, .decorated > span:after{
+ content: '';
+ position: absolute;
+ top: 50%;
+ border-bottom: 0.05px solid rgb(122, 122, 122);
+ width: 100vw;
+ margin: 0 20px;
+}
+.decorated > span:before{
+ right: 100%;
+}
+.decorated > span:after{
+ left: 100%;
+}
