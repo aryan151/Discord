@@ -16,8 +16,8 @@ function LoggedIn () {
                 <div>{user?.username}</div>
             </div>
             {/* <LogoutButton /> */}
-            <div className='edit-server-container'  onClick={() => setShowModal(true)}>
-            <i class="far fa-edit edit-server-icon"></i>
+            <div className='edit-server-container edit-user'  onClick={() => setShowModal(true)}>
+            <span><i class="fas fa-cog"></i></span>
             </div>
             {showModal && (
             <Modal  onClose={() => setShowModal(false)}>
@@ -25,7 +25,7 @@ function LoggedIn () {
               <LoggedInModal setShowModal={setShowModal}/>
             </Modal>
           )}
-            
+
         </div>
     )
 }

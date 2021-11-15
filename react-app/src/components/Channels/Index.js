@@ -12,8 +12,7 @@ import ChannelEdit from './edit-channel'
 import HomeServer from '../Server/HomeServer'
 
 import LoggedIn from '../LoggedIn'
-
-import EditServerModal from '../EditServer'
+import EditServer from '../EditServer/EditServer'
 
 
 
@@ -69,18 +68,13 @@ const Channels = ({id}) => {
         <div className="scroll">
         {server ?
           <div>
-            <div>
+            <div className="edit-server-div">
             <span id="server-name-in-channel">{server?.name}</span>
               {server.ownerId === userId ?
-              <span>
+              <span className="edit-server-buttons">
                 <span className={showMenu === false ? "plus-color" : "minus-color"}>
-                <i id="edit-server-button" onClick={showMenu === false ? openMenu : closeMenu} className={showMenu === false ? "fas fa-plus edit-server-icon" : "fas fa-minus edit-server-icon"}></i>
+                <i id="edit-server-button" onClick={showMenu === false ? openMenu : closeMenu} className={showMenu === false ? "fas fa-chevron-down" : "fas fa-minus edit-server-icon"}></i>
                 </span>
-                {showMenu && (
-                  <ul className="profile-dropdown">
-                    <li><EditServerModal server={server} serverId={server?.id}/></li>
-                  </ul>
-                  )}
 
               </span> : ''}
 
@@ -88,6 +82,11 @@ const Channels = ({id}) => {
 
           </div>
         : <h1>Hello from channels</h1>}
+           {showMenu && (
+
+               <EditServer setShowMenu={setShowMenu} serverId={server?.id}/>
+
+              )}
 
        { (server?.ownerId == userId) && <AddChannelModal serverId={serverId}/>}
         {channels?.map(channel =>
