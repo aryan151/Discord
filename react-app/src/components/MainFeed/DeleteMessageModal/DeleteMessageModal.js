@@ -1,10 +1,11 @@
 import './DeleteMessageModal.css'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { deleteOneMessage } from '../../../store/message';
 
 function DeleteMessageModal ({ message, onClose }) {
 
     // const messageDate = new Date(message.createdAt)
+    const user = useSelector(state => state.session.user)
     const dispatch = useDispatch()
 
     const submitDelete = (e) => {
@@ -21,7 +22,7 @@ function DeleteMessageModal ({ message, onClose }) {
                 <div className="delete-message-card">
                     <img className="delete-message-profile-picture" src='https://image.shutterstock.com/image-illustration/red-stamp-on-white-background-260nw-1165179109.jpg' alt="" />
                     <div className="delete-message-username-content">
-                        <p className="delete-message-username">message.User.username<span className="delete-message-datetime">Date</span></p>
+                        <p className="delete-message-username">{user.username}<span className="delete-message-datetime">Date</span></p>
                         <div className="channel-content-message">{message.body} <span className="message-edited-true">(edited)</span></div>
                     </div>
                 </div>

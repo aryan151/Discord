@@ -7,13 +7,13 @@ function MessageHover({ message, setMessageBeingEdited, setShowMessagePopup, set
         setShowDeleteMessageModal(message.id);
         setShowMessagePopup(false);
     }
-  
-    return ( 
+
+    return (
         <>
             <div className="track-to-prevent-hover-above">
                 <div className="message-hover-container">
                     <span className="material-icons message-edit-icon" onClick={() => setMessageBeingEdited(message.id)}>edit</span>
-                    <span className="material-icons message-delete-icon" onClick={handleDelete}>delete_outline</span>
+                    <span className="material-icons message-delete-icon" onClick={handleDelete}>delete</span>
                 </div>
             </div>
         </>

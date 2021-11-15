@@ -1,21 +1,23 @@
 const ADD_ONE_DM = 'dms/ADD_ONE_DM'
 const LOAD_ALL = '/dms/LOAD'
 
-const addDm = message => ({
+const addDm = (message, userId) => ({
   type: ADD_ONE_DM,
-  message
+  message,
+  userId
 })
 
-const loadDms = messages => ({
+const loadDms = (messages, userId) => ({
   type: LOAD_ALL,
-  messages
+  messages,
+  userId
 })
 
 export const fetchDms = (userId) => async dispatch => {
   const res = await fetch(`/api/dms/${userId}`)
   if (res.ok){
     const messages = await res.json()
-    dispatch(loadDms(messages['dms']))
+    dispatch(loadDms(messages['dms'], userId))
   }
 }
 
@@ -41,8 +43,9 @@ const dmMessagesReducer = (state = initialState, action) => {
       case(LOAD_ALL):
         const prev = {...initialState }
         // const dms = action.messages;
-        action.messages.map(dm =>{
-          prev[dm.dm_server_Id] = prev[dm.dm_server_Id] ? [...prev[dm.dm_server_Id], dm] : [dm]})
+        action.messages.map(dm => {
+          let key = dm.dm_server_Id == action.userId ? dm.senderId : dm.dm_server_Id;
+          prev[key] = prev[key] ? [...prev[key], dm] : [dm]})
           //   if (prev[dm.dm_server_Id]){
           //   prev[dm.dm_server_Id] = [...prev[dm.dm_server_Id], dm]
           // }

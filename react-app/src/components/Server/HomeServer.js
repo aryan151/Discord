@@ -33,7 +33,7 @@ const HomeServer = () => {
   }
 
   useEffect(() => {
-    if (history.length && !dmUsers.length){
+    if (history.length && !dmUsers.length && count == 0){
       let urlString = ""
       history.map((num, i) => {
         if (i == 0) {
@@ -46,6 +46,7 @@ const HomeServer = () => {
       fetch(`/api/users/dms/` + urlString).then(res => res.json())
       .then(json =>  {
         setDmUsers(json.users);
+        console.log(json.users, urlString)
         setDmUser(json.users[0])
       })
       setCount(prev => prev + 1);
@@ -64,14 +65,8 @@ const HomeServer = () => {
 
 
   const handleRemove = (user) => {
-    setDmUsers(prev => {
-      for (let i = 0; i < prev.length; i++){
-        if (user.username == prev[i].username){
-          return prev.splice(i, 1)
-        }
-      }
-      return prev
-    })
+    setDmUsers(dmUsers.filter(each => user.username !== each.username))
+
   }
 
   const addUser = (user) => {
@@ -93,9 +88,7 @@ const HomeServer = () => {
     setShowModal(false);
   }
 
-  const handleDmUser = (user) => {
-    setDmUser(user)
-  }
+
 
   return (
     <>

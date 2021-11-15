@@ -8,6 +8,8 @@ import { getMyServers } from '../../store/server';
 import searchimage from '../video/1490237.jpg'
 import ServerCard from './ServerCard/ServerCard';
 import './Explore.css'             
+ 
+
     
 function Explore() {         
      
