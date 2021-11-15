@@ -1,49 +1,49 @@
 # Flask React Project
 
-user --> after_hours 
+user --> after_hours
 password --> password
-d --> after_hours_db 
+d --> after_hours_db
 
 
-.env file: 
+.env file:
 
 FLASK_APP=app
 FLASK_ENV=development
 SECRET_KEY=lkasjdf09ajsd
-DATABASE_URL=postgresql://after_hours:password@localhost/after_hours_db 
+DATABASE_URL=postgresql://after_hours:password@localhost/after_hours_db
 
-models 
-api routes 
-seeds 
+models
+api routes
+seeds
 
-frontend: 
+frontend:
 
 skeleton
 
-server crud 
+server crud
 
 --------------------
 
-tuesday: 
+tuesday:
 
-finish server crud 
-
---------------------
-
-wednesday: 
-
-finish channel crud 
-  
---------------------
-
-thursday: 
-
-finish message 
-
+finish server crud
 
 --------------------
 
-Friday: 
+wednesday:
+
+finish channel crud
+
+--------------------
+
+thursday:
+
+finish message
+
+
+--------------------
+
+Friday:
 
 
 
