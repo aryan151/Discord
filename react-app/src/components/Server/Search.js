@@ -3,7 +3,7 @@ import { useSelector } from "react-redux"
 import { useHistory } from "react-router"
 import './HomeServer.css'
 
-const Search = ({addUser, setShowModal }) => {
+const Search = ({addUser, setDmUser }) => {
   const [term, setTerm] = useState("")
   const [results, setResults] = useState([])
   const currentUser = useSelector(state => state.session.user)
@@ -49,7 +49,7 @@ const Search = ({addUser, setShowModal }) => {
 
         { !!results.length && results?.map(user => (
 
-        <div  className='search-results-div' onClick={()=> addUser(user) }>
+        <div  className='search-results-div' onClick={()=> { addUser(user); setDmUser(user) }}>
 
           <img src={user.avatar}></img>
           <p>{user.username}</p>
