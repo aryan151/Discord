@@ -10,7 +10,7 @@
     background-color: #36393F;
     display: flex;
     border-radius: 3px;
-    border: 1px solid #2a2c31; 
+    border: 1px solid #2a2c31;
 }
 
 .message-hover-container:hover {
@@ -21,7 +21,7 @@
 .message-delete-icon {
     padding: 5px;
     color: #DBDCDD;
-    font-size: 20px;
+    font-size: 15px;
 }
 
 .message-edit-icon:hover,

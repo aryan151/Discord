@@ -8,7 +8,7 @@ import { getMyServers } from '../../store/server';
 import searchimage from '../video/1490237.jpg'
 import './Explore.css'             
   
-function Explore() {  
+function Explore() {     
 
     let history = useHistory()
     const dispatch = useDispatch() 
