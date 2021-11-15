@@ -5,7 +5,7 @@ import './AddServerModal.css'
 
 
 
-function AddServerModal () {
+function AddServerModal ({servers}) {
     const [showModal, setShowModal] = useState(false);
 
     return (
@@ -17,7 +17,7 @@ function AddServerModal () {
             </div>
             {showModal && (
             <Modal  onClose={() => setShowModal(false)}>
-              <AddServer setShowModal={setShowModal}/>
+              <AddServer servers={servers} setShowModal={setShowModal}/>
             </Modal>
           )}
         </>

@@ -1,7 +1,20 @@
 body {
     margin: 0;
   }
-  
+    
+  .backToSplash {
+    font-size: 40px;  
+    border: none;
+    background-color: transparent; 
+    color: white;
+    position: absolute;
+    right: 2%;
+    top: .3em;
+    background-attachment: fixed;  
+    position: fixed;
+
+}
+
   .loginPage {  
     width: 100vw;
     height: 100vh;
@@ -35,7 +48,7 @@ body {
     margin: 0;
     color: white;
     font-family: Helvetica, sans-serif;
-    font-size: 26px;
+    font-size: 30px;
     font-weight: 600;
     margin-bottom: 12px;
   }
@@ -70,10 +83,7 @@ body {
     font-size: 12px;
   }
   
-  #loginErrorLabel {
-    color: rgb(237,66,69);
-  }
-  
+
   #loginErrorBorder {
     border-color: rgb(237,66,69);
   }
@@ -103,7 +113,7 @@ body {
   
   .formButton {
     padding: 10px;
-    background-color: rgb(88, 101, 242);
+    background-color: #ff6964;
     border-radius: 3px;
     color: white;
     font-size: 15px;
@@ -120,7 +130,7 @@ body {
   }
   
   .already {
-    color: #72767d;
+    color:white;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 13px;
     font-weight: 100;
@@ -134,4 +144,4 @@ body {
   
   #loginHere:hover {
     text-decoration: underline;
-  }
+  }  

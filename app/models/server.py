@@ -36,4 +36,8 @@ class Server(db.Model):
             'tag': self.tag,
             'join_password': self.join_password,  
             'createdAt': self.createdAt.strftime("%Y/%m/%d %H:%M:%S")
+
         }
+
+     
+
