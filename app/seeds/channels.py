@@ -4,12 +4,12 @@ def seed_channels():
     channel1 = Channel(
         # id = 1,
         serverId=1,
-        name='Sports'
+        name='general'  
     )
     channel2 = Channel(
         # id=2,
         serverId=2,
-        name='Zombies'
+        name='general'
     )
     channel3 = Channel(
         # id = 3,
@@ -24,7 +24,7 @@ def seed_channels():
     channel5 = Channel(
         # id=4,
         serverId=3,
-        name='Ranked'
+        name='general'
     )
 
 
@@ -32,7 +32,16 @@ def seed_channels():
     db.session.add(channel2)
     db.session.add(channel3)
     db.session.add(channel4)
-    db.session.add(channel5)
+    db.session.add(channel5)  
+  
+    for i in range(4, 28):    
+        db.session.add(Channel(name='general', serverId=i))  
+        db.session.commit()
+
+
+
+
+
     db.session.commit()
 
 def undo_channels():
