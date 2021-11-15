@@ -1,9 +1,10 @@
 .edit-server-container {
     /* background-color: white; */
     width: 100%;
-    /* text-align: right; */
-    color: white;
+    text-align: right;
+    color: rgb(146, 146, 146);
     font-size: 15px;
+    padding-top: 1rem;
     /* height: 13px;
     right: 100%; */
 }

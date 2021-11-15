@@ -4,20 +4,19 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 import AHours from '../video/AHours.mp4'   
+import { AiOutlineLeft } from 'react-icons/ai'
 import './LoginForm.css';
 
-function LoginForm() {
+function LoginForm() {  
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loginError, setLoginError] = useState('');
   const [loginErrorBorder, setLoginErrorBorder] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (errors.length) {
-      setLoginError('loginErrorLabel')
       setLoginErrorBorder('loginErrorBorder')
     }
   }, [errors]);
@@ -50,35 +49,36 @@ function LoginForm() {
 
     await dispatch(login(email, password));  
 
-  };
+  }; 
 
-  const updateEmail = (e) => {
+  const updateEmail = (e) => {  
     setEmail(e.target.value);
   };
 
   const updatePassword = (e) => {
     setPassword(e.target.value);
-  };
+  }; 
 
   if (user) {
-    return <Redirect to='/dashboard' />;
+    return <Redirect to='/dashboard' />;    
   }
-
-  return (
+    
+  return ( 
     <div className="loginPage">  
       <video className='loginbackground'autoplay="autoplay" playsinline="playsinline" muted="muted" loop="loop" src={AHours}></video>
- 
+      <button className='backToSplash'>
+        <a href="/">  
+          <AiOutlineLeft/> 
+        </a>  
+      </button>
         <div className="formContainer">
             <h1>Welcome back!</h1>
             <h2>We're so excited to see you again!</h2>
 
-          <form id="signUpForm" autoComplete="off" onSubmit={onLogin}>
-            <div className="formField">
-              <label id={loginError}>
-                EMAIL
-                {errors.length > 0 && (
-                  <span className="loginError"> - Login or password is invalid.</span>
-                )}
+          <form id="loginForm" autoComplete="off" onSubmit={onLogin}>
+            <div className="formField">     
+              <label>
+                EMAIL    
               </label>
               <input
                 id={loginErrorBorder}
@@ -91,11 +91,8 @@ function LoginForm() {
               />
             </div>
             <div className="formField">
-              <label id={loginError}>
-                PASSWORD
-                {errors.length > 0 && (
-                  <span className="loginError"> - Login or password is invalid.</span>
-                )}
+              <label>
+                PASSWORD  
               </label>
                <input
                 id={loginErrorBorder}
@@ -106,7 +103,7 @@ function LoginForm() {
                 value={password}
                 onChange={updatePassword}
               />
-            </div>
+            </div>  
             <div className="loginButtons">
               <button className="formButton" type="submit">Login</button>
               <button id="demoLoginButton" className="formButton" onClick={demoLogin}>Demo One</button>

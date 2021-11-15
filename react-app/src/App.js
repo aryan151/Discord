@@ -39,15 +39,12 @@ function App() {
       <Switch>
         <Route path='/' exact={true}>
           <Splash />
-          <NavBar />
         </Route>
         <Route path='/login' exact={true}>
           <LoginForm />
-          <NavBar />
         </Route>
         <Route path='/signup' exact={true}>
           <SignUpForm />
-          <NavBar />
         </Route>
         {/* <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
