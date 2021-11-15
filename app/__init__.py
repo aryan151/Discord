@@ -18,7 +18,7 @@ from .api.channels_routes import channels_routes
 
 from .api.servers_routes import servers_routes
 from .api.members import members_routes
-
+from .api.dm_messages_routes import dm_messages_routes
 from .seeds import seed_commands
 from flask_socketio import emit, disconnect, send, join_room, leave_room
 
@@ -54,7 +54,7 @@ app.register_blueprint(channels_routes ,url_prefix='/api/channels')
 app.register_blueprint(servers_routes, url_prefix='/api/servers')
 app.register_blueprint(messages_routes, url_prefix='/api/messages')
 app.register_blueprint(members_routes, url_prefix='/api/members')
-
+app.register_blueprint(dm_messages_routes, url_prefix='/api/dms')
 
 db.init_app(app)
 Migrate(app, db)

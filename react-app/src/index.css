@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -27,6 +28,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	font-family: 'Roboto';
 }
 ol, ul {
 	list-style: none;
@@ -47,5 +49,25 @@ q:before, q:after {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.nav-container {
+	display: flex;
+	background-color: rgb(26, 25, 25);
+	height: 25px;
+}
+.nav-container h3 {
+	padding: 2px 0 2px 1.2rem;
+	white-space: nowrap;
+	align-self: center;
+	color: gold;
+}
+.nav-list {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	width: 100%;
+	gap: 3rem;
+
 }
 

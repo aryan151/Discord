@@ -3,7 +3,7 @@ import { useSelector } from "react-redux"
 import { useHistory } from "react-router"
 import './HomeServer.css'
 
-const Search = ({addUser, setShowModal}) => {
+const Search = ({addUser, setDmUser }) => {
   const [term, setTerm] = useState("")
   const [results, setResults] = useState([])
   const currentUser = useSelector(state => state.session.user)
@@ -15,7 +15,7 @@ const Search = ({addUser, setShowModal}) => {
     if(term.length > 0) {
       // setIsLoaded(false);
       setShowSearch(true);
-      fetch(`/api/users/search/${term}`).then(res => res.json()).then(json => {setResults(json.users.filter(user => user.username !== currentUser.username)); console.log(json)}).catch(e => console.log(e));
+      fetch(`/api/users/search/${term}`).then(res => res.json()).then(json => {setResults(json.users.filter(user => user.username !== currentUser.username )); console.log(json)}).catch(e => console.log(e));
       // setIsLoaded(true);
     } else (setResults(""));
 
@@ -26,27 +26,31 @@ const Search = ({addUser, setShowModal}) => {
     setTerm(e.target.value);
   }
 
-  useEffect(() => {
-    if (!showSearch) return;
-    const closeModal = () => {
-      setShowSearch(false);
-      setTerm('');
-    };
-    document.addEventListener('click', closeModal);
-
-    return () => document.removeEventListener("click", closeModal);
-  }, [showSearch]);
+  // useEffect(() => {
+  //   if (!showSearch) return;
+  //   const closeModal = () => {
+  //     setShowSearch(false);
+  //     setTerm('');
+  //   };
+  //   document.addEventListener('click', closeModal);
+  //   return () => document.removeEventListener("click", closeModal);
+  // }, [showSearch]);
 
 
   return (
-    <div className='search-container' onClick={(e)=> e.stopPropagation()}>
+    <div className={`search-container ${results.length ? 'results-found' : "" }`} onClick={(e)=> e.stopPropagation()}>
       <form className='search-bar' autoComplete="off">
-        <input type="search"  placeholder='Start Up A Conversation' value={term} onChange={handleSearch} />
-        { <ul className='search-results'>
+
+        <input type="search"
+           placeholder='Start Up A Conversation' value={term} onChange={handleSearch} />
+
+        { <ul
+          className={`search-results ${results.length >= 9 ? 'results-found' : "" }`}>
+
         { !!results.length && results?.map(user => (
 
-        <div className='search-results-div' onClick={()=> {addUser(user); setShowModal(false)}}>
-          {/* <div style={{ backgroundImage:`url(https://cdn.discordapp.com/embed/avatars/0.png)`}}></div> */}
+        <div  className='search-results-div' onClick={()=> { addUser(user); setDmUser(user) }}>
+
           <img src={user.avatar}></img>
           <p>{user.username}</p>
           </div>

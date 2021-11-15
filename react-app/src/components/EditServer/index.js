@@ -3,13 +3,14 @@ import { Modal } from '../../context/Modal';
 import EditServer from './EditServer';
 import './EditServer.css'
 
-function EditServerModal ({serverId}) {
+function EditServerModal ({serverId, server}) {
     const [showModal, setShowModal] = useState(false);
 
     return (
         <>
             <div className='edit-server-container'  onClick={() => setShowModal(true)}>
-            <i class="far fa-edit edit-server-icon"></i>
+            {/* <i class="far fa-edit edit-server-icon"></i> */}
+            edit {server?.name}
             </div>
             {showModal && (
             <Modal  onClose={() => setShowModal(false)}>
@@ -19,4 +20,4 @@ function EditServerModal ({serverId}) {
         </>
     )
 }
-export default EditServerModal
+export default EditServerModal;

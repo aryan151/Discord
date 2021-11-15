@@ -27,3 +27,98 @@
     padding-top: 20px;
     padding-right: 10px;
 }
+
+
+
+.user-options{
+    color: #fffffb;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-color: #36393f;
+  z-index: 10;
+  
+}
+
+  
+  .edit-user-form {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    min-width: 500px;
+    padding: 5rem 3rem;
+  }
+  
+  .edit-user-form input{
+    margin-bottom: 2rem;
+    background-color: #313339;
+    border-color: black;
+    border-radius: 3px;
+    padding: 0.35rem;
+    color: #fffffb;
+    min-width: 500px;
+    max-width: 500px;
+    font-size: 1.15rem;
+  }
+  
+  .logout span {
+    border-bottom: solid 1px #fffffb;
+    width: 45%;
+    margin: 0 auto 5px auto;
+    opacity: 35%;
+    margin-right: 0;
+  }
+  .logout{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+    font-size: 1.5rem;
+    height: 100%;
+    text-align: center;
+    width: 35%;
+  }
+  .logout span{
+    border-bottom: solid 1px #fffffb;
+    width: 45%;
+    margin: 0 auto 5px auto;
+    opacity: 35%;
+    margin-right: 0;
+  }
+  
+  .logout-user{
+    border: none;
+    color: red;
+    
+    font-size: 1.2rem;
+    background-color: transparent;
+    padding: 0.35rem 0.6rem;
+    border-radius: 10px;
+  }
+  
+
+  .exit-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 2.8rem;
+    cursor: pointer;
+  }
+  .exit-icon::before {
+    content: "ESC";
+    font-size: 13px;
+    position: absolute;
+    right: 10px;
+    bottom: -17px;
+  }
+  .exit-icon:hover {
+    color: red;
+  }
+  .exit-icon:hover::after{
+    color: #fffffb;
+  }
+  
+  .logout h2{
+      margin-bottom: 2rem;
+  }

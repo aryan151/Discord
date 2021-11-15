@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, session, request, redirect
-from app.models import Message, db
+from app.models import Message, DMMessage, db
 from app.forms import MessageForm, EditMessageForm
+
 
 messages_routes = Blueprint('messages', __name__)
 
@@ -18,7 +19,9 @@ def add_message(channelId):
         message = Message(
             body = form.data['body'],
             channelId = channelId,
-            userId = form.data['userId']
+            userId = form.data['userId'],
+            imageUrl = form.data['imageUrl'],
+            userName = form.data['userName']
         )
     db.session.add(message)
     db.session.commit()

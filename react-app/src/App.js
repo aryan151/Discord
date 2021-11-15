@@ -56,7 +56,7 @@ function App() {
         <ProtectedRoute path='/dashboard' exact={true} >
           <Dashboard />
         </ProtectedRoute>
-        <ProtectedRoute path='/home/:serverId' exact={true} >
+        <ProtectedRoute path='/home/:dmServerId' exact={true} >
           <Dashboard />
         </ProtectedRoute>
         <ProtectedRoute path='/:serverId' exact={true} >

@@ -9,7 +9,7 @@ def randomword():
     return ''.join(random.choice(string.ascii_lowercase) for i in range(12))
   
 class Server(db.Model):
-    __tablename__ = 'servers'
+    __tablename__ = 'servers'  
 
     id = db.Column(db.Integer, primary_key=True)    
     ownerId = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
@@ -36,4 +36,8 @@ class Server(db.Model):
             'tag': self.tag,
             'join_password': self.join_password,  
             'createdAt': self.createdAt.strftime("%Y/%m/%d %H:%M:%S")
+
         }
+
+     
+

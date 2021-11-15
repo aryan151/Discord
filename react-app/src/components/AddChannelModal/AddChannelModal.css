@@ -1,9 +1,14 @@
-
 .add-channel{
  cursor: hover;
  padding-bottom: 0.5rem;
 }
 
+.scroll{
+  margin-top: 15px;
+  overflow-y: scroll;
+  position: relative;
+  height: 60vh;
+}
 .create-channel {
   display: flex;
   flex-direction: column;
@@ -60,7 +65,7 @@
 
   font-weight: 900;
 }
-.create-channel input {
+.create-channel input,input::placeholder {
   background-color: #292d3e;
   padding: 0.75rem 0.45rem;
   font-size: 1.25rem;
@@ -75,4 +80,9 @@
 }
 .create-channel button:hover {
   background-color: #434b94;
+}
+
+.add-channel {
+  margin-top: 1rem;
+  font-size: 12px;
 }

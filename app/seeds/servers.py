@@ -42,10 +42,13 @@ def seed_servers():
         createdAt=randomDate() 
     ) 
 
-    db.session.add(server1)
+    db.session.add(server1)   
     db.session.add(server2)
     db.session.add(server3)
-    for i in range(1, 25):  
+
+
+
+    for i in range(1, 30):  
         db.session.add(Server(name=generate_slug()[0:20], ownerId=(i), avatar=fake.image_url(), banner=fake.image_url(), tag=random.choice(tags), createdAt=randomDate() ))
         db.session.commit()
     db.session.commit()     

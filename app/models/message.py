@@ -10,7 +10,8 @@ class Message(db.Model):
     userId = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     channelId = db.Column(db.Integer, db.ForeignKey('channels.id'))
     imageUrl = db.Column(db.String(200), nullable=True)
-    # createdAt = db.Column(db.DateTime(timezone=True), server_default=func.now())
+    createdAt = db.Column(db.DateTime(timezone=True), server_default=func.now())
+    userName = db.Column(db.String(200), nullable=True)
     # updatedAt = db.Column(db.DateTime(timezone=True), onupdate=func.now())
 
     #Relationship
@@ -25,5 +26,6 @@ class Message(db.Model):
             'userId': self.userId,
             'channelId': self.channelId,
             'imageUrl': self.imageUrl,
-            # 'createdAt': self.createdAt.strftime("%Y/%m/%d %H:%M:%S")
+            'createdAt': self.createdAt.strftime("%Y/%m/%d %H:%M:%S"),
+            'userName' : self.userName
         }

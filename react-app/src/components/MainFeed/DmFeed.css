@@ -1,0 +1,111 @@
+.dm-feed-container {
+  grid-column: 3/6;
+  grid-row: 1/6;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  position: relative;
+}
+.dm-message-container {
+  /* background-color: red; */
+  height: 85%;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  padding: 2rem 1rem 0 1rem;
+}
+.dm-feed-container ::-webkit-scrollbar {
+  width: 10px;
+}
+.dm-feed-container ::-webkit-scrollbar-thumb {
+  background: rgb(0, 0, 0);
+  border-radius: 10px;
+}
+.dm-feed-container ::-webkit-scrollbar-track {
+  background: #2a2c30;
+}
+.dm-feed-container h4 {
+  opacity: 50%;
+  font-size: 0.9rem;
+  padding: 1rem 0 1rem 5px;
+}
+.dm-message {
+  /* background-color: white; */
+  display: flex;
+  align-items: center;
+  padding: 0.25rem 2rem;
+}
+.dm-message h3 {
+  font-size: 1.75rem;
+
+}
+.dm-date-time {
+  display: flex;
+  gap: 1rem;
+}
+.dm-message:hover {
+  background-color: #202225;
+}
+
+.dm-input {
+  margin: auto auto 3rem auto;
+  max-width: 90%;
+}
+
+.inner-dm-message {
+  /* background-color: lawngreen; */
+  display: flex;
+  flex-direction: column;
+  /* margin-left: 1.5rem; */
+}
+.decorated.dm {
+  margin-top: 7px;
+}
+.avatar {
+  width: 250px;
+  height: 250px;
+  background-size: cover;
+  border-radius: 50%;
+  margin-bottom: 2rem;
+}
+.dm-history h2{
+  font-size: 3.25rem;
+}
+.dm-input .new-message-input {
+  min-width: 300px;
+  width: 95%;
+  height: 3.2rem;
+  line-height: 3rem;
+  padding: 0 0 1rem 1rem;
+  font-size: 1.2rem;
+  overflow: hidden;
+}
+
+.decorated{
+  overflow: hidden;
+  text-align: center;
+  color: grey;
+  font-size: 10px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.decorated > span{
+ position: relative;
+ display: inline-block;
+}
+.decorated > span:before, .decorated > span:after{
+ content: '';
+ position: absolute;
+ top: 50%;
+ border-bottom: 0.05px solid rgb(122, 122, 122);
+ width: 100vw;
+ margin: 0 20px;
+}
+.decorated > span:before{
+ right: 100%;
+}
+.decorated > span:after{
+ left: 100%;
+}
