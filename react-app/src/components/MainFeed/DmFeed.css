@@ -68,6 +68,7 @@
   height: 250px;
   background-size: cover;
   border-radius: 50%;
+  margin-bottom: 2rem;
 }
 .dm-history h2{
   font-size: 3.25rem;
