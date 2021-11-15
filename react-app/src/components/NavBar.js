@@ -3,11 +3,12 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import logo from './images/logo.png'
+import './navBar.css'
 
 const NavBar = () => {
   return (
     <nav className="nav-container">
-      <img src={logo}></img>
+      <img src={logo} alt=' ' className='logo'></img>
       {/* <ul className='nav-list'>
         <li>
           <NavLink to='/' exact={true} activeClassName='active'>
