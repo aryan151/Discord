@@ -12,6 +12,7 @@ const HomeServer = () => {
   const [showClose, setShowClose] = useState(false)
   const [current, setCurrent] = useState()
   const [dmUser, setDmUser] = useState(null)
+  const [count, setCount] = useState(0)
 
   const user = useSelector(state => state.session.user)
 
@@ -24,14 +25,13 @@ const HomeServer = () => {
       setShowModal(false);
     };
     document.addEventListener('click', closeModal);
-
     return () => document.removeEventListener("click", closeModal);
   }, [showModal]);
 
   const handleClick = () => {
     setShowModal(true)
-
   }
+
   useEffect(() => {
     if (history.length && !dmUsers.length){
       let urlString = ""
@@ -43,16 +43,25 @@ const HomeServer = () => {
           urlString += `-${num}`
         }
       })
-      console.log(urlString)
       fetch(`/api/users/dms/` + urlString).then(res => res.json())
-      .then(json =>  setDmUsers(json.users))
+      .then(json =>  {
+        setDmUsers(json.users);
+        setDmUser(json.users[0])
+      })
+      setCount(prev => prev + 1);
     }
   }, [history])
 
   useEffect(() => {
     dispatch(fetchDms(user.id))
-
   }, [])
+
+  // useEffect(() => {
+  //   if (dmUsers.length && count <= 1){
+  //     setDmUser(dmUsers[0]);
+  //   }
+  // }, [dmUsers, count, ])
+
 
   const handleRemove = (user) => {
     setDmUsers(prev => {
@@ -115,10 +124,10 @@ const HomeServer = () => {
       </div>
 
       <div className='search-wrapper' >
-          { showModal && <Search addUser={addUser} dmUsers={dmUsers} setShowModal={setShowModal}/>}
+          { showModal && <Search addUser={addUser} dmUsers={dmUsers} setDmUser={setDmUser} setShowModal={setShowModal}/>}
       </div>
     </div>
-      {dmUser &&  <DMFeed dmuser={dmUser} /> }
+      {dmUser ? <DMFeed dmuser={dmUser} /> : <img className='wumbus' src='https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F5e6ff2eb37d0440006bc9fe7%2FDiscord%2F960x0.jpg%3Ffit%3Dscale'></img>}
 
     </>
   )

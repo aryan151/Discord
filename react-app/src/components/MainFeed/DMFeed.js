@@ -80,6 +80,10 @@ const isSameDay = function(oldTime) {
   // }, [dmuser])
   const dms = useSelector(state => state.dms[dmuser.id])
 
+  useEffect(() => {
+    scrollToBottom()
+   }, [])
+
   const handleDm = async (e) => {
     e.preventDefault()
   //   const payload = {
@@ -115,11 +119,23 @@ const isSameDay = function(oldTime) {
     }
 }
 
+function scrollToBottom () {
+  var div = document.querySelector('.dm-message-container');
+  console.log(div)
+  if (div) div.scrollTop = div.scrollHeight - div.clientHeight;
+
+}
   return (
 
     <div className='dm-feed-container'>
 
       <div className='dm-message-container'>
+      <div className="dm-history">
+          < div className='avatar' style={{backgroundImage: `url(${dmuser.avatar})` }} ></div>
+          <h2>{dmuser.username}</h2>
+          <h4>This is the beginning of your direct message history with @{dmuser.username}</h4>
+
+        </div>
         {dms && dms.map(dm =>
         <div className='dm-message'>
           <div className='live-chat-avatar-div' style={{backgroundImage: `url(${dm?.imageUrl})`}}> </div>
@@ -166,7 +182,7 @@ const isSameDay = function(oldTime) {
           </div>
       </div>
         <div className="channel-content-chat-input-container dm-input">
-                    <form className="new-message-form" onSubmit={(e) => handleDm(e)} >
+                    <form className="new-dm-form" onSubmit={(e) => handleDm(e)} >
                         <label className="new-message-label">
                             <textarea
                                 type="text"
