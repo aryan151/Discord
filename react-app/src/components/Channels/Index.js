@@ -23,7 +23,6 @@ const Channels = ({id}) => {
   let serverId = params?.serverId
   const [showSettings, setShowSettings] = useState(false);
   const [channelToEdit, setChannelToEdit] = useState();
-  // serverId = 1
   const userId = useSelector(state => state.session?.user?.id)
   const channels = useSelector(state => state.channels[serverId])
   const server = useSelector(state => state.servers[serverId])
@@ -38,20 +37,6 @@ const Channels = ({id}) => {
 
   }, [dispatch, serverId, showSettings])
 
-
-  // useEffect(() => {
-  //   if (!showMenu) return;
-
-  //   const closeMenu = () => {
-  //     setShowMenu(false);
-  //   };
-
-  //   document.addEventListener('click', closeMenu);
-  //   // let element = document.getElementById('edit-server-button')
-  //   // element.addEventListener('click', closeMenu);
-
-  //   return () => document.removeEventListener("click", closeMenu);
-  // }, [showMenu]);
 
   const closeMenu = () => {
     setShowMenu(false);
@@ -85,13 +70,15 @@ const Channels = ({id}) => {
         {server ?
           <div>
             <div>
-            <span>{server?.name}</span>
+            <span id="server-name-in-channel">{server?.name}</span>
               {server.ownerId === userId ?
               <span>
-                <i id="edit-server-button" onClick={showMenu === false ? openMenu : closeMenu} className="far fa-edit edit-server-icon"></i>
+                <span className={showMenu === false ? "plus-color" : "minus-color"}>
+                <i id="edit-server-button" onClick={showMenu === false ? openMenu : closeMenu} className={showMenu === false ? "fas fa-plus edit-server-icon" : "fas fa-minus edit-server-icon"}></i>
+                </span>
                 {showMenu && (
                   <ul className="profile-dropdown">
-                    <li><EditServerModal serverId={server?.id}/></li>
+                    <li><EditServerModal server={server} serverId={server?.id}/></li>
                   </ul>
                   )}
 

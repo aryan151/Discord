@@ -81,3 +81,8 @@
 .create-channel button:hover {
   background-color: #434b94;
 }
+
+.add-channel {
+  margin-top: 1rem;
+  font-size: 12px;
+}

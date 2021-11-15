@@ -40,7 +40,7 @@ const EditServer = ({serverId, setShowModal}) => {
                 <fieldset>
                     <legend>Server Edit Options</legend>
                         <div>
-                            <label>Edit Server Name</label>
+                            <label>edit Server Name</label>
                             <div>
                                 <input
                                 type='text'
