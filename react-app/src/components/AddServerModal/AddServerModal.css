@@ -1,13 +1,101 @@
-.form-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding:5px;
-}
-
+ 
 #add-server-icon-div {
     font-size: 20px;
     color: rgb(77, 146, 37);
     margin-left: 10px;
     margin-top: 5px;
 }
+
+.formContainer {
+    width: fit-content;
+    height: fit-content;
+    padding: 32px;
+    background-color: black;
+    opacity: .9;
+    border-radius: 5px;
+  }    
+  .formContainer h1 {
+    margin: 0;
+    color: white;
+    font-family: Helvetica, sans-serif;
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  
+  .formContainer h2 {
+    margin: 0;
+    color: rgb(185, 187, 190);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    margin-bottom: 24px;
+  }
+  
+  .formField {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  
+  .formField label {
+    color: rgb(185, 187, 190);
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 10px;
+  }
+  
+  .loginError {
+    color: rgb(237,66,69);
+    font-style: italic;
+    font-weight: 300;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+  }
+  
+
+  #loginErrorBorder {
+    border-color: rgb(237,66,69);
+  }
+  
+  .formField input {
+    width: 394px;
+    height: 20px;
+    padding: 10px;
+    background-color: rgb(48, 51, 57);
+    border: 1px solid rgb(36, 36, 36);
+    border-radius: 3px;
+    color: rgb(222, 225, 228);
+    margin-bottom: 20px;
+    font-weight: 300;
+    font-size: 17px;
+  }
+  
+  .formField input:focus {
+    outline: none;
+    border: 1px solid rgb(102, 189, 255);
+  }
+  
+  .loginButtons {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .formButton {
+    padding: 10px;
+    background-color: #ff6964;
+    border-radius: 3px;
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+    border: none;
+    font-family: Arial, Helvetica, sans-serif;  
+    margin-bottom: 10px;
+    transition: background-color 0.2s linear;
+  }
+  
+  .formButton:hover {
+    background-color: rgb(66, 75, 180);
+    cursor: pointer;
+  }
+  

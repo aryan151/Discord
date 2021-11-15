@@ -1,10 +1,13 @@
 .explore-container {
     background-color: rgb(53, 53, 53);
-    width: 100%;
+    width: 90%;
     height: 100vh;
-    overflow: scroll;
-    flex-direction: column;
-    position: relative;
+
+    overflow: scroll;  
+    flex-direction: column;   
+    position: relative;  
+
+
     padding-left: 2em;
     padding-right: 2em;
     grid-column: 3/6;
@@ -24,7 +27,7 @@
     overflow-y: scroll;
   }
 
-  .channel {
+  .channelExplore {
     display: flex;
     text-align: center;
     align-items: center;
@@ -33,14 +36,44 @@
     margin: 3px 6px;
     border-radius: 7px;
     min-height: 2.75rem;
+    width: 200px;
+  }  
+
+  .channelExploreSelect {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: space-between;
+    color: black; 
+    margin: 3px 6px;
+    border-radius: 7px;
+    min-height: 2.75rem;
   }
-  .channel * {
+  .channelExploreSelect p {
+    color: black;
+  }
+
+
+  .channelExplore * {
     padding: 0 7px;
   }
-  .channel {
+  .channelExplore {
     color: lightgray;
   }
 
+  
+  .channelExplore:hover {
+    background-color: rgb(66, 66, 66);
+    cursor: pointer;
+  }
+  
+  .channelExplore p {
+    font-size: 16px;
+    display: inline-block;       
+  } 
+
+/* search */  
+ 
   .channel:hover {
     background-color: rgb(66, 66, 66);
     cursor: pointer;
@@ -59,13 +92,15 @@
   border-radius: 11px;
   position: relative;
   display: flex;
-  justify-content: center;
+  justify-content: center; 
   align-items: center;
+  background-size: cover;
   background-image: url('../video/1490237.jpg');
+  margin-top: 2rem;
 }
-
+        
 .topSearch {
-  z-index: 2;
+  z-index: 0;
   position: relative;
   width: fit-content;
   margin: 8vw auto;
@@ -76,15 +111,15 @@
 
 .topSearch h3 {
   font-size: 25px;
-  color: white;
+  color: black;
   margin: 0;
 }
 
 .topSearch h5 {
-  font-size: 16px;
-  font-weight: 200;
-  color: white;
-  margin: 7px 0 14px 0;
+  font-size: 20px;
+  font-weight: 240;
+  color: black;
+  margin: 7px 0 16px 0;    
 }
 
 .search-form {
@@ -107,23 +142,16 @@
   border-radius: 3px;
 }
 
-.searchCompassButton {
-  background: none;
-  color: inherit;
-  border: none;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-  color: rgb(150,153,157);
-  margin-right: 10px;
+
+.sort-dropdown {
+  color: white;
+  padding: 2rem;
 }
 
-.search-form:focus-within {
-  outline: solid rgb(191, 176, 255);
+.featured {
+  color: white;
+  padding: 2rem;
 }
-
-
-
 
 
 
@@ -131,19 +159,84 @@
   .ServerDisplay {
 
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr); 
     grid-gap: 3rem;
   }
-.explore-servers-card {
-  width: 90%;
-  height: 200px;
-  background-color: honeydew;
-  border-radius: 25px;
+
+/* Server Cards */
+
+.ServerContainer {
+  width: 500px;
+  height: 400px; 
+  background-color: transparent;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
 }
 
-.explore-links-image {
-  width: 100%;
-  height: 60%;
-  border-top-left-radius: 25px;
-  border-top-right-radius: 25px;
+
+.ServerFront {
+  width: 220px;
+  height: 350px;
+  background-color: white;
+  border-radius: 25px;
+  float:left;
+  margin: 25px 20px;
+
+
 }
+
+.ServerFrontTop {
+ width: 100%;     
+ height: 62%;  
+ background-color: green;
+ border-radius: 25px 25px 0 0;
+ float: left; 
+}
+
+.CardProfile {
+  width: 100px;
+  position: relative;
+  top: 35px; 
+  left: 50%;
+  transform: translate(-50%);
+  border-radius: 50%;
+  background-size: contain;  
+  box-sizing: border-box;
+  border-radius: 50%;
+  height: 100px;
+
+}
+  
+
+.ServerFrontBottom {  
+  clear: both;
+  width: 100%;
+  height: 38%;
+  background-color: white; 
+  border-radius: 0 0 25px 25px;
+  text-align: center;
+  text-transform: uppercase;
+
+}
+
+.ServerFrontBottom h1 { 
+  font-size: 18px;
+  color: black;
+  position: relative;
+  top: 10px; 
+}
+
+.ServerFrontBottom h3 {  
+  font-size: 18px;
+  position: relative;
+  top: 60px; 
+}
+
+
+.ServerFrontBottom h5 {
+font-size: 10px;
+color: black;
+position: relative;
+top: 30px; 
+}
+

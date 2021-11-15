@@ -1,10 +1,10 @@
 from flask import Blueprint, jsonify, session, request, redirect
 from app.models import ServerMember, db, User
 from app.forms import MemberForm
-
+  
 members_routes = Blueprint('members', __name__)
 
-@members_routes.route('/<int:serverId>')
+@members_routes.route('/<int:serverId>') 
 def get_members(serverId):
     members = User.query.join(ServerMember).filter(ServerMember.serverId == serverId).all()
     print('RIGHT HEREEEE', members)

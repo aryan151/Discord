@@ -69,8 +69,8 @@ function LoginForm() {
       <button className='backToSplash'>
         <a href="/">  
           <AiOutlineLeft/> 
-        </a>  
-      </button>
+        </a>    
+      </button> 
         <div className="formContainer">
             <h1>Welcome back!</h1>
             <h2>We're so excited to see you again!</h2>

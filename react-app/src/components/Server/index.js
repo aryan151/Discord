@@ -20,7 +20,6 @@ function Server () {
     // const ownedServers = useSelector(state => Object.values(state.servers).filter((server) => server?.ownerId == user?.id))
     const userId = useSelector((state) => state.session?.user?.id);
     // const [servers, setServers] = useState([])
-
     const servers = useSelector(state => Object.values(state.myServers))
 
     const dispatch = useDispatch()
@@ -60,7 +59,7 @@ function Server () {
     }
 
 
-
+  
     return (
         <div className='server-container'>
 
@@ -71,7 +70,7 @@ function Server () {
                     {serverInitials(homeServer?.name)}
                 </div>
 
-            </Link>
+            </Link>    
             <span className="home-divider">_______</span>
             </div>}
             {servers.map((server) => (
@@ -84,7 +83,7 @@ function Server () {
                 </Link>
                 {/* {server.ownerId === userId ?
                 <div className = 'edit-server-button'>
-                    <EditServerModal serverId={server?.id}/>
+                    <EditServerModal serverId={server?.id}/>  
                 </div> : ''} */}
             </div>
             ))}
