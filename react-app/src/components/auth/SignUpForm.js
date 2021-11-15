@@ -3,105 +3,125 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Redirect, NavLink } from 'react-router-dom';
 import { signUp } from '../../store/session';
 import AHours from '../video/AHours.mp4'
+import { AiOutlineLeft } from 'react-icons/ai'      
 import './SignUpForm.css'
-
+  
 const SignUpForm = () => {
-
-  const dispatch = useDispatch();
+    
+  const dispatch = useDispatch();  
   const user = useSelector(state => state.session.user);
 
-  const [errors, setErrors] = useState([]);
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [avatar, setAvatar] = useState('');
-  const [password, setPassword] = useState('');
-  const [repeatPassword, setRepeatPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [emailError, setEmailError] = useState('');
+  const [usernameError, setUsernameError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [confirmPasswordError, setConfirmPasswordError] = useState(''); 
 
 
-  if (user) { return <Redirect to='/dashboard' />; }
+  if (user) { return <Redirect to='/dashboard' />; }     
 
-  const onSignUp = async (e) => {
+
+  const handleSubmit = async (e) => {
 		e.preventDefault();
-		if (password === repeatPassword) {
-			const data = await dispatch(signUp(username, email, password ));
-			if (data) {
-				setErrors(data);
-			}
-		} else if (password !== repeatPassword) {
-			setErrors(['password : Your passwords do not match.'])
-		}
+    setEmailError('')    
+    setUsernameError('')
+    setPasswordError('')
+    setConfirmPasswordError('')       
+
+		if (password && password !== confirmPassword) {
+      setConfirmPasswordError('Passwords Do Not Match!');
+      return;  
+    }
+
+    let data;  
+    data = await dispatch(signUp(email, username, password))    
+
+    if (data) {
+      const errors = data.errors;
+      errors.forEach(error => {
+        if (error.includes('Email')) {
+          setEmailError(error)
+        }
+        if (error.includes('Username')) {  
+          setUsernameError(error)  
+        }
+        if (error.includes('Password')) {
+           setPasswordError(error)
+        }
+      })
+    }  
 	};
 
   return (
     <>
     <video className='signup_background'autoplay="autoplay" playsinline="playsinline" muted="muted" loop="loop" src={AHours}></video>
-      <form className="signup-form-container" autoComplete="off"  onSubmit={onSignUp}>
+    <button className='backToSplash'>
+        <a href="/">  
+          <AiOutlineLeft/> 
+        </a>  
+      </button>
+    <form className="signup-form-container" onSubmit={handleSubmit}> 
         <h1 className="signup-header">Create an account</h1>
-          <div className='standardInput'>
-            <input
-              className='input'
-              type="text"
-              name='username'
-              placeholder=' '
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-            <label className='label' htmlFor="username" >Username</label>
-            <span className='underline' ></span>
-          </div>
-          <div className='standardInput'>
-            <input
-              className='input'
-              type="email"
-              name='email'
-              placeholder=' '
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <label className='label' htmlFor="email" >Email</label>
-            <span className='underline' ></span>
-          </div>
-          {/* <div className='standardInput'>
-            <input
-              className='input'
-              type="url"
-              name='avatar'
-              placeholder=' '
-              value={avatar}
-              onChange={(e) => setAvatar(e.target.value)}
-            />
-            <label className='label' htmlFor="avatar" >Avatar</label>
-            <span className='underline' ></span>
-          </div> */}
-          <div className='standardInput'>
-            <input
-              className='input'
-              type="password"
-              name='password'
-              placeholder=' '
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <label className='label' htmlFor="password" >Password</label>
-            <span className='underline' ></span>
-          </div>
-          <div className='standardInput'>
-            <input
-              className='input'
-              type="password"
-              name='repeatPassword'
-              placeholder=' '
-              value={repeatPassword}
-              onChange={(e) => setRepeatPassword(e.target.value)}
-              required
-            />
-            <label className='label' htmlFor="repeatPassword" >Confirm Password</label>
-            <span className='underline' ></span>
-          </div>
-        <button className="signup-button" type="submit">Sign Up</button>
+        <label className="signup-email-label" >
+          Email
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="signup-email-input"
+          />
+          { emailError && (  
+            <div className="signup-error-container" id={emailError}>
+              <p className="signup-error">{emailError}</p>
+            </div>
+          )}
+        </label>
+        <label className="signup-username-label">
+          Username
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="signup-username-input"
+          />
+          { usernameError && (
+            <div className="signup-error-container">
+              <p className="signup-error">{usernameError}</p>
+            </div>
+          )}
+        </label>
+        <label className="signup-password-label">
+          Password
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="signup-password-input"
+          />
+          { passwordError && (
+            <div className="signup-error-container">
+              <p className="signup-error">{passwordError}</p>
+            </div>
+          )}
+        </label>
+        <label className="signup-confirm-label">
+          Confirm Password
+          <input
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            className="signup-confirm-input"
+          />
+          { confirmPasswordError && (
+            <div className="signup-error-container">
+              <p className="signup-error">{confirmPasswordError}</p>
+            </div>
+          )}
+        </label>    
+        <button className="formButton" type="submit">Sign Up</button>
         <div className="signup-tologin-container">
           <p className="signup-tologin-label">Already have an account?</p><NavLink className="signup-tologin-link" to="/login">Login</NavLink>
         </div>
