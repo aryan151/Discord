@@ -215,3 +215,21 @@
   border-radius: 7px;
   min-height: 2.75rem;
 }
+
+#server-name-in-channel {
+  padding-left: 6.5rem;
+  padding-right: 5.0rem;
+  /* margin-bottom: 2rem; */
+  font-size: 20px;
+  color: grey;
+}
+
+.plus-color {
+  font-size: 10px;
+  color: rgb(223, 223, 223);
+}
+
+.minus-color {
+  font-size: 10px;
+ color: rgb(233, 184, 184);
+}
