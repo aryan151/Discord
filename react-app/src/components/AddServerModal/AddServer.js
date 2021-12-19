@@ -1,124 +1,134 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addServer } from '../../store/server'
-import { getMyServers } from '../../store/server'; 
-import {createMemberToServer} from '../../store/membersservers' 
+import { getMyServers } from '../../store/server';
+import {createMemberToServer} from '../../store/membersservers'
+import { useHistory } from 'react-router';
+
 import './AddServerModal.css'
-  
+
 function AddServer({ setShowModal, servers }){
-      
+    let history = useHistory()
+
     const userId = useSelector((state) => state.session?.user?.id);
-
-
-    const [serverName, setServerName] = useState('')     
-    const [enteredPassword, setEnteredPassword] = useState('') 
-
+    const [serverName, setServerName] = useState('')
+    const [enteredPassword, setEnteredPassword] = useState('')
     const dispatch = useDispatch()
 
-    
+
+    const count = () => {
+        let count = 0
+        for (let i = 0; i < servers.length; i++) {
+            count +=1
+        }
+        return count + 1
+    }
+
+
     const createServer = async (e) => {
         e.preventDefault()
 
         const payload = {name:serverName, owner_id:userId}
 
         dispatch(addServer(payload))
-        dispatch(getMyServers(userId))  
-        setServerName('')  
-        setShowModal(false)    
-    }           
-                   
+        dispatch(getMyServers(userId))
+        setServerName('')
+        setShowModal(false)
+        history.push(`/${count()}`)
+    }
+
     const joinServer = async (e) => {
-        e.preventDefault()    
+        e.preventDefault()
         servers.map(server => {
             if (enteredPassword === server.join_password ) {
-                const payload = { 
-                    serverId: server.id,   
-                    userId,      
-                }     
+                const payload = {
+                    serverId: server.id,
+                    userId,
+                }
                 dispatch(createMemberToServer(payload))
                 dispatch(getMyServers(userId))
-                setShowModal(false)   
-                return   
-            }      
-        }) 
+                setShowModal(false)
+                return
+            }
+        })
         alert('That Server Does Not Exit')
         dispatch(getMyServers(userId))
-        setShowModal(false)     
-    }            
-        
-    return (  
-        <div>                
-            <form className='formContainer'>     
+        setShowModal(false)
+    }
+
+    return (
+        <div>
+            <form className='formContainer'>
                 <fieldset>
-                    <div className='formField'>     
+                    <div className='formField'>
                     <legend className='servername'>Add Your Own Server </legend>
-                    <h1>Create Your Own Server</h1>    
+                    <h1>Create Your Own Server</h1>
                     <label className='ServerCreateLabel'> Name</label>
-                    <div>  
+                    <div>
                             <input
                             className='ServerCreateButton'
-                            type="text"    
-                            value={serverName}    
+                            type="text"
+                            value={serverName}
                             onChange={(e) => setServerName(e.target.value)}
-                            />     
-                        </div>  
-                        <label className='ServerCreateLabel'> Description</label>  
+                            />
+                        </div>
+                        <label className='ServerCreateLabel'> Description</label>
                             <input
-                            className='ServerCreateButton'  
-                            type="text"   
-                            />     
+                            className='ServerCreateButton'
+                            type="text"
+                            />
                         <label className='ServerCreateLabel'>Choose Your Tag </label>
                         <div className='loginButtons'>
                             <button
                             className="formButton"
-                            type="submit"       
-                            onClick={createServer}  
-                            >Gaming  
+                            type="submit"
+                            onClick={createServer}
+                            >Gaming
                             </button>
-                        </div> 
+                        </div>
                         <div className='loginButtons'>
                             <button
                             className="formButton"
-                            type="submit"       
-                            onClick={createServer}  
-                            >Music   
+                            type="submit"
+                            onClick={createServer}
+                            >Music
                             </button>
-                        </div> 
+                        </div>
                         <div className='loginButtons'>
                             <button
                             className="formButton"
-                            type="submit"       
-                            onClick={createServer}  
-                            >Videos  
+                            type="submit"
+                            onClick={createServer}
+                            >Videos
                             </button>
-                        </div> 
+                        </div>
                         <div className='loginButtons'>
                             <button
                             className="formButton"
-                            type="submit"       
-                            onClick={createServer}  
-                            >Tech  
+                            type="submit"
+                            onClick={createServer}
+                            >Tech
                             </button>
-                        </div> 
+                        </div>
                         <div className='loginButtons'>
                             <button
                             className="formButton"
-                            type="submit"       
-                            onClick={createServer}  
-                            >Sports  
+                            type="submit"
+                            onClick={createServer}
+                            >Sports
                             </button>
-                        </div> 
-                        <div className='loginButtons'>  
+                        </div>
+                        <div className='loginButtons'>
                             <button
                             className="formButton"
-                            type="submit"       
-                            onClick={createServer}  
-                            >Misc.   
+                            type="submit"
+                            onClick={createServer}
+                            >Misc.
                             </button>
-                        </div> 
+                        </div>
                         </div>
 
-                        
+
 
                     </fieldset>
             </form>

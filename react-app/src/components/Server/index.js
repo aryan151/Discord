@@ -59,9 +59,19 @@ function Server () {
     }
 
 
-  
+    // <a href="https://ibb.co/MctF5hN"><img src="https://i.ibb.co/1rPFJn2/wavey-discord-logo.png" alt="wavey-discord-logo" border="0"></a>
+
+
     return (
         <div className='server-container'>
+
+            <div className="home-server">
+            <Link className='server-links' to={`/dashboard`}>
+                <img className="server-dashboard-div" src="https://i.ibb.co/1rPFJn2/wavey-discord-logo.png"></img>
+
+            </Link>
+            <div className="home-divider">_ _ _ _ _ _</div>
+            </div>
 
            { homeServer &&
             <div className="home-server">
@@ -70,8 +80,8 @@ function Server () {
                     {serverInitials(homeServer?.name)}
                 </div>
 
-            </Link>    
-            <span className="home-divider">_______</span>
+            </Link>
+            <div className="home-divider">_______</div>
             </div>}
             {servers.map((server) => (
             server !== homeServer &&
@@ -83,7 +93,7 @@ function Server () {
                 </Link>
                 {/* {server.ownerId === userId ?
                 <div className = 'edit-server-button'>
-                    <EditServerModal serverId={server?.id}/>  
+                    <EditServerModal serverId={server?.id}/>
                 </div> : ''} */}
             </div>
             ))}

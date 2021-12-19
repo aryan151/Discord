@@ -222,6 +222,7 @@
     box-sizing: border-box;
     /* position: relative; */
     top: 40rem;
+    outline: none;
 
 }
 
