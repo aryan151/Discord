@@ -1,8 +1,8 @@
 from app.models import db, User
 from faker import Faker
-fake = Faker()  
+fake = Faker()
 
-# Adds a demo user, you can add other users here if you want  
+# Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
         username='Demo', email='demo@aa.io', password='password', avatar=fake.image_url(), online=False)
@@ -12,15 +12,15 @@ def seed_users():
         username='bobbie', email='bobbie@aa.io', password='password', avatar=fake.image_url(), online=False)
 
     db.session.add(demo)
-    db.session.add(marnie)       
+    db.session.add(marnie)
     db.session.add(bobbie)
- 
-    for i in range(1, 30):
-        j = False
-        if (i % 2 == 0): j = True 
-        db.session.add(User(username=fake.name(), email=fake.ascii_email(), avatar=fake.image_url(), password='password', online=j))
 
-    db.session.commit()  
+    # for i in range(1, 30):
+    #     j = False
+    #     if (i % 2 == 0): j = True
+    #     db.session.add(User(username=fake.name(), email=fake.ascii_email(), avatar=fake.image_url(), password='password', online=j))
+
+    db.session.commit()
 
 
 # Uses a raw SQL query to TRUNCATE the users table.

@@ -209,8 +209,8 @@ export const MainFeed = () => {
             <h2>Welcome to {channel ? channel.name + "!": "the channel!"}</h2>
             <p>This is just the beginning. <br /> Be the first to leave a message.</p>
             <form onSubmit={createMessage}>
-            <input value={body} onChange={handleChange}></input>
-            <button type="submit">Send Message</button>
+            <input id= "text-input-first-message" value={body} onChange={handleChange}></input>
+            <button id="send-first-message-button" type="submit">SEND MESSAGE</button>
              </form>
             </div>
         );
@@ -315,15 +315,13 @@ export const MainFeed = () => {
                                         <DeleteMessageModal onClose={() => setShowDeleteMessageModal(false)} message={message}/>
                                     </Modal>
                                 }
-                                { NextHasSameOwner ? (
+
                                     <div
                                     className="message-without-profile-pic-container"
                                     onMouseOver={() => handleHoverOn(message.id)}
                                     onMouseLeave={handleHoverOff}
                                     >
-                                    <div className="message-profile-standin">
-                                        { showHoverTime === message.id && <p className="message-hover-time">{MTime}</p>}
-                                    </div>
+
                                     <div className="username-message-container">
                                         <MessageBox
                                             setMessageBeingEdited={setMessageBeingEdited}
@@ -334,27 +332,7 @@ export const MainFeed = () => {
                                     </div>
                                     { showMessagePopup === message.id && userId === message.userId && <MessageHover message={message} setMessageBeingEdited={setMessageBeingEdited} setShowMessagePopup={setShowMessagePopup} setShowDeleteMessageModal={setShowDeleteMessageModal}/>}
                                     </div>
-                                ):(
-                                    <div
-                                        className="message-with-profile-pic-container"
-                                        onMouseOver={() => handleHoverOn(message.id)}
-                                        onMouseLeave={handleHoverOff}
-                                    >
-                                    <div className="message-profile-pic-container">
-                                        <img className="message-profile-pic" src='https://image.shutterstock.com/image-illustration/red-stamp-on-white-background-260nw-1165179109.jpg' alt="" />
-                                    </div>
-                                    <div className="username-message-container">
-                                        <div className="message-username">{message.User.username}<span className="message-date-time">{Mdate}</span></div>
-                                        <MessageBox
-                                            setMessageBeingEdited={setMessageBeingEdited}
-                                            message={message}
-                                            messageBeingEdited={messageBeingEdited}
-                                            setShowDeleteMessageModal={setShowDeleteMessageModal}
-                                        />
-                                    </div>
-                                    { showMessagePopup === message.id && userId === message.userId && <MessageHover message={message} setMessageBeingEdited={setMessageBeingEdited} setShowMessagePopup={setShowMessagePopup} setShowDeleteMessageModal={setShowDeleteMessageModal}/>}
-                                    </div>
-                                )}
+
                                 </div>
                             )
                         })}
@@ -389,6 +367,7 @@ export const MainFeed = () => {
                         <form className="new-message-form">
                             { showEmojiPicker &&
                                 <NimblePicker
+                                    c
                                     set='google'
                                     data={data}
                                     theme={"dark"}

@@ -144,6 +144,35 @@
     font-size: 14px;
 }
 
+#send-first-message-button {
+    border: 0.2px solid rgba(58, 58, 58, 0.4);
+    padding: 1rem;
+    margin-left: 1rem;
+    margin-top: 1rem;
+    border-radius: 0.2rem;
+    font-size: 17px;
+    background-color: rgba(211, 211, 211, 0.8);
+    color: rgba(39, 0, 0, 0.988);
+    font-weight: 500;
+    font-family: "Roboto"
+
+
+
+}
+
+#text-input-first-message {
+    width: 25rem;
+    /* padding: 0.5rem; */
+    outline: none;
+    height: 3rem;
+    font-family: "Roboto";
+    font-size: 20px;
+    color: rgba(44, 44, 44, 0.988);
+
+
+
+}
+
 .channel-content-message {
     color: #cccccc;
     margin-top: 5px;
@@ -153,27 +182,26 @@
 }
 
 .channel-content-chat-input-container {
-    height: 100px;
-    width: 100%;
+    /* height: 100px; */
+    width: 53.5%;
     flex: 0 0 auto;
-    margin: auto 0 3rem 0;
+     /* margin: auto 0 3rem 0; */
+    position: absolute;
+    bottom: 1rem;
+    /* background-color: red; */
+    padding-left: 0.5rem;
+
 }
 
-.new-message-form {
-    width: 100%;
-    display: flex;
-    box-sizing: border-box;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    margin: auto 0 2rem 0;
-    position: relative;
-}
+
+
+
 
 .new-message-label {
     width: 100%;
     height: 100%;
-    position: relative;
+    /* position: relative; */
+    /* background-color: pink; */
     display: flex;
     justify-content: center;
 }
@@ -191,6 +219,9 @@
     padding-right: 50px;
     padding-top: 22px;
     box-sizing: border-box;
+    /* position: relative; */
+    top: 40rem;
+
 }
 
 .message-character-counter {
@@ -221,6 +252,11 @@
     border-radius: 100px;
 }
 
+.Main-Message-content {
+    /* background-color: red; */
+    padding-bottom: 1rem;
+}
+
 .message-error {
     color: #fd5f5f;
     font-size: 13px;
@@ -231,8 +267,8 @@
 
 .emoji-selector {
     position: absolute;
-    left: 30px;
-    top: 38px;
+    margin-top: 1.4rem;
+    margin-left: 1rem;
     z-index: 3;
     font-size: 24px;
     filter: grayscale();

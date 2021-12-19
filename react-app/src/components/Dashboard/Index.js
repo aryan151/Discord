@@ -16,7 +16,7 @@ const Dashboard = () => {
 
   return (
     <>
-    <NavBar />
+    {/* <NavBar /> */}
     <div className="dashboard-container">
       <Server />
       <Channels />
