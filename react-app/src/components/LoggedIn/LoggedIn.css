@@ -3,7 +3,7 @@
     margin: auto 0 0 0;
     height: 4rem;
     display: flex;
-    /* justify-content: space-between; */
+    justify-content: space-between;
     align-items: center;
 }
 .left-loggedin {
@@ -20,17 +20,35 @@
     margin-left: 10px;
 }
 
+.user-logout {
+  padding: 1rem;
+}
+
+.user-logout:hover {
+  background-color: blue;
+  /* color: rgb(0, 0, 0); */
+}
+
+.cancel {
+  color: rgba(255, 38, 38, 0.8)
+}
+
 
 
 .user-options{
     color: #fffffb;
   display: flex;
-  width: 100%;
-  height: 100%;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 10rem;
+  height: 7rem;
   background-color: #36393f;
   z-index: 10;
+  text-align: center;
 
 }
+
+
 
 
   .edit-user-form {
@@ -113,4 +131,8 @@
 
   .logout h2{
       margin-bottom: 2rem;
+  }
+
+  #username-bottom-channels-bar {
+    padding-top: 0.5rem;
   }

@@ -40,7 +40,7 @@ def seed_servers():
         banner=fake.image_url(),
         tag=random.choice(tags),
 
-        createdAt=randomDate() 
+        createdAt=randomDate()
     ),
     server4 = DMServer(
       ownerId=1,
@@ -59,16 +59,16 @@ def seed_servers():
     db.session.add(server1)
     db.session.add(server2)
     db.session.add(server3)
-    db.session.add(server3) 
-    db.session.add(server4)   
+    db.session.add(server3)
+    db.session.add(server4)
     db.session.add(server5)
-    db.session.add(server6) 
+    db.session.add(server6)
 
 
 
-    for i in range(1, 30):
-        db.session.add(Server(name=generate_slug()[0:20], ownerId=(i), avatar=fake.image_url(), banner=fake.image_url(), tag=random.choice(tags), createdAt=randomDate() ))
-        db.session.commit()
+    # for i in range(1, 30):
+    #     db.session.add(Server(name=generate_slug()[0:20], ownerId=(i), avatar=fake.image_url(), banner=fake.image_url(), tag=random.choice(tags), createdAt=randomDate() ))
+    #     db.session.commit()
     db.session.commit()
 
 
