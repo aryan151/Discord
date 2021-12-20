@@ -142,7 +142,7 @@ function scrollToBottom () {
           <div className='inner-dm-message'>
             <div className='dm-date-time'>
             <h3>{dm.username}</h3>
-            <div className='decorated dm'>
+            <div className='decorated'>
                 <span>
                     {new Intl.DateTimeFormat('en-US', { month: 'long' }).format(new Date(dm?.createdAt))} {new Date(dm?.createdAt).getDate()}, 2021
                 </span>

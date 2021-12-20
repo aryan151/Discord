@@ -59,7 +59,6 @@ function Server () {
     }
 
 
-    // <a href="https://ibb.co/MctF5hN"><img src="https://i.ibb.co/1rPFJn2/wavey-discord-logo.png" alt="wavey-discord-logo" border="0"></a>
 
 
     return (
@@ -67,13 +66,11 @@ function Server () {
 
             <div className="home-server">
             <Link className='server-links' to={`/dashboard`}>
-                {/* <img className="server-dashboard-div" src="https://i.ibb.co/1rPFJn2/wavey-discord-logo.png"></img> */}
                 <div className='server-links-div' style={{backgroundImage: `url("https://i.ibb.co/1rPFJn2/wavey-discord-logo.png")`}}>
                     Home
                 </div>
 
             </Link>
-            {/* <div className="home-divider">_ _ _ _ _ _</div> */}
             </div>
 
            { homeServer &&
@@ -94,10 +91,7 @@ function Server () {
                         {serverInitials(server?.name)}
                     </div>
                 </Link>
-                {/* {server.ownerId === userId ?
-                <div className = 'edit-server-button'>
-                    <EditServerModal serverId={server?.id}/>
-                </div> : ''} */}
+
             </div>
             ))}
             <div className='add-server-modal' >
