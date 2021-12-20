@@ -4,6 +4,8 @@ import { addServer } from '../../store/server'
 import { getMyServers } from '../../store/server';
 import {createMemberToServer} from '../../store/membersservers'
 import { useHistory } from 'react-router';
+import { useEffect } from 'react';
+import { getServers } from '../../store/server';
 
 import './AddServerModal.css'
 
@@ -13,16 +15,22 @@ function AddServer({ setShowModal, servers }){
     const userId = useSelector((state) => state.session?.user?.id);
     const [serverName, setServerName] = useState('')
     const [enteredPassword, setEnteredPassword] = useState('')
+    const allServers = useSelector(state => state.servers)
+    console.log('all Servers, ', allServers)
+    const [count, setCount] = useState('')
     const dispatch = useDispatch()
 
+    useEffect(() => {
+        dispatch(getServers)
+    })
+    useEffect(() => {
 
-    const count = () => {
         let count = 0
-        for (let i = 0; i < servers.length; i++) {
+        for (let i = 0; i < allServers.length; i++) {
             count +=1
         }
-        return count + 1
-    }
+        setCount(count)
+    }, [allServers])
 
 
     const createServer = async (e) => {
@@ -34,7 +42,7 @@ function AddServer({ setShowModal, servers }){
         dispatch(getMyServers(userId))
         setServerName('')
         setShowModal(false)
-        history.push(`/${count()}`)
+        history.push(`/${count}`)
     }
 
     const joinServer = async (e) => {
