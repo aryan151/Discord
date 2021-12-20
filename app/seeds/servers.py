@@ -139,16 +139,60 @@ def seed_servers():
       avatar="https://i.ibb.co/Byrc3Jb/synthwave.jpg",
       tag="Music",
     )
+    server21 = Server(
+      ownerId=3,
+      name="Bayern Munich",
+      avatar="https://i.ibb.co/mywGgmp/1200px-FC-Bayern-Mu-nchen-logo-2017-svg.png",
+      tag="Sports",
+    )
+    server22 = Server(
+      ownerId=3,
+      name="Design",
+      avatar="https://i.ibb.co/6vyz8hp/absolver.jpg",
+      tag="Tech",
+    )
+    server23 = Server(
+      ownerId=3,
+      name="Lil Peep",
+      avatar="https://i.ibb.co/6mGxnBF/lil-peep.jpg",
+      tag="Music",
+    )
+    server24 = Server(
+      ownerId=3,
+      name="LCD Soundsystem",
+      avatar="https://i.ibb.co/LtRfHr6/dance.jpg",
+      tag="Music",
+    )
+    server25 = Server(
+      ownerId=3,
+      name="Caribou",
+      avatar="https://i.ibb.co/G2RS9Hm/caribou.jpg",
+      tag="Music",
+    )
+    server26 = Server(
+      ownerId=3,
+      name="Halo Infinite",
+      avatar="https://i.ibb.co/jfTz9DW/halo-infinite-1279637.jpg",
+      tag="Gaming",
+    )
+    server27 = Server(
+      ownerId=3,
+      name="Absolver",
+      avatar="https://i.ibb.co/9cbXRjx/animation.jpg",
+      tag="Gaming",
+    )
+
+    server28 = Server(
+      ownerId=3,
+      name="James Blake",
+      avatar="https://i.ibb.co/kS2WcZ0/james-blake.jpg",
+      tag="Music",
+    )
 
 
-#     <a href="https://ibb.co/vwFGqWR"><img src="https://i.ibb.co/Wxhw5Xj/1200px-Python-logo-notext-svg.png" alt="1200px-Python-logo-notext-svg" border="0"></a>
-# <a href="https://ibb.co/NmKYjDf"><img src="https://i.ibb.co/CMQ07C4/keyboards-image.jpg" alt="keyboards-image" border="0"></a>
-# <a href="https://ibb.co/hLZcYVw"><img src="https://i.ibb.co/zQ7F6ZD/nodejs-45adbe594d.png" alt="nodejs-45adbe594d" border="0"></a>
-# <a href="https://ibb.co/19dcs0D"><img src="https://i.ibb.co/8jdkzmW/react-logo.png" alt="react-logo" border="0"></a>
+# <a href="https://ibb.co/t8W4K33"><img src="https://i.ibb.co/f4P2FQQ/com-truise.jpg" alt="com-truise" border="0"></a>
 
-# <a href="https://ibb.co/7yxZG9n"><img src="https://i.ibb.co/NYgJL49/Beatles-ad-1965-just-the-beatles-crop.jpg" alt="Beatles-ad-1965-just-the-beatles-crop" border="0"></a>
-# <a href="https://ibb.co/Cz0h7Cf"><img src="https://i.ibb.co/Y3jpknx/Daft-punk.jpg" alt="Daft-punk" border="0"></a>
-# <a href="https://ibb.co/WkPG5XZ"><img src="https://i.ibb.co/Byrc3Jb/synthwave.jpg" alt="synthwave" border="0"></a>
+
 
 
 
@@ -174,6 +218,14 @@ def seed_servers():
     db.session.add(server18)
     db.session.add(server19)
     db.session.add(server20)
+    db.session.add(server21)
+    db.session.add(server22)
+    db.session.add(server23)
+    db.session.add(server24)
+    db.session.add(server25)
+    db.session.add(server26)
+    db.session.add(server27)
+    db.session.add(server28)
 
     db.session.commit()
 

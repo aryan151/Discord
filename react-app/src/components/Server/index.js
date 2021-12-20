@@ -67,7 +67,10 @@ function Server () {
 
             <div className="home-server">
             <Link className='server-links' to={`/dashboard`}>
-                <img className="server-dashboard-div" src="https://i.ibb.co/1rPFJn2/wavey-discord-logo.png"></img>
+                {/* <img className="server-dashboard-div" src="https://i.ibb.co/1rPFJn2/wavey-discord-logo.png"></img> */}
+                <div className='server-links-div' style={{backgroundImage: `url("https://i.ibb.co/1rPFJn2/wavey-discord-logo.png")`}}>
+                    Home
+                </div>
 
             </Link>
             {/* <div className="home-divider">_ _ _ _ _ _</div> */}
@@ -77,7 +80,7 @@ function Server () {
             <div className="home-server">
            <Link className='server-links' to={`/home/${homeServer.id}`}>
                 <div className='server-links-div' style={{backgroundImage: `url(${homeServer?.avatar})`}}>
-                    {serverInitials(homeServer?.name)}
+                    DM's
                 </div>
 
             </Link>
