@@ -5,11 +5,11 @@ fake = Faker()
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        username='Demo', email='demo@aa.io', password='password', avatar=fake.image_url(), online=False)
+        username='Demo', email='demo@aa.io', password='password', avatar="https://i.ibb.co/Sv8THGn/discord-reddit-icon.png", online=False)
     marnie = User(
-        username='marnie', email='marnie@aa.io', password='password', avatar=fake.image_url(), online=False)
+        username='marnie', email='marnie@aa.io', password='password', avatar="https://i.ibb.co/fQ6L1Sz/color-discord-logo.png", online=False)
     bobbie = User(
-        username='bobbie', email='bobbie@aa.io', password='password', avatar=fake.image_url(), online=False)
+        username='bobbie', email='bobbie@aa.io', password='password', avatar="https://i.ibb.co/1rPFJn2/wavey-discord-logo.png", online=False)
 
     db.session.add(demo)
     db.session.add(marnie)
@@ -21,6 +21,9 @@ def seed_users():
     #     db.session.add(User(username=fake.name(), email=fake.ascii_email(), avatar=fake.image_url(), password='password', online=j))
 
     db.session.commit()
+
+    # "https://i.ibb.co/fQ6L1Sz/color-discord-logo.png" alt="color-discord-logo" border="0"></a>
+# <a href="https://ibb.co/MctF5hN"><img src="https://i.ibb.co/1rPFJn2/wavey-discord-logo.png"
 
 
 # Uses a raw SQL query to TRUNCATE the users table.

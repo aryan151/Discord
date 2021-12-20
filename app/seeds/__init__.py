@@ -12,8 +12,8 @@ seed_commands = AppGroup('seed')
 @seed_commands.command('all')
 def seed():
     seed_users()
-    # seed_servers()
-    # seed_channels()
+    seed_servers()
+    seed_channels()
     # seed_messages()
     # Add other seed functions here
 
@@ -22,7 +22,7 @@ def seed():
 @seed_commands.command('undo')
 def undo():
     undo_users()
-    # undo_servers()
-    # undo_channels()
+    undo_servers()
+    undo_channels()
     # undo_messages()
     # Add other undo functions here

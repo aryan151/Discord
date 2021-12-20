@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Vidaloka&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 
 .Message-content-outer-container {
     grid-column: 3/5;
@@ -221,6 +222,7 @@
     box-sizing: border-box;
     /* position: relative; */
     top: 40rem;
+    outline: none;
 
 }
 
