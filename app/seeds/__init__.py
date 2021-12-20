@@ -13,7 +13,7 @@ seed_commands = AppGroup('seed')
 def seed():
     seed_users()
     seed_servers()
-    # seed_channels()
+    seed_channels()
     # seed_messages()
     # Add other seed functions here
 
@@ -23,6 +23,6 @@ def seed():
 def undo():
     undo_users()
     undo_servers()
-    # undo_channels()
+    undo_channels()
     # undo_messages()
     # Add other undo functions here

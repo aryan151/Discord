@@ -70,7 +70,7 @@ function Server () {
                 <img className="server-dashboard-div" src="https://i.ibb.co/1rPFJn2/wavey-discord-logo.png"></img>
 
             </Link>
-            <div className="home-divider">_ _ _ _ _ _</div>
+            {/* <div className="home-divider">_ _ _ _ _ _</div> */}
             </div>
 
            { homeServer &&
