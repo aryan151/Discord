@@ -8,8 +8,18 @@ servers_routes = Blueprint('servers', __name__)
 
 @servers_routes.route('/explore/<int:id>')
 def get_servers(id):
-    servers = Server.query.join(ServerMember).filter(ServerMember.userId != id).all()
-    return {'servers': [server.to_dict() for server in servers]}
+    servers= []
+    servers_followed =  Server.query.join(ServerMember).filter(ServerMember.userId == id).all()
+    server_ids = [server.to_dict()['id'] for server in servers_followed]
+    all_servers = Server.query.all()
+    all_servers_list = [server.to_dict() for server in all_servers]
+    for i in all_servers_list:
+        if i['id'] not in server_ids:
+           servers.append(i)
+    return {'servers': [*servers]}
+
+    # servers = Server.query.all()
+    # return {'servers': [server.to_dict() for server in servers]}
 
 @servers_routes.route('/', methods = ['POST'])
 def add_server():

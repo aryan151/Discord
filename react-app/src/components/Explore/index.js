@@ -20,7 +20,7 @@ function Explore() {
     const [toggleTab, setToggleTab] = useState(1);
     const toggle = (index) => { setToggleTab(index) }
     const servers = useSelector(state => Object.values(state.servers));
-    const myServers = useSelector(state => new Set(Object.keys(state.myServers)))
+    const myServers = useSelector(state => state.myServers)
 
     console.log('my servers set', myServers)
 
@@ -31,24 +31,12 @@ function Explore() {
     const [searchQuery, setSearchQuery] = useState('');
     const [buttonFilter, setbuttonFilter] = useState('All')
 
-    useEffect( async () => {
+    useEffect(() => {
 
        dispatch(getServers(userId))
-       dispatch(getMyServers(userId))
+    //    dispatch(getMyServers(userId))
 
-        // if (servers) {
-        //     let newServers=[]
-        //     for (let i = 0; i < servers.length; i++) {
-        //         console.log('server[id]', servers[i])
-        //         if (!myServers.has(String(servers[i]?.id))){
-        //             newServers.push(servers[i])
-        //         }
-        //     }
-        //     console.log('newServers', newServers)
-        //     setFilteredServers([...newServers])
-        // }
-
-    }, [dispatch])
+    }, [dispatch, myServers])
 
 
     const updateSearchQuery = e => {
@@ -128,6 +116,7 @@ function Explore() {
         }
         dispatch(createMemberToServer(payload))
         dispatch(getMyServers(userId))
+        dispatch(getServers(userId))
         history.push(`/${serverId}`)
     }
 

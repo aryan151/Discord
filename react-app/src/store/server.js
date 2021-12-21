@@ -170,7 +170,7 @@ const serversReducer = (state = initialState, action) => {
             });
             return {
                 ...allServers,
-                ...state,
+                // ...state,
                 // list: action.list.servers,
             }
         }
