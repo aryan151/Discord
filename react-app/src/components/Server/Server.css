@@ -26,7 +26,7 @@
     font-size: 20px;
     background-size: contain;
     transition: all .2s ease-in-out;
-    padding-top: 20px;
+    margin-top: 1rem;
 }
 
 .server-dashboard-div {
@@ -41,6 +41,12 @@
     background-size: contain;
     transition: all .2s ease-in-out;
     /* padding-top: 20px; */
+}
+
+.joined-servers-div {
+    /* background-color: red; */
+    height: 23rem;
+    overflow-y: scroll;
 }
 
 

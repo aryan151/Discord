@@ -24,7 +24,8 @@ const Channels = ({id}) => {
   const [channelToEdit, setChannelToEdit] = useState();
   const userId = useSelector(state => state.session?.user?.id)
   const channels = useSelector(state => state.channels[serverId])
-  const server = useSelector(state => state.servers[serverId])
+  const server = useSelector(state => state.myServers[serverId])
+  // console.log('serverrrr', server)
   const [showMenu, setShowMenu] = useState(false);
   const dispatch = useDispatch()
 
@@ -66,25 +67,25 @@ const Channels = ({id}) => {
       {serverId === 'explore' ? <Explore /> :
       <div className="channels-container">
         <div className="scroll">
-        {server ?
+
           <div>
             <div className="edit-server-div">
             <span id="server-name-in-channel">{server?.name}</span>
-              {server.ownerId === userId ?
+
               <span className="edit-server-buttons">
                 <span className={showMenu === false ? "plus-color" : "minus-color"}>
                 <i id="edit-server-button" onClick={showMenu === false ? openMenu : closeMenu} className={showMenu === false ? "fas fa-chevron-down" : "fas fa-minus edit-server-icon"}></i>
                 </span>
 
-              </span> : ''}
+              </span>
 
             </div>
 
           </div>
-        : <h1>Hello from channels</h1>}
+
            {showMenu && (
 
-               <EditServer setShowMenu={setShowMenu} serverId={server?.id}/>
+               <EditServer setShowMenu={setShowMenu} server={server}/>
 
               )}
 

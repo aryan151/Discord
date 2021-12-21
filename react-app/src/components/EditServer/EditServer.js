@@ -7,14 +7,12 @@ import { useParams } from 'react-router';
 import { editOneServer } from '../../store/server';
 import { deleteOneServer } from '../../store/server';
 
-const EditServer = ({serverId, setShowMenu}) => {
+const EditServer = ({setShowMenu, server}) => {
     const userId = useSelector((state) => state.session?.user?.id);
-    // const params = useParams()
-    // let {serverId} = params
 
 
     const [serverName, setServerName] = useState('')
-    const [editServer, setEditServer] = useState('')
+    const [editServer, setEditServer] = useState(server?.name)
 
     const dispatch = useDispatch()
 
@@ -32,40 +30,55 @@ const EditServer = ({serverId, setShowMenu}) => {
         const payload = {
             name : editServer
         }
-        dispatch(editOneServer(payload, serverId))
+        dispatch(editOneServer(payload, server?.id))
         setShowMenu(false)
     }
 
     const handleDelete = (e) => {
         e.preventDefault()
-        dispatch(deleteOneServer(serverId))
+        dispatch(deleteOneServer(server?.id))
         setShowMenu(false)
     }
 
     return (
-        <div className="edit-server-dropdown" onClick={e => e.stopPropagation()}>
-            <form className="server-edit-form" onSubmit={handleEdit}>
+        <div className="edit-server-dropdown" >
 
-            <h3>Server Edit Options</h3>
-                <div className='rndm'>
-                    <label>Edit Server Name</label>
-                      <input
-                        type='text'
-                        value={editServer}
-                        onChange={(e) => setEditServer(e.target.value)}
-                        required
-                        />
-                    <div>
-                        <button className='edit-server-name' type='submit'>Update Name</button>
-                    </div>
-                </div>
 
-            </form>
-            <form  className='delete-server-button-form' onSubmit={handleDelete}>
+            { server?.ownerId === userId ?
 
-                <button className= "delete-server" type='submit'>Delete Server</button>
+            <div className="server-edit-form" >
+                    <form onSubmit={handleEdit}>
 
-            </form>
+                    <h3>Server Edit Options</h3>
+                        <div className='rndm'>
+                            <label>Edit Server Name</label>
+                            <input
+                                type='text'
+                                value={editServer}
+                                onChange={(e) => setEditServer(e.target.value)}
+                                required
+                                />
+                            <div>
+                                <button className='edit-server-name' type='submit'>Update Name</button>
+                            </div>
+                        </div>
+
+                    </form>
+                    <form  className='delete-server-button-form' onSubmit={handleDelete}>
+
+                        <button className= "delete-server" type='submit'>Delete Server</button>
+
+                    </form>
+
+
+            </div>
+
+
+            :
+
+            <button>Unjoin server</button>
+
+            }
 
         </div>
     )
