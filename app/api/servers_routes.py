@@ -70,3 +70,11 @@ def delete_server(serverId):
     db.session.delete(server)
     db.session.commit()
     return { 'id' : serverId}
+
+
+@servers_routes.route('/remove/<int:serverId>/<int:userId>', methods=['DELETE'])
+def remove_server(serverId, userId):
+    server = ServerMember.query.filter(ServerMember.userId == userId, ServerMember.serverId == serverId).one()
+    db.session.delete(server)
+    db.session.commit()
+    return { 'id' : serverId}

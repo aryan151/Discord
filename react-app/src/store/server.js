@@ -117,6 +117,21 @@ export const deleteOneServer = (serverId) => async dispatch => {
 }
 
 
+export const removeOneServer = (serverId, userId) => async dispatch => {
+    const response = await fetch(`/api/servers/remove/${serverId}/${userId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type' : 'application/json',
+        },
+
+    })
+        if (response.ok) {
+            const { id } = await response.json()
+            dispatch(loadAfterDelete(id))
+        }
+}
+
+
 
 
 const initialState = {

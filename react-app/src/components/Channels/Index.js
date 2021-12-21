@@ -68,7 +68,7 @@ const Channels = ({id}) => {
       <div className="channels-container">
         <div className="scroll">
 
-          <div>
+          {serverId && (<div>
             <div className="edit-server-div">
             <span id="server-name-in-channel">{server?.name}</span>
 
@@ -81,7 +81,7 @@ const Channels = ({id}) => {
 
             </div>
 
-          </div>
+          </div>)}
 
            {showMenu && (
 
