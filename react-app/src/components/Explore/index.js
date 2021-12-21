@@ -20,18 +20,36 @@ function Explore() {
     const [toggleTab, setToggleTab] = useState(1);
     const toggle = (index) => { setToggleTab(index) }
     const servers = useSelector(state => Object.values(state.servers));
+    const myServers = useSelector(state => new Set(Object.keys(state.myServers)))
+
+    console.log('my servers set', myServers)
 
     const userId = useSelector((state) => state.session?.user?.id);
-    const [filteredServers, setFilteredServers] = useState([...servers]);
+    const [filteredServers, setFilteredServers] = useState([]);
     const [sortBy, setSortBy] = useState('name A -> Z');
     const [sortOrder, setSortOrder] = useState(-1);   //array sort returns -1 or 1
     const [searchQuery, setSearchQuery] = useState('');
     const [buttonFilter, setbuttonFilter] = useState('All')
 
-    useEffect(() => {
-        dispatch(getServers())
-        dispatch(getMyServers(userId))
+    useEffect( async () => {
+
+       dispatch(getServers(userId))
+       dispatch(getMyServers(userId))
+
+        // if (servers) {
+        //     let newServers=[]
+        //     for (let i = 0; i < servers.length; i++) {
+        //         console.log('server[id]', servers[i])
+        //         if (!myServers.has(String(servers[i]?.id))){
+        //             newServers.push(servers[i])
+        //         }
+        //     }
+        //     console.log('newServers', newServers)
+        //     setFilteredServers([...newServers])
+        // }
+
     }, [dispatch])
+
 
     const updateSearchQuery = e => {
         setSearchQuery(e.target.value);
@@ -77,6 +95,8 @@ function Explore() {
     }
 
      useEffect(() => {
+
+
         let Alltags = ['All','Home','Gaming','Music','Videos','Tech','Sports']
         let allFiltered = [];
         let searchFiltered = [...servers];

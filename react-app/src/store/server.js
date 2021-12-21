@@ -52,8 +52,8 @@ const addOneMyServer = server => ({
 
 //THUNK ACTION GETTING ALL SERVERS
 
-export const getServers = () => async dispatch => {
-    const response = await fetch('/api/servers/')
+export const getServers = (userId) => async dispatch => {
+    const response = await fetch(`/api/servers/explore/${userId}`)
     if (response.ok) {
         const list = await response.json()
 

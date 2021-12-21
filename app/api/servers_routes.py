@@ -6,9 +6,9 @@ from app.models.dm_server import DMServer
 
 servers_routes = Blueprint('servers', __name__)
 
-@servers_routes.route('/')
-def get_servers():
-    servers = Server.query.all()
+@servers_routes.route('/explore/<int:id>')
+def get_servers(id):
+    servers = Server.query.join(ServerMember).filter(ServerMember.userId != id).all()
     return {'servers': [server.to_dict() for server in servers]}
 
 @servers_routes.route('/', methods = ['POST'])
