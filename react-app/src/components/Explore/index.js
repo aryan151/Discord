@@ -36,7 +36,7 @@ function Explore() {
        dispatch(getServers(userId))
     //    dispatch(getMyServers(userId))
 
-    }, [dispatch, myServers, userId])
+    }, [myServers, userId])
 
 
     const updateSearchQuery = e => {
