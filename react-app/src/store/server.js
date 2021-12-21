@@ -52,8 +52,8 @@ const addOneMyServer = server => ({
 
 //THUNK ACTION GETTING ALL SERVERS
 
-export const getServers = () => async dispatch => {
-    const response = await fetch('/api/servers/')
+export const getServers = (userId) => async dispatch => {
+    const response = await fetch(`/api/servers/explore/${userId}`)
     if (response.ok) {
         const list = await response.json()
 
@@ -117,6 +117,21 @@ export const deleteOneServer = (serverId) => async dispatch => {
 }
 
 
+export const removeOneServer = (serverId, userId) => async dispatch => {
+    const response = await fetch(`/api/servers/remove/${serverId}/${userId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type' : 'application/json',
+        },
+
+    })
+        if (response.ok) {
+            const { id } = await response.json()
+            dispatch(loadAfterDelete(id))
+        }
+}
+
+
 
 
 const initialState = {
@@ -170,7 +185,7 @@ const serversReducer = (state = initialState, action) => {
             });
             return {
                 ...allServers,
-                ...state,
+                // ...state,
                 // list: action.list.servers,
             }
         }

@@ -34,7 +34,7 @@ def seed_channels():
     db.session.add(channel4)
     db.session.add(channel5)
 
-    for i in range(4, 17):
+    for i in range(4, 25):
         db.session.add(Channel(name='general', serverId=i))
         db.session.commit()
 

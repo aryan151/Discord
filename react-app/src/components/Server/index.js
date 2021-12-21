@@ -59,50 +59,59 @@ function Server () {
     }
 
 
-    // <a href="https://ibb.co/MctF5hN"><img src="https://i.ibb.co/1rPFJn2/wavey-discord-logo.png" alt="wavey-discord-logo" border="0"></a>
 
 
     return (
         <div className='server-container'>
 
-            <div className="home-server">
-            <Link className='server-links' to={`/dashboard`}>
-                <img className="server-dashboard-div" src="https://i.ibb.co/1rPFJn2/wavey-discord-logo.png"></img>
+            <div id="home-plus-dm's-server-div">
 
-            </Link>
-            {/* <div className="home-divider">_ _ _ _ _ _</div> */}
-            </div>
+                    <div className="home-server">
+                        <Link className='server-links' to={`/dashboard`}>
+                            <div className='server-links-div' style={{backgroundImage: `url("https://i.ibb.co/1rPFJn2/wavey-discord-logo.png")`}}>
+                                Home
+                            </div>
 
-           { homeServer &&
-            <div className="home-server">
-           <Link className='server-links' to={`/home/${homeServer.id}`}>
-                <div className='server-links-div' style={{backgroundImage: `url(${homeServer?.avatar})`}}>
-                    {serverInitials(homeServer?.name)}
-                </div>
-
-            </Link>
-            <div className="home-divider">_______</div>
-            </div>}
-            {servers.map((server) => (
-            server !== homeServer &&
-            <div>
-                <Link className='server-links' to={`/${server?.id}`}>
-                    <div className='server-links-div' style={{backgroundImage: `url(${server?.avatar})`}}>
-                        {serverInitials(server?.name)}
+                        </Link>
                     </div>
-                </Link>
-                {/* {server.ownerId === userId ?
-                <div className = 'edit-server-button'>
-                    <EditServerModal serverId={server?.id}/>
-                </div> : ''} */}
+
+                { homeServer &&
+                    <div className="home-server">
+                        <Link className='server-links' to={`/home/${homeServer.id}`}>
+                            <div className='server-links-div' style={{backgroundImage: `url(${homeServer?.avatar})`}}>
+                                DM's
+                            </div>
+
+                        </Link>
+                    <div className="home-divider">_______</div>
+                    </div>}
+
             </div>
-            ))}
-            <div className='add-server-modal' >
-            <AddServerModal servers={servers} />
+
+            <div className="joined-servers-div">
+
+                {servers.map((server) => (
+                server !== homeServer &&
+                <div>
+                    <Link className='server-links' to={`/${server?.id}`}>
+                        <div className='server-links-div' style={{backgroundImage: `url(${server?.avatar})`}}>
+                            {serverInitials(server?.name)}
+                        </div>
+                    </Link>
+
+                </div>
+                ))}
+
             </div>
-            <div className='server-links-explore'>
-                <Link to='/explore'><div className="explore-server-icon"><i className="fas fa-compass"></i></div></Link>
-            </div>
+
+
+                    <div className='add-server-modal' >
+                    <AddServerModal servers={servers} />
+                    </div>
+                    <div className='server-links-explore'>
+                        <Link to='/explore'><div className="explore-server-icon"><i className="fas fa-compass"></i></div></Link>
+                    </div>
+
 
         </div>
     )

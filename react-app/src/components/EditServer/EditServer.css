@@ -19,7 +19,19 @@
     opacity: 0.975;
     margin-left: 7px;
     padding: 1rem;
-    height: 300px;
+    height: 10rem;
+    display: flex;
+    flex-direction: column;;
+    justify-content: space-between;
+}
+.edit-server-dropdown-non-owner {
+    position: absolute;
+    background-color: #18191c;
+    width: 85%;
+    opacity: 0.975;
+    margin-left: 7px;
+    padding: 1rem;
+    height: 5rem;
     display: flex;
     flex-direction: column;;
     justify-content: space-between;
@@ -73,4 +85,18 @@
 .delete-server:hover {
     color: white;
     background-color: #ed4245;
+}
+
+.unjoin-server {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+
+}
+
+
+#edit-server-non-owner-div {
+    display: flex;
+    flex-direction: column ;
+    justify-content: space-between;
+    height: 5rem;
 }

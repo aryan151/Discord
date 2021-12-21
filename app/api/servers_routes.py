@@ -6,10 +6,20 @@ from app.models.dm_server import DMServer
 
 servers_routes = Blueprint('servers', __name__)
 
-@servers_routes.route('/')
-def get_servers():
-    servers = Server.query.all()
-    return {'servers': [server.to_dict() for server in servers]}
+@servers_routes.route('/explore/<int:id>')
+def get_servers(id):
+    servers= []
+    servers_followed =  Server.query.join(ServerMember).filter(ServerMember.userId == id).all()
+    server_ids = [server.to_dict()['id'] for server in servers_followed]
+    all_servers = Server.query.all()
+    all_servers_list = [server.to_dict() for server in all_servers]
+    for i in all_servers_list:
+        if i['id'] not in server_ids:
+           servers.append(i)
+    return {'servers': [*servers]}
+
+    # servers = Server.query.all()
+    # return {'servers': [server.to_dict() for server in servers]}
 
 @servers_routes.route('/', methods = ['POST'])
 def add_server():
@@ -57,6 +67,14 @@ def edit_server(serverId):
 @servers_routes.route('/delete/<int:serverId>', methods=['DELETE'])
 def delete_server(serverId):
     server = Server.query.get(serverId)
+    db.session.delete(server)
+    db.session.commit()
+    return { 'id' : serverId}
+
+
+@servers_routes.route('/remove/<int:serverId>/<int:userId>', methods=['DELETE'])
+def remove_server(serverId, userId):
+    server = ServerMember.query.filter(ServerMember.userId == userId, ServerMember.serverId == serverId).one()
     db.session.delete(server)
     db.session.commit()
     return { 'id' : serverId}
