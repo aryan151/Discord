@@ -19,13 +19,13 @@ const EditServer = ({setShowMenu, server}) => {
 
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        const closeModal = () => {
-          setShowMenu(false);
-        };
-        document.addEventListener('click', closeModal);
-        return () => document.removeEventListener("click", closeModal);
-      }, []);
+    // useEffect(() => {
+    //     const closeModal = () => {
+    //       setShowMenu(false);
+    //     };
+    //     document.addEventListener('click', closeModal);
+    //     return () => document.removeEventListener("click", closeModal);
+    //   }, []);
 
 
     const handleEdit = (e) => {
@@ -63,13 +63,15 @@ const EditServer = ({setShowMenu, server}) => {
 
                 <h3>Server Edit Options</h3>
                     <div className='rndm'>
-                        <label>Edit Server Name</label>
+                        <label>Edit Server Name
+
                         <input
                             type='text'
                             value={editServer}
                             onChange={(e) => setEditServer(e.target.value)}
                             required
                             />
+                            </label>
                         <div>
                             <button className='edit-server-name' type='submit'>Update Name</button>
                         </div>
@@ -79,6 +81,7 @@ const EditServer = ({setShowMenu, server}) => {
                 <form  className='delete-server-button-form' onSubmit={handleDelete}>
 
                     <button className= "delete-server" type='submit'>Delete Server</button>
+                    <button className="edit-server-name" onClick={() => setShowMenu(false)}>Cancel</button>
 
                 </form>
 

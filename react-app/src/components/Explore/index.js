@@ -19,13 +19,13 @@ function Explore() {
     const user = useSelector((state) => state.session?.user);
     const [toggleTab, setToggleTab] = useState(1);
     const toggle = (index) => { setToggleTab(index) }
-    const servers = useSelector(state => Object.values(state.servers));
+    let servers = useSelector(state => Object.values(state.servers));
     const myServers = useSelector(state => state.myServers)
 
     console.log('my servers set', myServers)
 
     const userId = useSelector((state) => state.session?.user?.id);
-    const [filteredServers, setFilteredServers] = useState([]);
+    const [filteredServers, setFilteredServers] = useState([...servers]);
     const [sortBy, setSortBy] = useState('name A -> Z');
     const [sortOrder, setSortOrder] = useState(-1);   //array sort returns -1 or 1
     const [searchQuery, setSearchQuery] = useState('');
@@ -36,7 +36,7 @@ function Explore() {
        dispatch(getServers(userId))
     //    dispatch(getMyServers(userId))
 
-    }, [dispatch, myServers])
+    }, [myServers, userId])
 
 
     const updateSearchQuery = e => {
@@ -94,7 +94,7 @@ function Explore() {
         if (searchQuery.length) {
             searchFiltered = servers.filter(server => server.name.toLowerCase().includes(searchQuery.toLowerCase()))
         }
-        if (buttonFilter === 'All') {
+        else if (buttonFilter === 'All') {
             FilteredButtons = FilteredButtons
         }
         else {
@@ -117,6 +117,7 @@ function Explore() {
         dispatch(createMemberToServer(payload))
         dispatch(getMyServers(userId))
         dispatch(getServers(userId))
+        setFilteredServers(servers.filter(server => server.id !== serverId))
         history.push(`/${serverId}`)
     }
 
