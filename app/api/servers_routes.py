@@ -18,8 +18,12 @@ def get_servers(id):
            servers.append(i)
     return {'servers': [*servers]}
 
-    # servers = Server.query.all()
-    # return {'servers': [server.to_dict() for server in servers]}
+    # servers = list(filter(lambda server: server.id not in server_ids, all_servers_list))
+    # return {
+    #     'servers': [*servers]
+    # }
+
+
 
 @servers_routes.route('/', methods = ['POST'])
 def add_server():
