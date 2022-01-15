@@ -11,15 +11,16 @@
 
 .search-container {
   /* position: absolute; */
-  margin-top: 10rem;
+  margin-top: 7rem;
   background-color: #2f3136;
   padding: 2rem 2.75rem;
-  height: 200px;
-  position: relative;
+  height: 20rem;
+  /* position: relative; */
   border-radius: 15px;
   pointer-events: all;
   border: 1px solid rgb(29, 29, 29);
   z-index: 999;
+  overflow-y: scroll;
 }
 
 .search-container input{
@@ -39,22 +40,17 @@
   outline: none;
   box-shadow: 5px 5px 5px #363636, -3px -3px 5px  #363636;
 }
-.search-results{
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  padding: 0.75rem;
-  overflow-y: scroll;
-  height: 300px;
-}
+
 .search-results-div {
   display: flex;
-  height: 40px;
+  height: 3rem;
   align-items: center;
   gap: 0.25rem;
-  background-color: white;
+  background-color: rgb(44, 44, 44);
   border-radius: 10px;
-  max-height: 25px;
+  /* max-height: 25px; */
+  width: 100%;
+  margin-top: 0.2rem;
 }
 .results-found.search-container {
   height: 400px;
@@ -76,7 +72,7 @@
 
 .search-results-div img {
   border-radius: 50%;
-  height: 20px;
+  /* height: 20px; */
   margin-left: 3px;
 }
 
@@ -89,12 +85,13 @@ border-top-left-radius: 17px;
   color: rgb(219, 219, 219);
   cursor: pointer;
 }
-.start-conversation p {
-  background-color: #202225;
+#search-users {
+  background-color: #2462c0;
   padding: 0.85rem 0.75rem;
   margin: 15px auto 0 auto;
   width: 240px;
   border-radius: 7px;
+  font-size: 12px;
 
 }
 .dm-icon {

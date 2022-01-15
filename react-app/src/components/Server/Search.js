@@ -38,14 +38,13 @@ const Search = ({addUser, setDmUser }) => {
 
 
   return (
-    <div className={`search-container ${results.length ? 'results-found' : "" }`} onClick={(e)=> e.stopPropagation()}>
+    <div className='search-container' onClick={(e)=> e.stopPropagation()}>
       <form className='search-bar' autoComplete="off">
 
         <input type="search"
            placeholder='Start Up A Conversation' value={term} onChange={handleSearch} />
 
-        { <ul
-          className={`search-results ${results.length >= 9 ? 'results-found' : "" }`}>
+      
 
         { !!results.length && results?.map(user => (
 
@@ -56,8 +55,7 @@ const Search = ({addUser, setDmUser }) => {
           </div>
 
         ))}
-        </ul>
-      }
+
       </form>
     </div>
   )

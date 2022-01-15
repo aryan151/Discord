@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom';
 import {createMemberToServer} from '../../store/membersservers'
 import { getMyServers } from '../../store/server';
 import searchimage from '../video/1490237.jpg'
-import ServerCard from './ServerCard/ServerCard';
+// import ServerCard from './ServerCard/ServerCard';
 import './Explore.css'
 
 
@@ -17,7 +17,8 @@ function Explore() {
     const dispatch = useDispatch()
 
     const user = useSelector((state) => state.session?.user);
-    const [toggleTab, setToggleTab] = useState(1);
+    // const [toggleTab, setToggleTab] = useState(1);
+    const [toggleTab, setToggleTab] = useState(0);
     const toggle = (index) => { setToggleTab(index) }
     let servers = useSelector(state => Object.values(state.servers));
     const myServers = useSelector(state => state.myServers)
@@ -25,7 +26,8 @@ function Explore() {
     console.log('my servers set', myServers)
 
     const userId = useSelector((state) => state.session?.user?.id);
-    const [filteredServers, setFilteredServers] = useState([...servers]);
+    // const [filteredServers, setFilteredServers] = useState([...servers]);
+    const [filteredServers, setFilteredServers] = useState([]);
     const [sortBy, setSortBy] = useState('name A -> Z');
     const [sortOrder, setSortOrder] = useState(-1);   //array sort returns -1 or 1
     const [searchQuery, setSearchQuery] = useState('');
@@ -126,10 +128,10 @@ function Explore() {
             <ul className="channels-container">
             <div className="scroll">
                 <h1>Discover</h1>
-                <li type='button' onClick={() => {setbuttonFilter('All'); toggle(1)}}  className={toggleTab === 1 ? "channelExploreSelect" : "channelExplore"}>
+                {/* <li type='button' onClick={() => {setbuttonFilter('All'); toggle(1)}}  className={toggleTab === 1 ? "channelExploreSelect" : "channelExplore"}>
                     <i class="fas fa-globe"></i>
                     <p>All</p>
-                </li>
+                </li> */}
                 <li  type='button' onClick={() => {setbuttonFilter('Gaming'); toggle(2)}}  className={toggleTab === 2 ? "channelExploreSelect" : "channelExplore"}>
                     <i class="fas fa-headset"></i>
                     <p>Gaming</p>
@@ -138,10 +140,10 @@ function Explore() {
                     <i class="fas fa-music"></i>
                     <p>Music</p>
                 </li>
-                <li  type='button' onClick={() => {setbuttonFilter('Videos'); toggle(4)}}  className={toggleTab === 4 ? "channelExploreSelect" : "channelExplore"}>
+                {/* <li  type='button' onClick={() => {setbuttonFilter('Videos'); toggle(4)}}  className={toggleTab === 4 ? "channelExploreSelect" : "channelExplore"}>
                     <i class="fas fa-video"></i>
                     <p>Videos</p>
-                </li>
+                </li> */}
                 <li  type='button' onClick={() => {setbuttonFilter('Tech'); toggle(5)}}  className={toggleTab === 5 ? "channelExploreSelect" : "channelExplore"}>
                     <i class="fas fa-laptop"></i>
                     <p>Tech</p>
@@ -188,7 +190,7 @@ function Explore() {
          Click To Join
          </div>
             <div className='ServerDisplay'>
-                {filteredServers.slice(0,16).map((server) => (
+                {toggleTab !== 0 ? filteredServers.slice(0,16).map((server) => (
                     <div className='ServerContainer'>
                         <div className='ServerFront'>
                             <div className='ServerFrontTop' onClick={addMemberServer(server?.id)} >
@@ -205,7 +207,27 @@ function Explore() {
 
 
                     </div>
-                ))}
+                )) :
+                servers.slice(0,16).map((server) => (
+                    <div className='ServerContainer'>
+                        <div className='ServerFront'>
+                            <div className='ServerFrontTop' onClick={addMemberServer(server?.id)} >
+                                <div className='ServerAddTab'>
+                                    <img src={server.avatar} className='CardProfile' alt=''></img>
+                                </div>
+                            </div>
+                            <div className='ServerFrontBottom'>
+                                    <h1><span>{server.name}</span> </h1>
+                                    <h5> click to add</h5>
+                                    <h4>{server.tag}</h4>
+                                </div>
+                        </div>
+
+
+                    </div>
+                ))
+
+                }
             </div>
         </div>
     </>
